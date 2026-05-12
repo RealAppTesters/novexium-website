@@ -371,6 +371,11 @@
       border: 1px solid rgba(255,255,255,0.05);
       text-align: center;
     }
+    .about-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 4rem;
+    }
 
     /* Contact Form */
     .contact-wrapper {
@@ -470,6 +475,31 @@
     ::-webkit-scrollbar { width: 8px; }
     ::-webkit-scrollbar-track { background: #0A0A0F; }
     ::-webkit-scrollbar-thumb { background: #6C5CE7; border-radius: 10px; }
+
+    @media (max-width: 768px) {
+
+  .footer-content {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2rem;
+  }
+
+  .footer-content ul {
+    flex-direction: column;
+    gap: 1rem;
+    padding: 0;
+  }
+
+  .social-icons {
+    display: flex;
+    gap: 1rem;
+  }
+
+  .social-icons i {
+    margin-left: 0;
+  }
+
+}
   </style>
 </head>
 <body>
@@ -553,7 +583,7 @@
   <!-- About + Why Choose Us Combined -->
   <section id="about">
     <div class="container">
-      <div style="display: flex; flex-wrap: wrap; gap: 3rem;">
+      <div class="about-wrapper">
         <div style="flex:1"><h2 class="section-title" style="margin-bottom:1rem;">About Studio</h2><p style="font-size:1.2rem; color:var(--text-secondary);">Novexium is a digital product studio focused on transforming ideas into modern digital experiences. We combine design, development, and strategy to create products that feel premium, scalable, and impactful.</p><p style="margin-top:1rem;"><i>"You have the vision. We build the product."</i></p></div>
         <div style="flex:1"><h2 class="section-title" style="margin-bottom:1rem;">Why Choose Us</h2><div class="features-grid"><div class="feature-item"><i class="fas fa-gem fa-2x" style="color:#6C5CE7"></i><h4>Modern Design</h4></div><div class="feature-item"><i class="fas fa-tachometer-alt fa-2x" style="color:#6C5CE7"></i><h4>Fast Performance</h4></div><div class="feature-item"><i class="fas fa-chart-line fa-2x" style="color:#6C5CE7"></i><h4>Scalable Solutions</h4></div><div class="feature-item"><i class="fas fa-mobile fa-2x" style="color:#6C5CE7"></i><h4>Mobile First</h4></div><div class="feature-item"><i class="fas fa-code-branch fa-2x" style="color:#6C5CE7"></i><h4>Clean Code</h4></div><div class="feature-item"><i class="fas fa-globe fa-2x" style="color:#6C5CE7"></i><h4>International Standards</h4></div></div></div>
       </div>
