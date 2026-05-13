@@ -478,6 +478,39 @@
 
     @media (max-width: 768px) {
 
+  /* About + Why Choose Us */
+  .about-wrapper {
+    flex-direction: column !important;
+    gap: 4rem;
+  }
+
+  /* Contact Section */
+  .contact-wrapper {
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  .contact-form,
+  .contact-info {
+    width: 100%;
+  }
+
+  /* Remove clutter on mobile */
+  .contact-info div:first-child {
+    display: none;
+  }
+
+  /* Hide social icons on phone */
+  .contact-info div:nth-child(2) {
+    display: none;
+  }
+
+  /* Hide location from contact section */
+  .contact-info p:last-child {
+    display: none;
+  }
+
+  /* Footer mobile layout */
   .footer-content {
     flex-direction: column;
     align-items: flex-start;
@@ -497,6 +530,11 @@
 
   .social-icons i {
     margin-left: 0;
+  }
+
+  /* Better spacing */
+  footer {
+    padding: 3rem 1.5rem;
   }
 
 }
