@@ -726,13 +726,32 @@
     <div class="container">
       <h2 class="section-title reveal">Let's Build Together</h2>
       <div class="contact-wrapper">
-        <div class="contact-form">
-          <div class="form-group"><input type="text" placeholder="Full Name" id="name"></div>
-          <div class="form-group"><input type="email" placeholder="Email Address" id="email"></div>
-          <div class="form-group"><select id="projectType"><option>Website Development</option><option>Mobile App</option><option>UI/UX Design</option><option>SaaS Platform</option></select></div>
-          <div class="form-group"><textarea rows="4" placeholder="Tell us about your vision..."></textarea></div>
-          <button class="btn-primary" id="submitContact" style="width:100%">Send Message <i class="fas fa-paper-plane"></i></button>
-        </div>
+        <form class="contact-form" action="https://formspree.io/f/xwvyzjej" method="POST">
+          <div class="form-group">
+  <input type="text" name="name" placeholder="Full Name" required>
+</div>
+
+<div class="form-group">
+  <input type="email" name="email" placeholder="Email Address" required>
+</div>
+
+<div class="form-group">
+  <select name="projectType">
+    <option>Website Development</option>
+    <option>Mobile App</option>
+    <option>UI/UX Design</option>
+    <option>SaaS Platform</option>
+  </select>
+</div>
+
+<div class="form-group">
+  <textarea name="message" rows="4" placeholder="Tell us about your vision..." required></textarea>
+</div>
+
+<button type="submit" class="btn-primary" style="width:100%">
+  Send Message <i class="fas fa-paper-plane"></i>
+</button>
+        </form>
         <div class="contact-info">
           <div class="whatsapp-btn"><i class="fab fa-whatsapp fa-lg"></i> Chat on WhatsApp</div>
           <div style="margin-top: 2rem;"><i class="fab fa-instagram"></i>   <i class="fab fa-linkedin-in"></i>   <i class="fab fa-x-twitter"></i>   <i class="fab fa-github"></i></div>
@@ -801,10 +820,6 @@
     document.body.style.opacity = "1";
   });
 
-  // Contact alert (premium confirmation)
-  document.getElementById("submitContact")?.addEventListener("click", () => {
-    alert("✨ Thank you! Our team will reach out within 24 hours.");
-  });
   // WhatsApp simulation
   document.querySelector(".whatsapp-btn")?.addEventListener("click", () => {
     alert("📱 Connect via WhatsApp: +1 (555) 123-4567\nWe'll reply instantly.");
