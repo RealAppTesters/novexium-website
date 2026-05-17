@@ -1,33 +1,11 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html><html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <title>Novexium | Digital Product Studio</title>
-  <!-- Google Fonts: Inter + Poppins (premium typography) -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <!-- FontAwesome Icons (clean icons) -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-  <style>
-    /* ========== CSS VARIABLES (Premium Dark Theme) ========== */
-    :root {
-      --bg-primary: #0A0A0F;
-      --bg-secondary: #111115;
-      --bg-glass: rgba(20, 20, 30, 0.65);
-      --border-glass: rgba(255, 255, 255, 0.08);
-      --text-primary: #FFFFFF;
-      --text-secondary: #C0C0D0;
-      --accent-primary: #6C5CE7;
-      --accent-glow: #8A75FF;
-      --accent-secondary: #00D2FF;
-      --gradient-1: linear-gradient(135deg, #6C5CE7 0%, #A26BFF 100%);
-      --gradient-2: linear-gradient(135deg, #00D2FF 0%, #3A7BD5 100%);
-      --card-bg: rgba(18, 18, 26, 0.7);
-      --shadow-sm: 0 20px 35px -15px rgba(0, 0, 0, 0.5);
-      --shadow-glow: 0 0 25px rgba(108, 92, 231, 0.2);
-      --transition: all 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1);
-    }
-
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Novexium — AI-Native Product Engineering Studio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">  <style>
     * {
       margin: 0;
       padding: 0;
@@ -36,809 +14,693 @@
 
     body {
       font-family: 'Inter', sans-serif;
-      background-color: var(--bg-primary);
-      color: var(--text-primary);
-      line-height: 1.5;
+      background: #0b0b0d;
+      color: #f5f5f5;
+      line-height: 1.7;
       overflow-x: hidden;
-      cursor: default;
     }
 
-    /* Custom cursor (subtle premium effect) */
-    .cursor-dot {
-      width: 8px;
-      height: 8px;
-      background: var(--accent-primary);
-      border-radius: 50%;
-      position: fixed;
-      pointer-events: none;
-      z-index: 9999;
-      transition: transform 0.1s ease;
-      mix-blend-mode: difference;
-    }
-    .cursor-outline {
-      width: 35px;
-      height: 35px;
-      border: 1.5px solid rgba(108, 92, 231, 0.5);
-      border-radius: 50%;
-      position: fixed;
-      pointer-events: none;
-      z-index: 9998;
-      transition: all 0.15s ease-out;
-      backdrop-filter: blur(2px);
+    a {
+      text-decoration: none;
+      color: inherit;
     }
 
-    /* Smooth Scroll */
-    html {
-      scroll-behavior: smooth;
+    .container {
+      width: 90%;
+      max-width: 1280px;
+      margin: auto;
     }
 
-    /* Global Glassmorphism Navbar */
-    .navbar {
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-      backdrop-filter: blur(16px);
-      background: rgba(10, 10, 15, 0.75);
-      border-bottom: 1px solid var(--border-glass);
-      padding: 1rem 5%;
+    nav {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      transition: var(--transition);
+      padding: 28px 0;
+      position: sticky;
+      top: 0;
+      background: rgba(11,11,13,0.95);
+      backdrop-filter: blur(10px);
+      z-index: 100;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
     }
 
     .logo {
-      font-family: 'Poppins', sans-serif;
-      font-size: 1.8rem;
-      font-weight: 700;
-      background: var(--gradient-1);
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-      letter-spacing: -0.02em;
+      font-size: 1.3rem;
+      font-weight: 800;
+      letter-spacing: -1px;
     }
 
     .nav-links {
       display: flex;
-      gap: 2.2rem;
-      list-style: none;
-    }
-    .nav-links a {
-      text-decoration: none;
-      color: var(--text-secondary);
-      font-weight: 500;
-      transition: var(--transition);
+      gap: 30px;
+      color: #c7c7c7;
       font-size: 0.95rem;
     }
-    .nav-links a:hover {
-      color: var(--accent-primary);
-    }
-    .menu-icon {
-      display: none;
-      font-size: 1.8rem;
-      cursor: pointer;
-    }
 
-    /* Buttons */
-    .btn-primary, .btn-secondary {
-      padding: 0.9rem 2rem;
-      border-radius: 40px;
-      font-weight: 600;
-      font-size: 0.9rem;
-      transition: var(--transition);
-      display: inline-block;
-      text-decoration: none;
-      text-align: center;
-      backdrop-filter: blur(8px);
-      cursor: pointer;
-    }
-    .btn-primary {
-      background: var(--gradient-1);
-      color: white;
-      border: none;
-      box-shadow: 0 4px 12px rgba(108, 92, 231, 0.3);
-    }
-    .btn-primary:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 15px 30px rgba(108, 92, 231, 0.4);
-    }
-    .btn-secondary {
-      background: rgba(255, 255, 255, 0.03);
-      border: 1px solid rgba(255, 255, 255, 0.2);
-      color: white;
-    }
-    .btn-secondary:hover {
-      border-color: var(--accent-primary);
-      background: rgba(108, 92, 231, 0.1);
-      transform: translateY(-3px);
-    }
-
-    /* Container */
-    .container {
-      max-width: 1400px;
-      margin: 0 auto;
-      padding: 0 5%;
-    }
-    section {
-      padding: 6rem 0;
-    }
-    .section-title {
-      font-size: 3rem;
-      font-weight: 700;
-      font-family: 'Poppins', sans-serif;
-      margin-bottom: 3rem;
-      background: linear-gradient(to right, #FFF, #A0A0FF);
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-    }
-
-    /* Hero Section */
     .hero {
-      min-height: 90vh;
+      min-height: 100vh;
       display: flex;
       align-items: center;
       position: relative;
-      overflow: hidden;
+      padding: 100px 0;
     }
-    .hero-content {
-      flex: 1;
-      z-index: 2;
-    }
-    .hero-badge {
-      display: inline-block;
-      background: rgba(108, 92, 231, 0.2);
-      backdrop-filter: blur(8px);
-      padding: 0.5rem 1.2rem;
-      border-radius: 30px;
-      font-size: 0.8rem;
-      margin-bottom: 1.5rem;
-      border: 1px solid rgba(108, 92, 231, 0.4);
-    }
-    .hero h1 {
-      font-size: 4.8rem;
-      font-weight: 800;
-      line-height: 1.2;
-      font-family: 'Poppins', sans-serif;
-      letter-spacing: -0.02em;
-      margin-bottom: 1.5rem;
-    }
-    .hero p {
-      font-size: 1.2rem;
-      color: var(--text-secondary);
-      max-width: 550px;
-      margin-bottom: 2rem;
-    }
-    .hero-buttons {
-      display: flex;
-      gap: 1rem;
-      flex-wrap: wrap;
-    }
-    .mockup-area {
-      flex: 1;
-      position: relative;
-      display: flex;
-      justify-content: center;
-    }
-    .glass-mock {
-      width: 320px;
-      height: 580px;
-      background: rgba(30, 30, 45, 0.4);
-      backdrop-filter: blur(20px);
-      border-radius: 2.5rem;
-      border: 1px solid rgba(255,255,255,0.2);
-      box-shadow: 0 25px 45px -12px black;
-      transform: rotate(5deg);
-      transition: transform 0.5s;
-    }
-    .glass-mock::before {
+
+    .hero::before {
       content: "";
       position: absolute;
-      inset: 0;
-      border-radius: 2.5rem;
-      padding: 2px;
-      background: linear-gradient(145deg, rgba(108,92,231,0.5), rgba(0,210,255,0.3));
-      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-      mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-      -webkit-mask-composite: xor;
-      mask-composite: exclude;
-      pointer-events: none;
-    }
-    .floating-gradient {
-      position: absolute;
-      width: 250px;
-      height: 250px;
-      background: radial-gradient(circle, rgba(108,92,231,0.4), transparent);
-      filter: blur(60px);
-      border-radius: 50%;
-      animation: floatAnim 12s infinite alternate;
-    }
-    @keyframes floatAnim {
-      0% { transform: translate(0, 0) scale(1); opacity: 0.5; }
-      100% { transform: translate(40px, -40px) scale(1.3); opacity: 0.9; }
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, rgba(86,125,255,0.2), transparent 70%);
+      top: -200px;
+      right: -200px;
+      z-index: -1;
     }
 
-    /* Services Cards */
-    .services-grid {
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+
+    .eyebrow {
+      display: inline-block;
+      padding: 8px 14px;
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 999px;
+      font-size: 0.85rem;
+      color: #9ca3af;
+      margin-bottom: 28px;
+      background: rgba(255,255,255,0.02);
+    }
+
+    h1 {
+      font-size: 5rem;
+      line-height: 1;
+      font-weight: 800;
+      letter-spacing: -4px;
+      margin-bottom: 30px;
+    }
+
+    .hero p {
+      font-size: 1.15rem;
+      color: #b4b4b4;
+      max-width: 650px;
+      margin-bottom: 35px;
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 18px;
+      margin-bottom: 30px;
+    }
+
+    .btn {
+      padding: 16px 28px;
+      border-radius: 14px;
+      font-weight: 600;
+      transition: 0.3s ease;
+      display: inline-block;
+    }
+
+    .btn-primary {
+      background: white;
+      color: black;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+    }
+
+    .btn-secondary {
+      border: 1px solid rgba(255,255,255,0.12);
+      color: white;
+      background: rgba(255,255,255,0.03);
+    }
+
+    .hero-visual {
+      background: linear-gradient(145deg, rgba(255,255,255,0.04), rgba(255,255,255,0.01));
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 30px;
+      padding: 30px;
+      box-shadow: 0 30px 60px rgba(0,0,0,0.4);
+    }
+
+    .code-window {
+      background: #111318;
+      border-radius: 18px;
+      padding: 24px;
+      font-family: monospace;
+      color: #89ffb2;
+      font-size: 0.95rem;
+      overflow: hidden;
+    }
+
+    section {
+      padding: 120px 0;
+    }
+
+    .section-title {
+      font-size: 3rem;
+      line-height: 1.1;
+      margin-bottom: 20px;
+      font-weight: 800;
+      letter-spacing: -2px;
+    }
+
+    .section-subtitle {
+      color: #b4b4b4;
+      max-width: 700px;
+      margin-bottom: 60px;
+      font-size: 1.05rem;
+    }
+
+    .services-grid,
+    .principles-grid,
+    .stack-grid,
+    .case-grid,
+    .testimonial-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 2rem;
-    }
-    .service-card {
-      background: var(--card-bg);
-      backdrop-filter: blur(12px);
-      border-radius: 1.8rem;
-      padding: 2rem;
-      border: 1px solid var(--border-glass);
-      transition: var(--transition);
-      cursor: pointer;
-    }
-    .service-card:hover {
-      transform: translateY(-10px);
-      border-color: rgba(108,92,231,0.5);
-      box-shadow: var(--shadow-glow);
-    }
-    .service-icon {
-      font-size: 2.8rem;
-      margin-bottom: 1.5rem;
-      background: var(--gradient-1);
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-    }
-    .service-card h3 {
-      font-size: 1.7rem;
-      margin-bottom: 1rem;
-    }
-    .service-card p {
-      color: var(--text-secondary);
-      font-size: 0.95rem;
+      gap: 28px;
     }
 
-    /* Projects Section */
-    .projects-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 2rem;
-    }
-    .project-card {
-      background: var(--card-bg);
-      border-radius: 1.5rem;
-      overflow: hidden;
-      border: 1px solid var(--border-glass);
-      transition: var(--transition);
-    }
-    .project-card:hover {
-      transform: scale(1.02);
-      border-color: var(--accent-primary);
-    }
-    .project-img {
-      height: 220px;
-      background: linear-gradient(145deg, #1E1E2C, #13131A);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 4rem;
-    }
-    .project-info {
-      padding: 1.5rem;
-    }
-    .tech-tags span {
-      background: rgba(108,92,231,0.2);
-      padding: 0.2rem 0.8rem;
-      border-radius: 20px;
-      font-size: 0.7rem;
-      margin-right: 0.5rem;
-    }
-
-    /* Process Steps */
-    .process-steps {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-between;
-      gap: 1.5rem;
-    }
-    .step {
-      flex: 1;
-      min-width: 160px;
-      text-align: center;
-      background: rgba(20,20,30,0.5);
-      border-radius: 2rem;
-      padding: 1.8rem;
-      backdrop-filter: blur(8px);
-    }
-    .step-number {
-      font-size: 2.5rem;
-      font-weight: 800;
-      background: var(--gradient-1);
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-    }
-
-    /* Why Choose Us */
-    .features-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px,1fr));
-      gap: 1.8rem;
-      margin-top: 2rem;
-    }
-    .feature-item {
-      background: rgba(255,255,255,0.02);
-      backdrop-filter: blur(8px);
-      padding: 1.8rem;
-      border-radius: 1.5rem;
-      border: 1px solid rgba(255,255,255,0.05);
-      text-align: center;
-    }
-    .about-wrapper {
-    display: flex;
-    flex-direction: column;
-    gap: 4rem;
-    }
-
-    /* Contact Form */
-    .contact-wrapper {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 3rem;
-    }
-    .contact-form {
-      flex: 1.5;
-    }
-    .contact-info {
-      flex: 1;
-    }
-    .form-group {
-      margin-bottom: 1.5rem;
-    }
-    input, select, textarea {
-      width: 100%;
-      padding: 1rem;
-      background: rgba(20,20,28,0.8);
-      border: 1px solid var(--border-glass);
-      border-radius: 1rem;
-      color: white;
-      transition: var(--transition);
-    }
-    input:focus, select:focus, textarea:focus {
-      outline: none;
-      border-color: var(--accent-primary);
-      box-shadow: 0 0 12px rgba(108,92,231,0.3);
-    }
-    .whatsapp-btn {
-      background: #25D36620;
-      border: 1px solid #25D366;
-      display: inline-flex;
-      align-items: center;
-      gap: 0.7rem;
-      padding: 0.8rem 1.8rem;
-      border-radius: 40px;
-      margin-top: 1rem;
-    }
-    .email-link {
-      color: white;
-      text-decoration: none;
+    .card {
+      background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
+      border: 1px solid rgba(255,255,255,0.08);
+      padding: 35px;
+      border-radius: 24px;
       transition: 0.3s ease;
     }
 
-    .email-link:hover {
-      color: #6C5CE7;
-    }
-    .project-img {
-      width: 100%;
-      height: 260px;
-      overflow: hidden;
-      border-radius: 1.5rem 1.5rem 0 0;
+    .card:hover {
+      transform: translateY(-6px);
+      border-color: rgba(255,255,255,0.16);
     }
 
-    .project-img img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      transition: 0.5s ease;
+    .card h3 {
+      font-size: 1.4rem;
+      margin-bottom: 16px;
     }
 
-    .project-card:hover .project-img img {
-      transform: scale(1.05);
+    .card p,
+    .card li {
+      color: #b9b9b9;
+      font-size: 0.97rem;
     }
 
-    /* Footer */
+    .card ul {
+      margin-top: 20px;
+      padding-left: 18px;
+    }
+
+    .tech-stack {
+      background: #0f1014;
+    }
+
+    .stack-item {
+      padding: 30px;
+      border-radius: 22px;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .stack-item h4 {
+      margin-bottom: 15px;
+      font-size: 1.1rem;
+    }
+
+    .tech-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .tag {
+      padding: 10px 14px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.05);
+      font-size: 0.9rem;
+      color: #d9d9d9;
+      border: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .quote-section {
+      text-align: center;
+      padding: 150px 0;
+    }
+
+    .quote-section h2 {
+      font-size: 4rem;
+      line-height: 1.1;
+      max-width: 900px;
+      margin: auto;
+      letter-spacing: -3px;
+    }
+
+    .quote-section p {
+      color: #9e9e9e;
+      margin-top: 25px;
+    }
+
+    .founder {
+      background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      border-radius: 30px;
+      padding: 60px;
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .founder h2 {
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+    }
+
+    .cta {
+      text-align: center;
+      padding: 160px 0;
+    }
+
+    .cta h2 {
+      font-size: 4rem;
+      line-height: 1;
+      letter-spacing: -3px;
+      margin-bottom: 30px;
+    }
+
     footer {
-      background: #050508;
-      padding: 3rem 5%;
-      border-top: 1px solid var(--border-glass);
+      padding: 60px 0;
+      border-top: 1px solid rgba(255,255,255,0.08);
     }
-    .footer-content {
+
+    .footer-grid {
       display: flex;
       justify-content: space-between;
       flex-wrap: wrap;
-      gap: 2rem;
-    }
-    .social-icons i {
-      font-size: 1.4rem;
-      margin-left: 1rem;
-      transition: var(--transition);
-      cursor: pointer;
-    }
-    .social-icons i:hover {
-      color: var(--accent-primary);
+      gap: 40px;
     }
 
-    @media (max-width: 900px) {
-      .nav-links { display: none; }
-      .menu-icon { display: block; }
-      .hero { flex-direction: column; text-align: center; }
-      .hero h1 { font-size: 2.8rem; }
-      .section-title { font-size: 2.2rem; }
-      .navbar { padding: 1rem 5%; }
-    }
-    @media (max-width: 600px) {
-      .hero h1 { font-size: 2.2rem; }
-    }
-    .mobile-nav {
+    .footer-links {
       display: flex;
-      flex-direction: column;
-      position: absolute;
-      top: 70px;
-      left: 0;
-      width: 100%;
-      background: rgba(10,10,15,0.95);
-      backdrop-filter: blur(20px);
-      gap: 1rem;
-      padding: 1.5rem;
-      z-index: 999;
+      gap: 24px;
+      color: #a8a8a8;
     }
-    .reveal {
-      opacity: 0;
-      transform: translateY(35px);
-      transition: all 0.7s ease;
+
+    @media(max-width: 980px) {
+      .hero-grid {
+        grid-template-columns: 1fr;
+      }
+
+      h1 {
+        font-size: 3.5rem;
+      }
+
+      .section-title {
+        font-size: 2.4rem;
+      }
+
+      .quote-section h2,
+      .cta h2 {
+        font-size: 2.8rem;
+      }
+
+      .nav-links {
+        display: none;
+      }
     }
-    .reveal.active {
-      opacity: 1;
-      transform: translateY(0);
-    }
-    ::-webkit-scrollbar { width: 8px; }
-    ::-webkit-scrollbar-track { background: #0A0A0F; }
-    ::-webkit-scrollbar-thumb { background: #6C5CE7; border-radius: 10px; }
-
-    @media (max-width: 768px) {
-
-  /* About + Why Choose Us */
-  .about-wrapper {
-    flex-direction: column !important;
-    gap: 4rem;
-  }
-
-  /* Contact Section */
-  .contact-wrapper {
-    flex-direction: column;
-    gap: 2rem;
-  }
-
-  .contact-form,
-  .contact-info {
-    width: 100%;
-  }
-
-  /* Remove clutter on mobile */
-  .contact-info div:first-child {
-    display: none;
-  }
-
-  /* Hide social icons on phone */
-  .contact-info div:nth-child(2) {
-    display: none;
-  }
-
-  /* Hide location from contact section */
-  .contact-info p:last-child {
-    display: none;
-  }
-
-  /* Footer mobile layout */
-  .footer-content {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 2rem;
-  }
-
-  .footer-content ul {
-    flex-direction: column;
-    gap: 1rem;
-    padding: 0;
-  }
-
-  .social-icons {
-    display: flex;
-    gap: 1rem;
-  }
-
-  .social-icons i {
-    margin-left: 0;
-  }
-
-  /* Better spacing */
-  footer {
-    padding: 3rem 1.5rem;
-  }
-
-}
-  </style>
-</head>
-<body>
-
-<div class="cursor-dot"></div>
-<div class="cursor-outline"></div>
-
-<nav class="navbar" id="navbar">
-  <div class="logo">Novexium</div>
-  <div class="menu-icon" id="menuToggle"><i class="fas fa-bars"></i></div>
-  <ul class="nav-links" id="navLinks">
-    <li><a href="#home">Home</a></li>
-    <li><a href="#services">Services</a></li>
-    <li><a href="#projects">Projects</a></li>
-    <li><a href="#process">Process</a></li>
-    <li><a href="#about">About</a></li>
-    <li><a href="#contact">Contact</a></li>
-  </ul>
+  </style></head>
+<body>  <div class="container">
+    <nav>
+      <div class="logo">NOVEXIUM</div><div class="nav-links">
+    <a href="#services">Services</a>
+    <a href="#stack">Tech Stack</a>
+    <a href="#work">Work</a>
+    <a href="#insights">Insights</a>
+    <a href="#contact">Contact</a>
+  </div>
 </nav>
 
-<main>
-  <!-- Hero Section -->
-  <section id="home" class="hero container">
-    <div class="hero-content">
-      <span class="hero-badge"><i class="fas fa-bolt"></i> Digital Product Studio</span>
-      <h1>We Turn Ideas Into Powerful Digital Products</h1>
-      <p>We design and build modern websites, mobile apps, and digital platforms for startups, creators, and businesses worldwide.</p>
-      <div class="hero-buttons">
-        <a href="#contact" class="btn-primary">Start Your Project</a>
-        <a href="#projects" class="btn-secondary">View Our Work</a>
-        <a href="novexium-pricing.pdf" class="btn-secondary" target="_blank"> Pricing</a>
-      </div>
-    </div>
-    <div class="mockup-area">
-      <div class="glass-mock"></div>
-      <div class="floating-gradient" style="top:-20px; right:0;"></div>
-      <div class="floating-gradient" style="bottom:20px; left:-30px; animation-delay: -3s;"></div>
-    </div>
-  </section>
+  </div>  <section class="hero">
+    <div class="container hero-grid"><div>
+    <div class="eyebrow">AI-Native Product Engineering Studio</div>
 
-  <!-- Services Section -->
-  <section id="services">
-    <div class="container">
-      <h2 class="section-title reveal">Premium Services</h2>
-      <div class="services-grid">
-        <div class="service-card reveal"><i class="fas fa-code service-icon"></i><h3>Website Development</h3><p>Build modern responsive websites, ecommerce platforms, business websites, landing pages, and custom web experiences optimized for performance and usability.</p></div>
-        <div class="service-card reveal"><i class="fas fa-mobile-alt service-icon"></i><h3>Mobile App Development</h3><p>Develop modern cross-platform mobile applications with sleek interfaces and scalable architecture for Android and iOS.</p></div>
-        <div class="service-card reveal"><i class="fas fa-pen-nib service-icon"></i><h3>UI/UX Design</h3><p>Design intuitive digital experiences focused on usability, aesthetics, responsiveness, and modern interaction principles.</p></div>
-        <div class="service-card reveal"><i class="fas fa-headset service-icon"></i><h3>Product Maintenance & Support</h3><p>Provide ongoing updates, optimizations, performance improvements, feature additions, and long-term product support.</p></div>
-      </div>
-    </div>
-  </section>
+    <h1>
+      Software that removes operational chaos.
+    </h1>
 
-  <!-- Projects Section -->
-  <section id="projects">
-    <div class="container">
-      <h2 class="section-title reveal">Handcrafted Products</h2>
-     <div class="projects-grid">
+    <p>
+      Novexium builds AI systems, scalable platforms, and intelligent internal tools for startups and growing companies that want software people actually enjoy using.
+    </p>
 
-  <div class="project-card reveal">
-    <div class="project-img">
-      <img src="fashion-platform.png" alt="Fashion Platform">
+    <div class="hero-buttons">
+      <a href="#contact" class="btn btn-primary">Book a Strategy Call</a>
+      <a href="#work" class="btn btn-secondary">See Real Work</a>
     </div>
 
-    <div class="project-info">
-      <h3>Ecommerce Fashion Platform</h3>
-      <p>Next-gen fashion marketplace with AI recommendations</p>
+    <p>
+      Built by engineers obsessed with usability, performance, clarity, and long-term scalability.
+    </p>
+  </div>
+
+  <div class="hero-visual">
+    <div class="code-window">
+      > Deploying AI workflow architecture...<br><br>
+      ✓ Node.js API initialized<br>
+      ✓ React frontend compiled<br>
+      ✓ PostgreSQL connected<br>
+      ✓ AI services operational<br>
+      ✓ CI/CD pipeline deployed<br>
+      ✓ Real-time analytics active<br><br>
+      System status: Stable.
+    </div>
+  </div>
+
+</div>
+
+  </section>  <section id="services">
+    <div class="container"><h2 class="section-title">
+    We build systems that help businesses move faster.
+  </h2>
+
+  <p class="section-subtitle">
+    Most companies don’t need more software. They need fewer manual processes, better workflows, faster systems, and tools that don’t create frustration.
+  </p>
+
+  <div class="services-grid">
+
+    <div class="card">
+      <h3>AI Automation Systems</h3>
+      <p>
+        We design AI-powered workflows that reduce repetitive work and improve operational efficiency.
+      </p>
+
+      <ul>
+        <li>AI support assistants</li>
+        <li>Document processing</li>
+        <li>CRM automation</li>
+        <li>Knowledge assistants</li>
+        <li>Workflow orchestration</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h3>Product Engineering</h3>
+      <p>
+        We turn ideas into production-ready products designed for long-term scalability.
+      </p>
+
+      <ul>
+        <li>SaaS platforms</li>
+        <li>Client portals</li>
+        <li>Admin dashboards</li>
+        <li>Marketplaces</li>
+        <li>Custom web applications</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h3>Infrastructure & Scaling</h3>
+      <p>
+        We build stable, resilient systems capable of handling rapid growth.
+      </p>
+
+      <ul>
+        <li>Cloud architecture</li>
+        <li>Performance optimization</li>
+        <li>Database engineering</li>
+        <li>Deployment pipelines</li>
+        <li>System monitoring</li>
+      </ul>
+    </div>
+
+  </div>
+</div>
+
+  </section>  <section class="tech-stack" id="stack">
+    <div class="container"><h2 class="section-title">
+    The technologies we trust.
+  </h2>
+
+  <p class="section-subtitle">
+    We choose technologies based on scalability, maintainability, developer experience, and long-term performance — not hype.
+  </p>
+
+  <div class="stack-grid">
+
+    <div class="stack-item">
+      <h4>Frontend Development</h4>
 
       <div class="tech-tags">
-        <span>React</span>
-        <span>Node.js</span>
-        <span>Stripe</span>
+        <div class="tag">React.js</div>
+        <div class="tag">Next.js</div>
+        <div class="tag">TypeScript</div>
+        <div class="tag">Tailwind CSS</div>
+        <div class="tag">JavaScript</div>
       </div>
     </div>
-  </div>
 
-
-  <div class="project-card reveal">
-    <div class="project-img">
-      <img src="saas-dashboard.png" alt="SaaS Dashboard">
-    </div>
-
-    <div class="project-info">
-      <h3>Startup SaaS Dashboard</h3>
-      <p>Analytics suite for modern B2B teams</p>
+    <div class="stack-item">
+      <h4>Backend Engineering</h4>
 
       <div class="tech-tags">
-        <span>Vue</span>
-        <span>D3</span>
-        <span>Firebase</span>
+        <div class="tag">Node.js</div>
+        <div class="tag">Express.js</div>
+        <div class="tag">NestJS</div>
+        <div class="tag">Python</div>
+        <div class="tag">REST APIs</div>
+        <div class="tag">GraphQL</div>
       </div>
     </div>
-  </div>
 
-
-  <div class="project-card reveal">
-    <div class="project-img">
-      <img src="restaurant-app.png" alt="Restaurant App">
-    </div>
-
-    <div class="project-info">
-      <h3>Restaurant Booking App</h3>
-      <p>Reservation & loyalty platform</p>
+    <div class="stack-item">
+      <h4>Mobile Development</h4>
 
       <div class="tech-tags">
-        <span>Flutter</span>
-        <span>MongoDB</span>
+        <div class="tag">Flutter</div>
+        <div class="tag">Dart</div>
+        <div class="tag">React Native</div>
+        <div class="tag">Cross-platform Apps</div>
       </div>
     </div>
-  </div>
 
-
-  <div class="project-card reveal">
-    <div class="project-img">
-      <img src="fitness-app.png" alt="Fitness App">
-    </div>
-
-    <div class="project-info">
-      <h3>Fitness Mobile Application</h3>
-      <p>Workout & nutrition tracking with live coaching</p>
+    <div class="stack-item">
+      <h4>AI & Automation</h4>
 
       <div class="tech-tags">
-        <span>React Native</span>
-        <span>Firebase</span>
+        <div class="tag">OpenAI APIs</div>
+        <div class="tag">LangChain</div>
+        <div class="tag">AI Agents</div>
+        <div class="tag">Workflow Automation</div>
+        <div class="tag">Vector Databases</div>
       </div>
     </div>
+
+    <div class="stack-item">
+      <h4>Databases & Storage</h4>
+
+      <div class="tech-tags">
+        <div class="tag">PostgreSQL</div>
+        <div class="tag">MongoDB</div>
+        <div class="tag">Redis</div>
+        <div class="tag">Firebase</div>
+        <div class="tag">Supabase</div>
+      </div>
+    </div>
+
+    <div class="stack-item">
+      <h4>Cloud & DevOps</h4>
+
+      <div class="tech-tags">
+        <div class="tag">AWS</div>
+        <div class="tag">Docker</div>
+        <div class="tag">CI/CD</div>
+        <div class="tag">Vercel</div>
+        <div class="tag">Linux</div>
+        <div class="tag">GitHub Actions</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+  </section>  <section class="quote-section">
+    <div class="container">
+      <h2>
+        Most software creates complexity.
+        <br>
+        We build systems that create clarity.
+      </h2><p>
+    Good software should feel calm, fast, obvious, and scalable.
+  </p>
+</div>
+
+  </section>  <section id="work">
+    <div class="container"><h2 class="section-title">
+    Real systems. Real operational problems.
+  </h2>
+
+  <p class="section-subtitle">
+    We focus on building software that improves workflows, reduces manual work, and supports long-term growth.
+  </p>
+
+  <div class="case-grid">
+
+    <div class="card">
+      <h3>AI Operations Assistant</h3>
+      <p>
+        Built an AI-powered operations system that automated repetitive support workflows and centralized team communication.
+      </p>
+    </div>
+
+    <div class="card">
+      <h3>Internal Workflow Platform</h3>
+      <p>
+        Replaced fragmented spreadsheets and disconnected tools with a unified operational dashboard.
+      </p>
+    </div>
+
+    <div class="card">
+      <h3>Scalable SaaS Platform</h3>
+      <p>
+        Designed and deployed a production-ready SaaS platform with scalable infrastructure and real-time analytics.
+      </p>
+    </div>
+
+  </div>
+</div>
+
+  </section>  <section>
+    <div class="container"><h2 class="section-title">
+    Why teams work with us.
+  </h2>
+
+  <div class="principles-grid">
+
+    <div class="card">
+      <h3>We think like operators.</h3>
+      <p>
+        We care about workflows, team efficiency, and business outcomes — not just technical features.
+      </p>
+    </div>
+
+    <div class="card">
+      <h3>We move quickly.</h3>
+      <p>
+        We prefer rapid iteration over bloated timelines and endless meetings.
+      </p>
+    </div>
+
+    <div class="card">
+      <h3>We stay honest.</h3>
+      <p>
+        If something is a bad idea technically or operationally, we’ll say it.
+      </p>
+    </div>
+
+  </div>
+</div>
+
+  </section>  <section>
+    <div class="container founder"><h2>
+    Why Novexium exists.
+  </h2>
+
+  <p>
+    We started Novexium because too much software feels disconnected from real operational problems.
+  </p>
+
+  <br>
+
+  <p>
+    Businesses are overwhelmed with fragmented tools, repetitive workflows, complicated systems, and software people barely tolerate using.
+  </p>
+
+  <br>
+
+  <p>
+    We wanted to build systems differently.
+  </p>
+
+  <br>
+
+  <p>
+    Not just technically impressive systems.
+  </p>
+
+  <br>
+
+  <p>
+    Useful ones.
+  </p>
+
+  <br>
+
+  <p>
+    The kind that save time, reduce stress, improve workflows, and help teams scale with clarity.
+  </p>
+
+</div>
+
+  </section>  <section>
+    <div class="container"><h2 class="section-title">
+    What clients say.
+  </h2>
+
+  <div class="testimonial-grid">
+
+    <div class="card">
+      <p>
+        “Novexium simplified operational problems that had slowed our team down for years.”
+      </p>
+    </div>
+
+    <div class="card">
+      <p>
+        “They moved fast, communicated clearly, and genuinely cared about solving the actual problem.”
+      </p>
+    </div>
+
+    <div class="card">
+      <p>
+        “The systems they built became essential to our operations within weeks.”
+      </p>
+    </div>
+
+  </div>
+</div>
+
+  </section>  <section class="cta" id="contact">
+    <div class="container"><h2>
+    Let’s build software people actually enjoy using.
+  </h2>
+
+  <p class="section-subtitle" style="margin:auto; margin-bottom:40px;">
+    Whether you're building a new product, exploring AI automation, improving internal systems, or scaling infrastructure — we’d love to hear what you're working on.
+  </p>
+
+  <div class="hero-buttons" style="justify-content:center;">
+    <a href="#" class="btn btn-primary">Start a Project</a>
+    <a href="#" class="btn btn-secondary">Book a Call</a>
   </div>
 
 </div>
-    </div>
-  </section>
 
-  <!-- Process Section -->
-  <section id="process">
-    <div class="container">
-      <h2 class="section-title reveal">Our Process</h2>
-      <div class="process-steps">
-        <div class="step reveal"><div class="step-number">01</div><h4>Discovery</h4><small>Understand vision & goals</small></div>
-        <div class="step reveal"><div class="step-number">02</div><h4>Planning & Design</h4><small>Wireframes & prototypes</small></div>
-        <div class="step reveal"><div class="step-number">03</div><h4>Development</h4><small>Agile sprints & iterations</small></div>
-        <div class="step reveal"><div class="step-number">04</div><h4>Testing & Optimization</h4><small>QA & performance tuning</small></div>
-        <div class="step reveal"><div class="step-number">05</div><h4>Launch</h4><small>Deploy & go live</small></div>
-        <div class="step reveal"><div class="step-number">06</div><h4>Ongoing Support</h4><small>Maintenance & scaling</small></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- About + Why Choose Us Combined -->
-  <section id="about">
-    <div class="container">
-      <div class="about-wrapper">
-        <div style="flex:1"><h2 class="section-title" style="margin-bottom:1rem;">About Studio</h2><p style="font-size:1.2rem; color:var(--text-secondary);">Novexium is a digital product studio focused on transforming ideas into modern digital experiences. We combine design, development, and strategy to create products that feel premium, scalable, and impactful.</p><p style="margin-top:1rem;"><i>"You have the vision. We build the product."</i></p></div>
-        <div style="flex:1"><h2 class="section-title" style="margin-bottom:1rem;">Why Choose Us</h2><div class="features-grid"><div class="feature-item"><i class="fas fa-gem fa-2x" style="color:#6C5CE7"></i><h4>Modern Design</h4></div><div class="feature-item"><i class="fas fa-tachometer-alt fa-2x" style="color:#6C5CE7"></i><h4>Fast Performance</h4></div><div class="feature-item"><i class="fas fa-chart-line fa-2x" style="color:#6C5CE7"></i><h4>Scalable Solutions</h4></div><div class="feature-item"><i class="fas fa-mobile fa-2x" style="color:#6C5CE7"></i><h4>Mobile First</h4></div><div class="feature-item"><i class="fas fa-code-branch fa-2x" style="color:#6C5CE7"></i><h4>Clean Code</h4></div><div class="feature-item"><i class="fas fa-globe fa-2x" style="color:#6C5CE7"></i><h4>International Standards</h4></div></div></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Contact Section -->
-  <section id="contact">
-    <div class="container">
-      <h2 class="section-title reveal">Let's Build Together</h2>
-      <div class="contact-wrapper">
-        <form class="contact-form" action="https://formspree.io/f/xwvyzjej" method="POST">
-          <div class="form-group">
-  <input type="text" name="name" placeholder="Full Name" required>
-</div>
-
-<div class="form-group">
-  <input type="email" name="email" placeholder="Email Address" required>
-</div>
-
-<div class="form-group">
-  <select name="projectType">
-    <option>Website Development</option>
-    <option>Mobile App</option>
-    <option>UI/UX Design</option>
-    <option>SaaS Platform</option>
-  </select>
-</div>
-
-<div class="form-group">
-  <textarea name="message" rows="4" placeholder="Tell us about your vision..." required></textarea>
-</div>
-
-<button type="submit" class="btn-primary" style="width:100%">
-  Send Message <i class="fas fa-paper-plane"></i>
-</button>
-        </form>
-        <div class="contact-info">
-          <div class="whatsapp-btn"><i class="fab fa-whatsapp fa-lg"></i> Chat on WhatsApp</div>
-          <div style="margin-top: 2rem;"><i class="fab fa-instagram"></i>   <i class="fab fa-linkedin-in"></i>   <i class="fab fa-x-twitter"></i>   <i class="fab fa-github"></i></div>
-          <p style="margin-top: 1.5rem;"><i class="fas fa-envelope"></i><a href="mailto:novexiumdigital@gmail.com" class="email-link"> novexiumdigital@gmail.com</a></p>
-          
-        </div>
-      </div>
-    </div>
-  </section>
-</main>
-
-<footer>
-  <div class="footer-content">
-    <div><div class="logo">Novexium</div><p style="font-size:0.8rem; margin-top:0.5rem;">© 2025 — Beyond Boundaries</p><p><i class="fas fa-map-marker-alt"></i> Global Digital Studio</p></div>
-    <div><ul style="list-style: none; display: flex; gap: 1.5rem;"><li><a href="#home" style="color:white; text-decoration:none;">Home</a></li><li><a href="#services" style="color:white; text-decoration:none;">Services</a></li><li><a href="#projects" style="color:white; text-decoration:none;">Projects</a></li><li><a href="#contact" style="color:white;">Contact</a></li></ul></div>
-    <div class="social-icons"><i class="fab fa-twitter"></i><i class="fab fa-dribbble"></i><i class="fab fa-behance"></i></div>
+  </section>  <footer>
+    <div class="container footer-grid"><div>
+    <div class="logo">NOVEXIUM</div>
+    <p style="margin-top:14px; color:#9e9e9e; max-width:400px;">
+      AI-native product engineering studio focused on automation, scalable systems, and operational clarity.
+    </p>
   </div>
-</footer>
 
-<script>
-  // Custom cursor
-  const cursorDot = document.querySelector(".cursor-dot");
-  const cursorOutline = document.querySelector(".cursor-outline");
-  window.addEventListener("mousemove", (e) => {
-    cursorDot.style.transform = `translate(${e.clientX - 4}px, ${e.clientY - 4}px)`;
-    cursorOutline.style.transform = `translate(${e.clientX - 17}px, ${e.clientY - 17}px)`;
-  });
-  document.querySelectorAll("a, button, .service-card, .project-card").forEach(el => {
-    el.addEventListener("mouseenter", () => { cursorOutline.style.transform = "scale(1.5)"; cursorOutline.style.borderColor = "#8A75FF"; });
-    el.addEventListener("mouseleave", () => { cursorOutline.style.transform = "scale(1)"; cursorOutline.style.borderColor = "rgba(108, 92, 231, 0.5)"; });
-  });
+  <div class="footer-links">
+    <a href="#">Services</a>
+    <a href="#">Work</a>
+    <a href="#">Insights</a>
+    <a href="#">About</a>
+    <a href="#">Contact</a>
+  </div>
 
-  // Mobile Navigation
-  const menuToggle = document.getElementById("menuToggle");
-  const navLinks = document.getElementById("navLinks");
-  menuToggle.addEventListener("click", () => {
-    if (navLinks.classList.contains("nav-links")) {
-      navLinks.classList.toggle("mobile-nav");
-    }
-  });
-  document.querySelectorAll(".nav-links a").forEach(link => {
-    link.addEventListener("click", () => {
-      if (navLinks.classList.contains("mobile-nav")) navLinks.classList.remove("mobile-nav");
-    });
-  });
+</div>
 
-  // Scroll Reveal Animation
-  const reveals = document.querySelectorAll(".reveal");
-  function revealOnScroll() {
-    for (let el of reveals) {
-      const windowHeight = window.innerHeight;
-      const revealTop = el.getBoundingClientRect().top;
-      const revealPoint = 150;
-      if (revealTop < windowHeight - revealPoint) {
-        el.classList.add("active");
-      }
-    }
-  }
-  window.addEventListener("scroll", revealOnScroll);
-  revealOnScroll();
-
-  // Loading animation / fade subtle
-  document.body.style.opacity = "0";
-  window.addEventListener("load", () => {
-    document.body.style.transition = "opacity 0.8s ease";
-    document.body.style.opacity = "1";
-  });
-
-  // WhatsApp simulation
-  document.querySelector(".whatsapp-btn")?.addEventListener("click", () => {
-  alert("WhatsApp support coming soon.\nPlease contact us via email for project inquiries.");
-});
-
-  // smooth anchor offset for sticky navbar
-  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function(e) {
-      e.preventDefault();
-      const targetId = this.getAttribute('href').substring(1);
-      if (!targetId) return;
-      const targetElement = document.getElementById(targetId);
-      if (targetElement) {
-        const offset = 80;
-        const topPos = targetElement.offsetTop - offset;
-        window.scrollTo({ top: topPos, behavior: "smooth" });
-      }
-    });
-  });
-</script>
-</body>
-</html>
+  </footer></body>
+</html> 
