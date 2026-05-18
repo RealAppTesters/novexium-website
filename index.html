@@ -1,706 +1,1284 @@
-<!DOCTYPE html><html lang="en">
+<!DOCTYPE html>
+<html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Novexium — AI-Native Product Engineering Studio</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Novexium — Web Development for Founders</title>
+<meta name="description" content="I build websites and web products for founders and makers who need to get online fast, look credible, and start growing.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-    body {
-      font-family: 'Inter', sans-serif;
-      background: #0b0b0d;
-      color: #f5f5f5;
-      line-height: 1.7;
-      overflow-x: hidden;
-    }
+  :root {
+    --green: #1D9E75;
+    --green-dark: #0F6E56;
+    --green-deep: #085041;
+    --green-light: #E1F5EE;
+    --green-mid: #9FE1CB;
+    --text: #0f0f0f;
+    --text-muted: #6b6b6b;
+    --text-faint: #a0a0a0;
+    --bg: #fafaf8;
+    --bg-card: #ffffff;
+    --bg-surface: #f4f4f1;
+    --border: rgba(0,0,0,0.08);
+    --border-strong: rgba(0,0,0,0.14);
+    --radius: 12px;
+    --radius-sm: 8px;
+    --radius-pill: 100px;
+  }
 
-    a {
-      text-decoration: none;
-      color: inherit;
-    }
+  html { scroll-behavior: smooth; }
 
-    .container {
-      width: 90%;
-      max-width: 1280px;
-      margin: auto;
-    }
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    font-size: 16px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
 
-    nav {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 28px 0;
-      position: sticky;
-      top: 0;
-      background: rgba(11,11,13,0.95);
-      backdrop-filter: blur(10px);
-      z-index: 100;
-      border-bottom: 1px solid rgba(255,255,255,0.05);
-    }
+  a { color: inherit; text-decoration: none; }
 
-    .logo {
-      font-size: 1.3rem;
-      font-weight: 800;
-      letter-spacing: -1px;
-    }
+  /* NAV */
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(250,250,248,0.92);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    padding: 0 40px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
 
-    .nav-links {
-      display: flex;
-      gap: 30px;
-      color: #c7c7c7;
-      font-size: 0.95rem;
-    }
+  .nav-logo {
+    font-size: 16px;
+    font-weight: 500;
+    letter-spacing: -0.4px;
+    color: var(--text);
+  }
+
+  .nav-logo span { color: var(--green); }
+
+  .nav-links {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-size: 14px;
+    color: var(--text-muted);
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--text); }
+
+  .nav-cta {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    color: #fff;
+    background: var(--green);
+    border: none;
+    border-radius: var(--radius-sm);
+    padding: 8px 18px;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.15s;
+  }
+
+  .nav-cta:hover { background: var(--green-dark); }
+  .nav-cta:active { transform: scale(0.97); }
+
+  .hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+    padding: 4px;
+    background: none;
+    border: none;
+  }
+
+  .hamburger span {
+    display: block;
+    width: 22px;
+    height: 1.5px;
+    background: var(--text);
+    transition: all 0.3s;
+  }
+
+  .mobile-menu {
+    display: none;
+    position: fixed;
+    top: 60px;
+    left: 0;
+    right: 0;
+    background: var(--bg);
+    border-bottom: 1px solid var(--border);
+    padding: 24px 40px;
+    z-index: 99;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .mobile-menu.open { display: flex; }
+  .mobile-menu a { font-size: 16px; color: var(--text-muted); }
+  .mobile-menu .nav-cta { width: fit-content; margin-top: 4px; }
+
+  /* HERO */
+  .hero {
+    padding: 100px 40px 80px;
+    max-width: 1100px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: center;
+  }
+
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--green-deep);
+    background: var(--green-light);
+    border-radius: var(--radius-pill);
+    padding: 5px 14px;
+    margin-bottom: 24px;
+  }
+
+  .hero-badge-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--green);
+    animation: pulse 2s infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(0.8); }
+  }
+
+  .hero h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 52px;
+    font-weight: 400;
+    line-height: 1.1;
+    letter-spacing: -1px;
+    color: var(--text);
+    margin-bottom: 20px;
+  }
+
+  .hero h1 em {
+    font-style: italic;
+    color: var(--green);
+  }
+
+  .hero-sub {
+    font-size: 16px;
+    color: var(--text-muted);
+    line-height: 1.75;
+    margin-bottom: 36px;
+    max-width: 420px;
+  }
+
+  .hero-actions {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 48px;
+  }
+
+  .btn-primary {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    color: #fff;
+    background: var(--green);
+    border: none;
+    border-radius: var(--radius-sm);
+    padding: 12px 24px;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.15s;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .btn-primary:hover { background: var(--green-dark); }
+  .btn-primary:active { transform: scale(0.97); }
+
+  .btn-primary svg { transition: transform 0.2s; }
+  .btn-primary:hover svg { transform: translateX(3px); }
+
+  .btn-secondary {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    color: var(--text-muted);
+    background: transparent;
+    border: 1px solid var(--border-strong);
+    border-radius: var(--radius-sm);
+    padding: 12px 24px;
+    cursor: pointer;
+    transition: border-color 0.2s, color 0.2s, transform 0.15s;
+  }
+
+  .btn-secondary:hover { border-color: var(--text-muted); color: var(--text); }
+  .btn-secondary:active { transform: scale(0.97); }
+
+  .hero-proof {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    padding-top: 36px;
+    border-top: 1px solid var(--border);
+  }
+
+  .proof-item {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+  }
+
+  .proof-item + .proof-item {
+    padding-left: 24px;
+    border-left: 1px solid var(--border);
+    margin-left: 24px;
+  }
+
+  .proof-num {
+    font-size: 22px;
+    font-weight: 500;
+    color: var(--text);
+    letter-spacing: -0.5px;
+  }
+
+  .proof-label {
+    font-size: 12px;
+    color: var(--text-faint);
+    line-height: 1.4;
+  }
+
+  /* Hero visual side */
+  .hero-visual {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .visual-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 20px;
+    transition: border-color 0.2s;
+  }
+
+  .visual-card:hover { border-color: var(--border-strong); }
+
+  .visual-card-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 14px;
+  }
+
+  .visual-card-label {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+  }
+
+  .status-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--green);
+  }
+
+  .visual-card-title {
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--text);
+    margin-bottom: 4px;
+  }
+
+  .visual-card-sub {
+    font-size: 13px;
+    color: var(--text-muted);
+    line-height: 1.5;
+  }
+
+  .visual-tag {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--green-deep);
+    background: var(--green-light);
+    border-radius: var(--radius-pill);
+    padding: 3px 10px;
+    margin-top: 10px;
+  }
+
+  .visual-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+
+  .visual-mini {
+    background: var(--bg-surface);
+    border-radius: var(--radius-sm);
+    padding: 16px;
+    text-align: center;
+  }
+
+  .visual-mini-num {
+    font-size: 20px;
+    font-weight: 500;
+    color: var(--text);
+    letter-spacing: -0.3px;
+  }
+
+  .visual-mini-label {
+    font-size: 11px;
+    color: var(--text-faint);
+    margin-top: 3px;
+  }
+
+  /* DIVIDER */
+  .divider {
+    height: 1px;
+    background: var(--border);
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  /* SECTIONS */
+  .section {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 80px 40px;
+  }
+
+  .section-header {
+    margin-bottom: 48px;
+  }
+
+  .section-label {
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--green);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+
+  .section-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 36px;
+    font-weight: 400;
+    letter-spacing: -0.5px;
+    color: var(--text);
+    margin-bottom: 12px;
+    line-height: 1.2;
+  }
+
+  .section-sub {
+    font-size: 15px;
+    color: var(--text-muted);
+    line-height: 1.7;
+    max-width: 440px;
+  }
+
+  /* SERVICES */
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+
+  .service-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 28px;
+    transition: border-color 0.2s, transform 0.2s;
+  }
+
+  .service-card:hover {
+    border-color: var(--green-mid);
+    transform: translateY(-2px);
+  }
+
+  .svc-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: var(--radius-sm);
+    background: var(--green-light);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 18px;
+  }
+
+  .svc-icon svg { color: var(--green-dark); }
+
+  .service-card h3 {
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--text);
+    margin-bottom: 8px;
+  }
+
+  .service-card p {
+    font-size: 13px;
+    color: var(--text-muted);
+    line-height: 1.65;
+  }
+
+  /* WORK */
+  .work-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+
+  .work-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+    transition: border-color 0.2s, transform 0.2s;
+  }
+
+  .work-card:hover {
+    border-color: var(--border-strong);
+    transform: translateY(-2px);
+  }
+
+  .work-thumb {
+    height: 160px;
+    background: var(--bg-surface);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-bottom: 1px solid var(--border);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .work-thumb-icon {
+    width: 56px;
+    height: 56px;
+    border-radius: var(--radius);
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-faint);
+  }
+
+  .work-thumb-icon svg { width: 28px; height: 28px; }
+
+  .work-body { padding: 20px 24px 24px; }
+
+  .work-tag {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--green-deep);
+    background: var(--green-light);
+    border-radius: var(--radius-pill);
+    padding: 3px 10px;
+    margin-bottom: 10px;
+  }
+
+  .work-card h3 {
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--text);
+    margin-bottom: 6px;
+  }
+
+  .work-card p {
+    font-size: 13px;
+    color: var(--text-muted);
+    line-height: 1.65;
+    margin-bottom: 16px;
+  }
+
+  .work-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--green);
+    transition: gap 0.2s;
+  }
+
+  .work-link:hover { gap: 10px; }
+
+  /* PRICING */
+  .pricing-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    align-items: start;
+  }
+
+  .pricing-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 28px;
+    transition: transform 0.2s;
+  }
+
+  .pricing-card:hover { transform: translateY(-2px); }
+
+  .pricing-card.featured {
+    border: 2px solid var(--green);
+    position: relative;
+  }
+
+  .pricing-popular {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--green-deep);
+    background: var(--green-light);
+    border-radius: var(--radius-pill);
+    padding: 4px 12px;
+    margin-bottom: 16px;
+  }
+
+  .pricing-card h3 {
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--text);
+    margin-bottom: 6px;
+  }
+
+  .pricing-desc {
+    font-size: 13px;
+    color: var(--text-muted);
+    line-height: 1.6;
+    margin-bottom: 24px;
+  }
+
+  .pricing-price {
+    font-family: 'DM Serif Display', serif;
+    font-size: 40px;
+    font-weight: 400;
+    color: var(--text);
+    letter-spacing: -1px;
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+
+  .pricing-price-sub {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    color: var(--text-faint);
+    margin-bottom: 6px;
+  }
+
+  .pricing-delivery {
+    font-size: 12px;
+    color: var(--text-muted);
+    background: var(--bg-surface);
+    border-radius: var(--radius-sm);
+    padding: 6px 10px;
+    margin-bottom: 24px;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .pricing-divider {
+    height: 1px;
+    background: var(--border);
+    margin-bottom: 20px;
+  }
+
+  .pricing-features {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 28px;
+  }
+
+  .feat {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    font-size: 13px;
+    color: var(--text-muted);
+    line-height: 1.5;
+  }
+
+  .feat-check {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: var(--green-light);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  .feat-check svg { color: var(--green); }
+
+  .pricing-btn {
+    width: 100%;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    padding: 12px;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .pricing-btn-outline {
+    background: transparent;
+    border: 1px solid var(--border-strong);
+    color: var(--text);
+  }
+
+  .pricing-btn-outline:hover {
+    border-color: var(--text-muted);
+    background: var(--bg-surface);
+  }
+
+  .pricing-btn-solid {
+    background: var(--green);
+    border: none;
+    color: #fff;
+  }
+
+  .pricing-btn-solid:hover { background: var(--green-dark); }
+  .pricing-btn-solid:active, .pricing-btn-outline:active { transform: scale(0.98); }
+
+  /* ABOUT */
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 64px;
+    align-items: start;
+  }
+
+  .about-text p {
+    font-size: 15px;
+    color: var(--text-muted);
+    line-height: 1.8;
+    margin-bottom: 16px;
+  }
+
+  .about-text p:last-child { margin-bottom: 0; }
+
+  .about-highlight {
+    font-family: 'DM Serif Display', serif;
+    font-size: 22px;
+    font-style: italic;
+    color: var(--text);
+    line-height: 1.4;
+    border-left: 3px solid var(--green);
+    padding-left: 20px;
+    margin: 28px 0;
+  }
+
+  .facts {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .fact {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    padding: 18px 20px;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    transition: border-color 0.2s;
+  }
+
+  .fact:hover { border-color: var(--green-mid); }
+
+  .fact-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: var(--radius-sm);
+    background: var(--green-light);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    color: var(--green-dark);
+  }
+
+  .fact h4 {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text);
+    margin-bottom: 3px;
+  }
+
+  .fact p {
+    font-size: 13px;
+    color: var(--text-muted);
+    line-height: 1.55;
+  }
+
+  /* CTA SECTION */
+  .cta-section {
+    background: var(--text);
+    padding: 80px 40px;
+    text-align: center;
+  }
+
+  .cta-section h2 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 44px;
+    font-weight: 400;
+    color: #fff;
+    letter-spacing: -0.8px;
+    margin-bottom: 14px;
+    line-height: 1.15;
+  }
+
+  .cta-section h2 em {
+    font-style: italic;
+    color: var(--green-mid);
+  }
+
+  .cta-section p {
+    font-size: 16px;
+    color: rgba(255,255,255,0.55);
+    margin-bottom: 36px;
+    line-height: 1.65;
+  }
+
+  .cta-actions {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+  }
+
+  .btn-white {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text);
+    background: #fff;
+    border: none;
+    border-radius: var(--radius-sm);
+    padding: 12px 24px;
+    cursor: pointer;
+    transition: opacity 0.2s, transform 0.15s;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .btn-white:hover { opacity: 0.9; }
+  .btn-white:active { transform: scale(0.97); }
+
+  .btn-ghost {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    color: rgba(255,255,255,0.7);
+    background: transparent;
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: var(--radius-sm);
+    padding: 12px 24px;
+    cursor: pointer;
+    transition: border-color 0.2s, color 0.2s, transform 0.15s;
+  }
+
+  .btn-ghost:hover { border-color: rgba(255,255,255,0.5); color: #fff; }
+  .btn-ghost:active { transform: scale(0.97); }
+
+  /* FOOTER */
+  footer {
+    background: var(--text);
+    border-top: 1px solid rgba(255,255,255,0.08);
+    padding: 28px 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .footer-logo {
+    font-size: 15px;
+    font-weight: 500;
+    color: #fff;
+    letter-spacing: -0.3px;
+  }
+
+  .footer-logo span { color: var(--green-mid); }
+
+  .footer-links {
+    display: flex;
+    gap: 24px;
+    list-style: none;
+  }
+
+  .footer-links a {
+    font-size: 13px;
+    color: rgba(255,255,255,0.4);
+    transition: color 0.2s;
+  }
+
+  .footer-links a:hover { color: rgba(255,255,255,0.8); }
+
+  .footer-copy {
+    font-size: 12px;
+    color: rgba(255,255,255,0.3);
+  }
+
+  /* SCROLL ANIMATIONS */
+  .reveal {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .reveal-delay-1 { transition-delay: 0.1s; }
+  .reveal-delay-2 { transition-delay: 0.2s; }
+  .reveal-delay-3 { transition-delay: 0.3s; }
+
+  /* RESPONSIVE */
+  @media (max-width: 768px) {
+    nav { padding: 0 20px; }
+    .nav-links, .nav-cta { display: none; }
+    .hamburger { display: flex; }
+    .mobile-menu { padding: 24px 20px; }
 
     .hero {
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      position: relative;
-      padding: 100px 0;
-    }
-
-    .hero::before {
-      content: "";
-      position: absolute;
-      width: 600px;
-      height: 600px;
-      background: radial-gradient(circle, rgba(86,125,255,0.2), transparent 70%);
-      top: -200px;
-      right: -200px;
-      z-index: -1;
-    }
-
-    .hero-grid {
-      display: grid;
-      grid-template-columns: 1.1fr 1fr;
-      gap: 80px;
-      align-items: center;
-    }
-
-    .eyebrow {
-      display: inline-block;
-      padding: 8px 14px;
-      border: 1px solid rgba(255,255,255,0.08);
-      border-radius: 999px;
-      font-size: 0.85rem;
-      color: #9ca3af;
-      margin-bottom: 28px;
-      background: rgba(255,255,255,0.02);
-    }
-
-    h1 {
-      font-size: 5rem;
-      line-height: 1;
-      font-weight: 800;
-      letter-spacing: -4px;
-      margin-bottom: 30px;
-    }
-
-    .hero p {
-      font-size: 1.15rem;
-      color: #b4b4b4;
-      max-width: 650px;
-      margin-bottom: 35px;
-    }
-
-    .hero-buttons {
-      display: flex;
-      gap: 18px;
-      margin-bottom: 30px;
-    }
-
-    .btn {
-      padding: 16px 28px;
-      border-radius: 14px;
-      font-weight: 600;
-      transition: 0.3s ease;
-      display: inline-block;
-    }
-
-    .btn-primary {
-      background: white;
-      color: black;
-    }
-
-    .btn-primary:hover {
-      transform: translateY(-2px);
-    }
-
-    .btn-secondary {
-      border: 1px solid rgba(255,255,255,0.12);
-      color: white;
-      background: rgba(255,255,255,0.03);
-    }
-
-    .hero-visual {
-      background: linear-gradient(145deg, rgba(255,255,255,0.04), rgba(255,255,255,0.01));
-      border: 1px solid rgba(255,255,255,0.08);
-      border-radius: 30px;
-      padding: 30px;
-      box-shadow: 0 30px 60px rgba(0,0,0,0.4);
-    }
-
-    .code-window {
-      background: #111318;
-      border-radius: 18px;
-      padding: 24px;
-      font-family: monospace;
-      color: #89ffb2;
-      font-size: 0.95rem;
-      overflow: hidden;
-    }
-
-    section {
-      padding: 120px 0;
-    }
-
-    .section-title {
-      font-size: 3rem;
-      line-height: 1.1;
-      margin-bottom: 20px;
-      font-weight: 800;
-      letter-spacing: -2px;
-    }
-
-    .section-subtitle {
-      color: #b4b4b4;
-      max-width: 700px;
-      margin-bottom: 60px;
-      font-size: 1.05rem;
-    }
-
-    .services-grid,
-    .principles-grid,
-    .stack-grid,
-    .case-grid,
-    .testimonial-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 28px;
-    }
-
-    .card {
-      background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
-      border: 1px solid rgba(255,255,255,0.08);
-      padding: 35px;
-      border-radius: 24px;
-      transition: 0.3s ease;
-    }
-
-    .card:hover {
-      transform: translateY(-6px);
-      border-color: rgba(255,255,255,0.16);
-    }
-
-    .card h3 {
-      font-size: 1.4rem;
-      margin-bottom: 16px;
-    }
-
-    .card p,
-    .card li {
-      color: #b9b9b9;
-      font-size: 0.97rem;
-    }
-
-    .card ul {
-      margin-top: 20px;
-      padding-left: 18px;
-    }
-
-    .tech-stack {
-      background: #0f1014;
-    }
-
-    .stack-item {
-      padding: 30px;
-      border-radius: 22px;
-      background: rgba(255,255,255,0.03);
-      border: 1px solid rgba(255,255,255,0.08);
-    }
-
-    .stack-item h4 {
-      margin-bottom: 15px;
-      font-size: 1.1rem;
-    }
-
-    .tech-tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-    }
-
-    .tag {
-      padding: 10px 14px;
-      border-radius: 999px;
-      background: rgba(255,255,255,0.05);
-      font-size: 0.9rem;
-      color: #d9d9d9;
-      border: 1px solid rgba(255,255,255,0.06);
-    }
-
-    .quote-section {
-      text-align: center;
-      padding: 150px 0;
-    }
-
-    .quote-section h2 {
-      font-size: 4rem;
-      line-height: 1.1;
-      max-width: 900px;
-      margin: auto;
-      letter-spacing: -3px;
-    }
-
-    .quote-section p {
-      color: #9e9e9e;
-      margin-top: 25px;
-    }
-
-    .founder {
-      background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
-      border-radius: 30px;
-      padding: 60px;
-      border: 1px solid rgba(255,255,255,0.08);
-    }
-
-    .founder h2 {
-      font-size: 2.5rem;
-      margin-bottom: 20px;
-    }
-
-    .cta {
-      text-align: center;
-      padding: 160px 0;
-    }
-
-    .cta h2 {
-      font-size: 4rem;
-      line-height: 1;
-      letter-spacing: -3px;
-      margin-bottom: 30px;
-    }
-
-    footer {
-      padding: 60px 0;
-      border-top: 1px solid rgba(255,255,255,0.08);
-    }
-
-    .footer-grid {
-      display: flex;
-      justify-content: space-between;
-      flex-wrap: wrap;
+      grid-template-columns: 1fr;
+      padding: 60px 20px 60px;
       gap: 40px;
     }
 
-    .footer-links {
-      display: flex;
-      gap: 24px;
-      color: #a8a8a8;
+    .hero h1 { font-size: 36px; }
+    .hero-visual { display: none; }
+    .hero-proof { flex-wrap: wrap; gap: 20px; }
+    .proof-item + .proof-item { border-left: none; padding-left: 0; margin-left: 0; }
+
+    .section { padding: 60px 20px; }
+    .section-title { font-size: 28px; }
+
+    .services-grid { grid-template-columns: 1fr; }
+    .work-grid { grid-template-columns: 1fr; }
+    .pricing-grid { grid-template-columns: 1fr; }
+    .about-grid { grid-template-columns: 1fr; gap: 40px; }
+
+    .cta-section { padding: 60px 20px; }
+    .cta-section h2 { font-size: 32px; }
+    .cta-actions { flex-direction: column; }
+
+    footer {
+      flex-direction: column;
+      gap: 16px;
+      text-align: center;
+      padding: 24px 20px;
     }
 
-    @media(max-width: 980px) {
-      .hero-grid {
-        grid-template-columns: 1fr;
-      }
+    .footer-links { justify-content: center; }
+  }
+</style>
+</head>
+<body>
 
-      h1 {
-        font-size: 3.5rem;
-      }
-
-      .section-title {
-        font-size: 2.4rem;
-      }
-
-      .quote-section h2,
-      .cta h2 {
-        font-size: 2.8rem;
-      }
-
-      .nav-links {
-        display: none;
-      }
-    }
-  </style></head>
-<body>  <div class="container">
-    <nav>
-      <div class="logo">NOVEXIUM</div><div class="nav-links">
-    <a href="#services">Services</a>
-    <a href="#stack">Tech Stack</a>
-    <a href="#work">Work</a>
-    <a href="#insights">Insights</a>
-    <a href="#contact">Contact</a>
-  </div>
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">Novex<span>ium</span></a>
+  <ul class="nav-links">
+    <li><a href="#work">Work</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#pricing">Pricing</a></li>
+    <li><a href="#about">About</a></li>
+  </ul>
+  <button class="nav-cta" onclick="document.getElementById('contact-form').scrollIntoView({behavior:'smooth'})">Start a project</button>
+  <button class="hamburger" id="hamburger" aria-label="Open menu">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
 
-  </div>  <section class="hero">
-    <div class="container hero-grid"><div>
-    <div class="eyebrow">AI-Native Product Engineering Studio</div>
+<div class="mobile-menu" id="mobile-menu">
+  <a href="#work" onclick="closeMobile()">Work</a>
+  <a href="#services" onclick="closeMobile()">Services</a>
+  <a href="#pricing" onclick="closeMobile()">Pricing</a>
+  <a href="#about" onclick="closeMobile()">About</a>
+  <button class="nav-cta" onclick="closeMobile(); document.getElementById('contact-form').scrollIntoView({behavior:'smooth'})">Start a project</button>
+</div>
 
-    <h1>
-      Software that removes operational chaos.
-    </h1>
-
-    <p>
-      Novexium builds AI systems, scalable platforms, and intelligent internal tools for startups and growing companies that want software people actually enjoy using.
-    </p>
-
-    <div class="hero-buttons">
-      <a href="#contact" class="btn btn-primary">Book a Strategy Call</a>
-      <a href="#work" class="btn btn-secondary">See Real Work</a>
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-left">
+    <div class="hero-badge">
+      <div class="hero-badge-dot"></div>
+      Available for new projects
     </div>
-
-    <p>
-      Built by engineers obsessed with usability, performance, clarity, and long-term scalability.
-    </p>
+    <h1>Your idea deserves to <em>look the part</em> online.</h1>
+    <p class="hero-sub">I build websites and web products for founders and makers who need to get online fast, look credible, and start growing. No agency overhead. No bloated timelines.</p>
+    <div class="hero-actions">
+      <button class="btn-primary" onclick="document.getElementById('contact-form').scrollIntoView({behavior:'smooth'})">
+        Start a project
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </button>
+      <button class="btn-secondary" onclick="document.getElementById('work').scrollIntoView({behavior:'smooth'})">See my work</button>
+    </div>
+    <div class="hero-proof">
+      <div class="proof-item">
+        <span class="proof-num">3</span>
+        <span class="proof-label">Products launched</span>
+      </div>
+      <div class="proof-item">
+        <span class="proof-num">1,000+</span>
+        <span class="proof-label">Users on RealAppTesters</span>
+      </div>
+      <div class="proof-item">
+        <span class="proof-num">2–3 wks</span>
+        <span class="proof-label">Typical delivery</span>
+      </div>
+    </div>
   </div>
-
   <div class="hero-visual">
-    <div class="code-window">
-      > Deploying AI workflow architecture...<br><br>
-      ✓ Node.js API initialized<br>
-      ✓ React frontend compiled<br>
-      ✓ PostgreSQL connected<br>
-      ✓ AI services operational<br>
-      ✓ CI/CD pipeline deployed<br>
-      ✓ Real-time analytics active<br><br>
-      System status: Stable.
+    <div class="visual-card">
+      <div class="visual-card-top">
+        <span class="visual-card-label">Latest project</span>
+        <div class="status-dot"></div>
+      </div>
+      <div class="visual-card-title">RealAppTesters</div>
+      <div class="visual-card-sub">Google Play testing service — live with paying users and a money-back guarantee.</div>
+      <span class="visual-tag">Web product</span>
+    </div>
+    <div class="visual-row">
+      <div class="visual-mini">
+        <div class="visual-mini-num">1,000+</div>
+        <div class="visual-mini-label">Developers served</div>
+      </div>
+      <div class="visual-mini">
+        <div class="visual-mini-num">99%</div>
+        <div class="visual-mini-label">Success rate</div>
+      </div>
+    </div>
+    <div class="visual-card">
+      <div class="visual-card-top">
+        <span class="visual-card-label">Also built</span>
+        <div class="status-dot"></div>
+      </div>
+      <div class="visual-card-title">QuickGames</div>
+      <div class="visual-card-sub">Browser gaming platform with accounts, categories, and a daily-updated game library.</div>
+      <span class="visual-tag">Platform</span>
     </div>
   </div>
+</section>
 
-</div>
+<div class="divider"></div>
 
-  </section>  <section id="services">
-    <div class="container"><h2 class="section-title">
-    We build systems that help businesses move faster.
-  </h2>
-
-  <p class="section-subtitle">
-    Most companies don’t need more software. They need fewer manual processes, better workflows, faster systems, and tools that don’t create frustration.
-  </p>
-
+<!-- SERVICES -->
+<section class="section" id="services">
+  <div class="section-header reveal">
+    <p class="section-label">Services</p>
+    <h2 class="section-title">What I build</h2>
+    <p class="section-sub">Fast delivery, clean code, and zero agency overhead.</p>
+  </div>
   <div class="services-grid">
-
-    <div class="card">
-      <h3>AI Automation Systems</h3>
-      <p>
-        We design AI-powered workflows that reduce repetitive work and improve operational efficiency.
-      </p>
-
-      <ul>
-        <li>AI support assistants</li>
-        <li>Document processing</li>
-        <li>CRM automation</li>
-        <li>Knowledge assistants</li>
-        <li>Workflow orchestration</li>
-      </ul>
+    <div class="service-card reveal reveal-delay-1">
+      <div class="svc-icon">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+      </div>
+      <h3>Marketing websites</h3>
+      <p>Landing pages and multi-page sites that make your product or business look credible from day one — optimised for search and built to convert.</p>
     </div>
-
-    <div class="card">
-      <h3>Product Engineering</h3>
-      <p>
-        We turn ideas into production-ready products designed for long-term scalability.
-      </p>
-
-      <ul>
-        <li>SaaS platforms</li>
-        <li>Client portals</li>
-        <li>Admin dashboards</li>
-        <li>Marketplaces</li>
-        <li>Custom web applications</li>
-      </ul>
+    <div class="service-card reveal reveal-delay-2">
+      <div class="svc-icon">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+      </div>
+      <h3>Web products</h3>
+      <p>Full web applications — platforms, dashboards, tools — with real users in mind from the start. Built to scale.</p>
     </div>
-
-    <div class="card">
-      <h3>Infrastructure & Scaling</h3>
-      <p>
-        We build stable, resilient systems capable of handling rapid growth.
-      </p>
-
-      <ul>
-        <li>Cloud architecture</li>
-        <li>Performance optimization</li>
-        <li>Database engineering</li>
-        <li>Deployment pipelines</li>
-        <li>System monitoring</li>
-      </ul>
+    <div class="service-card reveal reveal-delay-3">
+      <div class="svc-icon">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+      </div>
+      <h3>Launch packages</h3>
+      <p>Everything you need to go from idea to live in weeks — design, build, SEO, and deployment all included.</p>
     </div>
-
   </div>
-</div>
+</section>
 
-  </section>  <section class="tech-stack" id="stack">
-    <div class="container"><h2 class="section-title">
-    The technologies we trust.
-  </h2>
+<div class="divider"></div>
 
-  <p class="section-subtitle">
-    We choose technologies based on scalability, maintainability, developer experience, and long-term performance — not hype.
-  </p>
-
-  <div class="stack-grid">
-
-    <div class="stack-item">
-      <h4>Frontend Development</h4>
-
-      <div class="tech-tags">
-        <div class="tag">React.js</div>
-        <div class="tag">Next.js</div>
-        <div class="tag">TypeScript</div>
-        <div class="tag">Tailwind CSS</div>
-        <div class="tag">JavaScript</div>
+<!-- WORK -->
+<section class="section" id="work">
+  <div class="section-header reveal">
+    <p class="section-label">Work</p>
+    <h2 class="section-title">Things I've built</h2>
+    <p class="section-sub">Real products designed, built, and launched from scratch.</p>
+  </div>
+  <div class="work-grid">
+    <div class="work-card reveal reveal-delay-1">
+      <div class="work-thumb">
+        <div class="work-thumb-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M12 18h.01"/></svg>
+        </div>
+      </div>
+      <div class="work-body">
+        <span class="work-tag">Web product</span>
+        <h3>RealAppTesters</h3>
+        <p>A paid service helping Android developers pass Google Play's closed testing requirements — with tiered pricing, a money-back guarantee, and 1,000+ developers served.</p>
+        <a href="https://www.realapptesters.com" target="_blank" class="work-link">
+          View live
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/></svg>
+        </a>
       </div>
     </div>
-
-    <div class="stack-item">
-      <h4>Backend Engineering</h4>
-
-      <div class="tech-tags">
-        <div class="tag">Node.js</div>
-        <div class="tag">Express.js</div>
-        <div class="tag">NestJS</div>
-        <div class="tag">Python</div>
-        <div class="tag">REST APIs</div>
-        <div class="tag">GraphQL</div>
+    <div class="work-card reveal reveal-delay-2">
+      <div class="work-thumb">
+        <div class="work-thumb-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="20" height="12" rx="2"/><path d="M12 12m-2 0a2 2 0 104 0 2 2 0 10-4 0M6 12h.01M18 12h.01"/></svg>
+        </div>
+      </div>
+      <div class="work-body">
+        <span class="work-tag">Platform</span>
+        <h3>QuickGames</h3>
+        <p>A browser gaming platform built from scratch — with user accounts, saved favourites, game categories, and a daily-updated library built for instant no-download play.</p>
+        <a href="https://www.quickgames.live" target="_blank" class="work-link">
+          View live
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/></svg>
+        </a>
       </div>
     </div>
+  </div>
+</section>
 
-    <div class="stack-item">
-      <h4>Mobile Development</h4>
+<div class="divider"></div>
 
-      <div class="tech-tags">
-        <div class="tag">Flutter</div>
-        <div class="tag">Dart</div>
-        <div class="tag">React Native</div>
-        <div class="tag">Cross-platform Apps</div>
+<!-- PRICING -->
+<section class="section" id="pricing">
+  <div class="section-header reveal">
+    <p class="section-label">Pricing</p>
+    <h2 class="section-title">Simple, transparent pricing</h2>
+    <p class="section-sub">No hidden fees. No surprise invoices. Pick the package that fits where you are right now.</p>
+  </div>
+  <div class="pricing-grid">
+
+    <div class="pricing-card reveal reveal-delay-1">
+      <h3>Basic</h3>
+      <p class="pricing-desc">For individuals who need a clean, fast presence online.</p>
+      <div class="pricing-price">$299</div>
+      <p class="pricing-price-sub">one-time payment</p>
+      <div class="pricing-delivery">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+        Delivered in 5–7 days
+      </div>
+      <div class="pricing-divider"></div>
+      <div class="pricing-features">
+        <div class="feat"><div class="feat-check"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></div>Single page website</div>
+        <div class="feat"><div class="feat-check"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></div>Mobile responsive</div>
+        <div class="feat"><div class="feat-check"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></div>Contact form</div>
+        <div class="feat"><div class="feat-check"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></div>Basic SEO setup</div>
+        <div class="feat"><div class="feat-check"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></div>Deployment included</div>
+      </div>
+      <button class="pricing-btn pricing-btn-outline" onclick="document.getElementById('contact-form').scrollIntoView({behavior:'smooth'})">Get started</button>
+    </div>
+
+    <div class="pricing-card featured reveal reveal-delay-2">
+      <div class="pricing-popular">Most popular</div>
+      <h3>Standard</h3>
+      <p class="pricing-desc">For founders and small businesses ready to grow online.</p>
+      <div class="pricing-price">$599</div>
+      <p class="pricing-price-sub">one-time payment</p>
+      <div class="pricing-delivery">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+        Delivered in 10–14 days
+      </div>
+      <div class="pricing-divider"></div>
+      <div class="pricing-features">
+        <div class="feat"><div class="feat-check"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></div>Up to 5 pages</div>
+        <div class="feat"><div class="feat-check"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></div>Mobile responsive</div>
+        <div class="feat"><div class="feat-check"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></div>Contact form + animations</div>
+        <div class="feat"><div class="feat-check"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></div>SEO + Google Analytics</div>
+        <div class="feat"><div class="feat-check"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></div>1 round of revisions</div>
+        <div class="feat"><div class="feat-check"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></div>Deployment included</div>
+      </div>
+      <button class="pricing-btn pricing-btn-solid" onclick="document.getElementById('contact-form').scrollIntoView({behavior:'smooth'})">Get started</button>
+    </div>
+
+    <div class="pricing-card reveal reveal-delay-3">
+      <h3>Premium</h3>
+      <p class="pricing-desc">For businesses that need a complete web presence or custom app.</p>
+      <div class="pricing-price">$1,199</div>
+      <p class="pricing-price-sub">one-time payment</p>
+      <div class="pricing-delivery">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+        Delivered in 3–4 weeks
+      </div>
+      <div class="pricing-divider"></div>
+      <div class="pricing-features">
+        <div class="feat"><div class="feat-check"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></div>Up to 10 pages or web app</div>
+        <div class="feat"><div class="feat-check"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></div>Advanced animations</div>
+        <div class="feat"><div class="feat-check"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></div>Full SEO + Analytics + sitemap</div>
+        <div class="feat"><div class="feat-check"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></div>CMS — client can edit content</div>
+        <div class="feat"><div class="feat-check"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></div>3 rounds of revisions</div>
+        <div class="feat"><div class="feat-check"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></div>30 days post-launch support</div>
+      </div>
+      <button class="pricing-btn pricing-btn-outline" onclick="document.getElementById('contact-form').scrollIntoView({behavior:'smooth'})">Get started</button>
+    </div>
+
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ABOUT -->
+<section class="section" id="about">
+  <div class="section-header reveal">
+    <p class="section-label">About</p>
+    <h2 class="section-title">Why work with me</h2>
+  </div>
+  <div class="about-grid">
+    <div class="about-text reveal">
+      <p>I'm a web developer and builder. I started Novexium because I wanted to help founders and makers who have real ideas but need someone who can actually build them — without the cost and slowness of a full agency.</p>
+      <div class="about-highlight">"I've shipped my own products. I know what it takes to go from zero to something real people use."</div>
+      <p>I work fully remotely with clients worldwide. Every project I take on gets my full attention — you're not one of twenty clients being managed by a junior account team.</p>
+      <p>Right now I'm taking on a small number of projects. The goal is to do great work, earn honest feedback, and build from there.</p>
+    </div>
+    <div class="facts reveal reveal-delay-1">
+      <div class="fact">
+        <div class="fact-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 010 20M12 2a15.3 15.3 0 000 20"/></svg>
+        </div>
+        <div>
+          <h4>100% remote, worldwide</h4>
+          <p>I work with clients anywhere — fully async or with regular calls, whatever suits you.</p>
+        </div>
+      </div>
+      <div class="fact">
+        <div class="fact-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+        </div>
+        <div>
+          <h4>Direct communication</h4>
+          <p>You talk to the person building your site. No project managers, no message chains.</p>
+        </div>
+      </div>
+      <div class="fact">
+        <div class="fact-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </div>
+        <div>
+          <h4>Honest by default</h4>
+          <p>If something is a bad idea, I'll say so before we build it — not after.</p>
+        </div>
+      </div>
+      <div class="fact">
+        <div class="fact-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+        </div>
+        <div>
+          <h4>Fast turnaround</h4>
+          <p>Most projects delivered in 2–3 weeks. Not months of back-and-forth.</p>
+        </div>
       </div>
     </div>
-
-    <div class="stack-item">
-      <h4>AI & Automation</h4>
-
-      <div class="tech-tags">
-        <div class="tag">OpenAI APIs</div>
-        <div class="tag">LangChain</div>
-        <div class="tag">AI Agents</div>
-        <div class="tag">Workflow Automation</div>
-        <div class="tag">Vector Databases</div>
-      </div>
-    </div>
-
-    <div class="stack-item">
-      <h4>Databases & Storage</h4>
-
-      <div class="tech-tags">
-        <div class="tag">PostgreSQL</div>
-        <div class="tag">MongoDB</div>
-        <div class="tag">Redis</div>
-        <div class="tag">Firebase</div>
-        <div class="tag">Supabase</div>
-      </div>
-    </div>
-
-    <div class="stack-item">
-      <h4>Cloud & DevOps</h4>
-
-      <div class="tech-tags">
-        <div class="tag">AWS</div>
-        <div class="tag">Docker</div>
-        <div class="tag">CI/CD</div>
-        <div class="tag">Vercel</div>
-        <div class="tag">Linux</div>
-        <div class="tag">GitHub Actions</div>
-      </div>
-    </div>
-
   </div>
-</div>
+</section>
 
-  </section>  <section class="quote-section">
-    <div class="container">
-      <h2>
-        Most software creates complexity.
-        <br>
-        We build systems that create clarity.
-      </h2><p>
-    Good software should feel calm, fast, obvious, and scalable.
-  </p>
-</div>
-
-  </section>  <section id="work">
-    <div class="container"><h2 class="section-title">
-    Real systems. Real operational problems.
-  </h2>
-
-  <p class="section-subtitle">
-    We focus on building software that improves workflows, reduces manual work, and supports long-term growth.
-  </p>
-
-  <div class="case-grid">
-
-    <div class="card">
-      <h3>AI Operations Assistant</h3>
-      <p>
-        Built an AI-powered operations system that automated repetitive support workflows and centralized team communication.
-      </p>
-    </div>
-
-    <div class="card">
-      <h3>Internal Workflow Platform</h3>
-      <p>
-        Replaced fragmented spreadsheets and disconnected tools with a unified operational dashboard.
-      </p>
-    </div>
-
-    <div class="card">
-      <h3>Scalable SaaS Platform</h3>
-      <p>
-        Designed and deployed a production-ready SaaS platform with scalable infrastructure and real-time analytics.
-      </p>
-    </div>
-
+<!-- CTA -->
+<section class="cta-section" id="contact-form">
+  <h2>Ready to get <em>built?</em></h2>
+  <p>Tell me what you're working on. I'll get back to you within 24 hours.</p>
+  <div class="cta-actions">
+    <a href="mailto:hello@novexium.com">
+      <button class="btn-white">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        hello@novexium.com
+      </button>
+    </a>
+    <button class="btn-ghost" onclick="document.getElementById('pricing').scrollIntoView({behavior:'smooth'})">View pricing</button>
   </div>
-</div>
+</section>
 
-  </section>  <section>
-    <div class="container"><h2 class="section-title">
-    Why teams work with us.
-  </h2>
+<!-- FOOTER -->
+<footer>
+  <span class="footer-logo">Novex<span>ium</span></span>
+  <ul class="footer-links">
+    <li><a href="#work">Work</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#pricing">Pricing</a></li>
+    <li><a href="#about">About</a></li>
+  </ul>
+  <span class="footer-copy">Building for founders, worldwide.</span>
+</footer>
 
-  <div class="principles-grid">
+<script>
+  const hamburger = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('mobile-menu');
 
-    <div class="card">
-      <h3>We think like operators.</h3>
-      <p>
-        We care about workflows, team efficiency, and business outcomes — not just technical features.
-      </p>
-    </div>
+  hamburger.addEventListener('click', () => {
+    mobileMenu.classList.toggle('open');
+  });
 
-    <div class="card">
-      <h3>We move quickly.</h3>
-      <p>
-        We prefer rapid iteration over bloated timelines and endless meetings.
-      </p>
-    </div>
+  function closeMobile() {
+    mobileMenu.classList.remove('open');
+  }
 
-    <div class="card">
-      <h3>We stay honest.</h3>
-      <p>
-        If something is a bad idea technically or operationally, we’ll say it.
-      </p>
-    </div>
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12 });
 
-  </div>
-</div>
+  reveals.forEach(el => observer.observe(el));
 
-  </section>  <section>
-    <div class="container founder"><h2>
-    Why Novexium exists.
-  </h2>
-
-  <p>
-    We started Novexium because too much software feels disconnected from real operational problems.
-  </p>
-
-  <br>
-
-  <p>
-    Businesses are overwhelmed with fragmented tools, repetitive workflows, complicated systems, and software people barely tolerate using.
-  </p>
-
-  <br>
-
-  <p>
-    We wanted to build systems differently.
-  </p>
-
-  <br>
-
-  <p>
-    Not just technically impressive systems.
-  </p>
-
-  <br>
-
-  <p>
-    Useful ones.
-  </p>
-
-  <br>
-
-  <p>
-    The kind that save time, reduce stress, improve workflows, and help teams scale with clarity.
-  </p>
-
-</div>
-
-  </section>  <section>
-    <div class="container"><h2 class="section-title">
-    What clients say.
-  </h2>
-
-  <div class="testimonial-grid">
-
-    <div class="card">
-      <p>
-        “Novexium simplified operational problems that had slowed our team down for years.”
-      </p>
-    </div>
-
-    <div class="card">
-      <p>
-        “They moved fast, communicated clearly, and genuinely cared about solving the actual problem.”
-      </p>
-    </div>
-
-    <div class="card">
-      <p>
-        “The systems they built became essential to our operations within weeks.”
-      </p>
-    </div>
-
-  </div>
-</div>
-
-  </section>  <section class="cta" id="contact">
-    <div class="container"><h2>
-    Let’s build software people actually enjoy using.
-  </h2>
-
-  <p class="section-subtitle" style="margin:auto; margin-bottom:40px;">
-    Whether you're building a new product, exploring AI automation, improving internal systems, or scaling infrastructure — we’d love to hear what you're working on.
-  </p>
-
-  <div class="hero-buttons" style="justify-content:center;">
-    <a href="#" class="btn btn-primary">Start a Project</a>
-    <a href="#" class="btn btn-secondary">Book a Call</a>
-  </div>
-
-</div>
-
-  </section>  <footer>
-    <div class="container footer-grid"><div>
-    <div class="logo">NOVEXIUM</div>
-    <p style="margin-top:14px; color:#9e9e9e; max-width:400px;">
-      AI-native product engineering studio focused on automation, scalable systems, and operational clarity.
-    </p>
-  </div>
-
-  <div class="footer-links">
-    <a href="#">Services</a>
-    <a href="#">Work</a>
-    <a href="#">Insights</a>
-    <a href="#">About</a>
-    <a href="#">Contact</a>
-  </div>
-
-</div>
-
-  </footer></body>
-</html> 
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function(e) {
+      const target = document.querySelector(this.getAttribute('href'));
+      if (target) {
+        e.preventDefault();
+        target.scrollIntoView({ behavior: 'smooth' });
+        closeMobile();
+      }
+    });
+  });
+</script>
+</body>
+</html>
