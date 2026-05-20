@@ -51,7 +51,7 @@
       letter-spacing: -0.02em;
     }
 
-    /* Navigation (consistent with checkout) */
+    /* Navigation */
     .nav {
       position: sticky;
       top: 0;
@@ -140,7 +140,7 @@
       color: var(--green);
     }
 
-    /* Card style (same as checkout) */
+    /* Form Card */
     .form-card {
       background: var(--bg-card);
       border: 1px solid var(--border);
@@ -155,7 +155,7 @@
       box-shadow: var(--shadow-md);
     }
 
-    /* Form groups */
+    /* Form Groups */
     .form-group {
       margin-bottom: 1.8rem;
     }
@@ -199,7 +199,7 @@
       min-height: 90px;
     }
 
-    /* Checkbox group for goals */
+    /* Checkbox group */
     .checkbox-group {
       background: var(--bg-surface);
       border-radius: var(--radius-sm);
@@ -227,7 +227,7 @@
       flex-shrink: 0;
     }
 
-    /* File upload area */
+    /* File upload */
     .file-zone {
       border: 1px dashed var(--border-strong);
       background: var(--bg-surface);
@@ -262,7 +262,7 @@
       display: none;
     }
 
-    /* Queued message (agency style) */
+    /* Queued message (agency-style confirmation) */
     .queued-message {
       background: var(--green-light);
       border-left: 4px solid var(--green);
@@ -336,7 +336,7 @@
       font-size: 0.8rem;
     }
 
-    /* Trust row (optional) */
+    /* Trust row */
     .trust-row {
       display: flex;
       align-items: center;
@@ -388,26 +388,21 @@
       color: var(--text-faint);
     }
 
-    /* responsiveness */
     @media (max-width: 700px) {
       .nav {
         padding: 0 1.25rem;
       }
-
       .page {
         padding: 1.5rem 1.25rem 3rem;
       }
-
       .form-card {
         padding: 1.5rem;
       }
-
       .checkbox-group {
         flex-direction: column;
         align-items: flex-start;
         gap: 0.7rem;
       }
-
       .trust-row {
         gap: 1rem;
         justify-content: flex-start;
@@ -434,73 +429,74 @@
   </div>
 
   <div class="form-card">
-    <!-- formspree endpoint: replace YOUR_FORM_ID with actual Formspree ID -->
-    <form id="onboardingForm" action="https://formspree.io/f/xykvekjv" method="POST" enctype="multipart/form-data">
-      <!-- hidden honeypot for spam prevention (optional but recommended) -->
-      <input type="text" name="_gotcha" style="display:none" />
-      
+    <!-- 
+      IMPORTANT: This form submits to our secure Vercel API endpoint (/api/submit-onboarding)
+      The actual Formspree ID is stored as an environment variable (FORMSPREE_ID) in Vercel,
+      keeping it out of GitHub and ensuring security across dev/preview/production environments.
+    -->
+    <form id="onboardingForm">
       <!-- 1. Full Name -->
       <div class="form-group">
         <label for="fullname">Full Name <span class="label-optional">*</span></label>
-        <input type="text" id="fullname" name="Full Name" required placeholder="Alex Rivera" />
+        <input type="text" id="fullname" name="fullName" required placeholder="Alex Rivera" />
       </div>
 
       <!-- 2. Email Address -->
       <div class="form-group">
         <label for="email">Email Address <span class="label-optional">*</span></label>
-        <input type="email" id="email" name="Email Address" required placeholder="hello@agency.com" />
+        <input type="email" id="email" name="email" required placeholder="hello@agency.com" />
       </div>
 
       <!-- 3. Business Name -->
       <div class="form-group">
         <label for="business">Business Name</label>
-        <input type="text" id="business" name="Business Name" placeholder="Novexium Digital" />
+        <input type="text" id="business" name="businessName" placeholder="Novexium Digital" />
       </div>
 
       <!-- 4. Website URL -->
       <div class="form-group">
         <label for="website">Website URL <span class="label-optional">*</span></label>
-        <input type="url" id="website" name="Website URL" required placeholder="https://yourdomain.com" />
+        <input type="url" id="website" name="websiteUrl" required placeholder="https://yourdomain.com" />
       </div>
 
       <!-- 5. What does your business do? -->
       <div class="form-group">
         <label for="businessDescription">What does your business do?</label>
-        <textarea id="businessDescription" name="Business Description" placeholder="Describe your core product/service, target audience, and value proposition..."></textarea>
+        <textarea id="businessDescription" name="businessDescription" placeholder="Describe your core product/service, target audience, and value proposition..."></textarea>
       </div>
 
       <!-- 6. Biggest website concerns -->
       <div class="form-group">
         <label for="concerns">What are your biggest website concerns right now?</label>
-        <textarea id="concerns" name="Website Concerns" placeholder="e.g., low conversion, slow speed, poor SEO, outdated design, low trust signals..."></textarea>
+        <textarea id="concerns" name="websiteConcerns" placeholder="e.g., low conversion, slow speed, poor SEO, outdated design, low trust signals..."></textarea>
       </div>
 
       <!-- 7. Competitors -->
       <div class="form-group">
         <label for="competitors">Who are your competitors?</label>
-        <input type="text" id="competitors" name="Competitors" placeholder="e.g., competitor1.com, competitor2.com (optional but helpful)" />
+        <input type="text" id="competitors" name="competitors" placeholder="e.g., competitor1.com, competitor2.com (optional but helpful)" />
       </div>
 
-      <!-- 8. Main goals (checkbox + multi-select) -->
+      <!-- 8. Main goals (checkbox group) -->
       <div class="form-group">
         <label>What is the main goal of this website?</label>
         <div class="checkbox-group">
-          <label class="checkbox-item"><input type="checkbox" name="Goal" value="More sales" /> More sales</label>
-          <label class="checkbox-item"><input type="checkbox" name="Goal" value="More leads" /> More leads</label>
-          <label class="checkbox-item"><input type="checkbox" name="Goal" value="Better branding" /> Better branding</label>
-          <label class="checkbox-item"><input type="checkbox" name="Goal" value="Better mobile experience" /> Better mobile experience</label>
-          <label class="checkbox-item"><input type="checkbox" name="Goal" value="SEO improvements" /> SEO improvements</label>
-          <label class="checkbox-item"><input type="checkbox" name="Goal" value="Conversion improvements" /> Conversion improvements</label>
+          <label class="checkbox-item"><input type="checkbox" name="goals" value="More sales" /> More sales</label>
+          <label class="checkbox-item"><input type="checkbox" name="goals" value="More leads" /> More leads</label>
+          <label class="checkbox-item"><input type="checkbox" name="goals" value="Better branding" /> Better branding</label>
+          <label class="checkbox-item"><input type="checkbox" name="goals" value="Better mobile experience" /> Better mobile experience</label>
+          <label class="checkbox-item"><input type="checkbox" name="goals" value="SEO improvements" /> SEO improvements</label>
+          <label class="checkbox-item"><input type="checkbox" name="goals" value="Conversion improvements" /> Conversion improvements</label>
         </div>
       </div>
 
       <!-- 9. Additional notes -->
       <div class="form-group">
         <label for="additionalNotes">Anything else you'd like me to know?</label>
-        <textarea id="additionalNotes" name="Additional Notes" placeholder="Budget expectations, timeline, specific features, target audience insights..."></textarea>
+        <textarea id="additionalNotes" name="additionalNotes" placeholder="Budget expectations, timeline, specific features, target audience insights..."></textarea>
       </div>
 
-      <!-- 10. File upload section (optional) -->
+      <!-- 10. File upload (optional) -->
       <div class="form-group">
         <label>Upload screenshots / files <span class="label-optional">(optional, max 5MB)</span></label>
         <div class="file-zone" onclick="document.getElementById('fileInput').click()">
@@ -516,10 +512,9 @@
         <input type="file" id="fileInput" name="attachment" accept="image/*,application/pdf,.txt,.doc,.docx" style="display:none" />
       </div>
 
-      <!-- success / error / queue message -->
       <div id="formStatus"></div>
       
-      <!-- the "queued" confirmation message that appears after submit -->
+      <!-- Queued confirmation message (agency-style) -->
       <div id="queuedMessage" class="queued-message hidden">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
           <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
@@ -535,7 +530,7 @@
         </svg>
         Submit & queue project
       </button>
-      <p class="status-text" id="formHelper">All information is encrypted. We’ll review within 24h.</p>
+      <p class="status-text" id="formHelper">All information is encrypted. We'll review within 24h.</p>
     </form>
   </div>
 
@@ -560,7 +555,7 @@
     const fileInput = document.getElementById('fileInput');
     const fileHint = document.getElementById('fileHint');
 
-    // update file hint text when file selected
+    // File input handler
     if (fileInput) {
       fileInput.addEventListener('change', function(e) {
         if (fileInput.files.length > 0) {
@@ -572,21 +567,16 @@
       });
     }
 
-    // Helper to clear previous status
     function clearStatus() {
-      if (formStatusDiv) {
-        formStatusDiv.innerHTML = '';
-      }
+      if (formStatusDiv) formStatusDiv.innerHTML = '';
     }
 
-    // show temporary error
     function showError(message) {
       clearStatus();
       const errorDiv = document.createElement('div');
       errorDiv.className = 'error-text';
       errorDiv.textContent = message;
       formStatusDiv.appendChild(errorDiv);
-      // remove after 5 sec
       setTimeout(() => {
         if (errorDiv.parentNode) errorDiv.remove();
       }, 5000);
@@ -594,16 +584,13 @@
 
     function showQueuedMessage() {
       queuedMessageDiv.classList.remove('hidden');
-      // ensure the exact psychological wording
       const queuedSpan = document.getElementById('queuedText');
       if (queuedSpan) {
         queuedSpan.innerHTML = 'Thank you. Your project has officially been queued. You’ll receive updates via email shortly.';
       }
-      // smooth scroll to message
       queuedMessageDiv.scrollIntoView({ behavior: 'smooth', block: 'center' });
     }
 
-    // validation for required fields (client side)
     function validateForm() {
       const fullname = document.getElementById('fullname')?.value.trim();
       const email = document.getElementById('email')?.value.trim();
@@ -625,110 +612,83 @@
         showError('Website URL is required.');
         return false;
       }
-      // basic URL format validation
-      try {
-        if (!website.startsWith('http://') && !website.startsWith('https://')) {
-          // we can let it pass but inform better UX
-          if (website.length > 0 && !website.includes('.')) {
-            showError('Please enter a valid website URL (e.g., https://example.com)');
-            return false;
-          }
+      if (!website.startsWith('http://') && !website.startsWith('https://')) {
+        if (website.length > 0 && !website.includes('.')) {
+          showError('Please enter a valid website URL (e.g., https://example.com)');
+          return false;
         }
-      } catch(e) {
-        showError('Website URL seems invalid. Use format like https://yoursite.com');
-        return false;
       }
       return true;
     }
 
-    // handle form submission to Formspree (AJAX to avoid page reload + show queued message)
+    // Convert form to JSON payload (including file as base64 if needed, but Formspree works with multipart)
+    // For simplicity, we send as JSON without file, but we handle file separately via FormData if exists.
+    // Better: use FormData to support file uploads through our Vercel endpoint.
     form.addEventListener('submit', async function(e) {
       e.preventDefault();
-
-      // additional validation
+      
       if (!validateForm()) return;
 
-      // disable button to prevent double submission
       submitBtn.disabled = true;
-      submitBtn.innerHTML = `<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><line x1="12" y1="2" x2="12" y2="6"/><line x1="12" y1="18" x2="12" y2="22"/><line x1="4.93" y1="4.93" x2="7.76" y2="7.76"/><line x1="16.24" y1="16.24" x2="19.07" y2="19.07"/><line x1="2" y1="12" x2="6" y2="12"/><line x1="18" y1="12" x2="22" y2="12"/><line x1="4.93" y1="19.07" x2="7.76" y2="16.24"/><line x1="16.24" y1="7.76" x2="19.07" y2="4.93"/></svg> Submitting...`;
+      submitBtn.innerHTML = `<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><line x1="12" y1="2" x2="12" y2="6"/><line x1="12" y1="18" x2="12" y2="22"/><line x1="4.93" y1="4.93" x2="7.76" y2="7.76"/><line x1="16.24" y1="16.24" x2="19.07" y2="19.07"/><line x1="2" y1="12" x2="6" y2="12"/><line x1="18" y1="12" x2="22" y2="12"/><line x1="4.93" y1="19.07" x2="7.76" y2="16.24"/><line x1="16.24" y1="7.76" x2="19.07" y2="4.93"/></svg> Queuing project...`;
       
       clearStatus();
-      // hide previous queued msg if shown
       queuedMessageDiv.classList.add('hidden');
 
-      // Build FormData
-      const formData = new FormData(form);
-
-      // Process multiple checkboxes for "Goal" field: collect selected values into a single string
-      const goalCheckboxes = document.querySelectorAll('input[name="Goal"]:checked');
+      // Build FormData to support file upload
+      const formDataPayload = new FormData();
+      
+      // text fields
+      formDataPayload.append('fullName', document.getElementById('fullname').value.trim());
+      formDataPayload.append('email', document.getElementById('email').value.trim());
+      formDataPayload.append('businessName', document.getElementById('business').value.trim());
+      formDataPayload.append('websiteUrl', document.getElementById('website').value.trim());
+      formDataPayload.append('businessDescription', document.getElementById('businessDescription').value.trim());
+      formDataPayload.append('websiteConcerns', document.getElementById('concerns').value.trim());
+      formDataPayload.append('competitors', document.getElementById('competitors').value.trim());
+      formDataPayload.append('additionalNotes', document.getElementById('additionalNotes').value.trim());
+      
+      // Goals checkboxes
+      const goalCheckboxes = document.querySelectorAll('input[name="goals"]:checked');
       const goalValues = Array.from(goalCheckboxes).map(cb => cb.value);
       if (goalValues.length > 0) {
-        // append as a readable string; also keep individual but Formspree can handle array if name="Goal[]"
-        // To be safe, we set a new field: "Selected Goals"
-        formData.delete('Goal'); // remove individual entries (but will keep if we want nice)
-        goalValues.forEach(val => {
-          formData.append('Selected Goals', val);
-        });
-        // additionally store as comma-separated text for readability
-        formData.set('Main Goals (selected)', goalValues.join(', '));
+        formDataPayload.append('selectedGoals', goalValues.join(', '));
+        goalValues.forEach(g => formDataPayload.append('goalsList', g));
       } else {
-        // optional: ensure field exists
-        formData.append('Main Goals (selected)', 'Not specified');
+        formDataPayload.append('selectedGoals', 'Not specified');
       }
-
-      // add honeypot: not needed but ensure formspree works without extra spam.
-      // get the action URL: replace YOUR_FORM_ID with actual ID, but developer can replace.
-      // We will read current action; if default placeholder we show error but allow test mode? Provide helpful note
-      let actionUrl = form.action;
-      if (actionUrl.includes('YOUR_FORM_ID') || actionUrl === 'https://formspree.io/f/YOUR_FORM_ID') {
-        // in demo environment, show alert to replace with real Formspree ID, but still simulate success
-        // For better UX, allow demo simulation and show queued message (no actual email)
-        console.warn('Formspree ID not configured. Replace "YOUR_FORM_ID" in form action with your actual Formspree endpoint.');
-        // Simulate successful queue for demonstration (since real ID not set)
-        setTimeout(() => {
-          submitBtn.disabled = false;
-          submitBtn.innerHTML = `<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13" /><polygon points="22 2 15 22 11 13 2 9 22 2" /></svg> Submit & queue project`;
-          showQueuedMessage();
-          form.reset();
-          if (fileHint) fileHint.textContent = 'No file chosen';
-          // also clear custom checkboxes visual (no need)
-        }, 800);
-        return;
+      
+      // File attachment if any
+      if (fileInput.files.length > 0) {
+        formDataPayload.append('attachment', fileInput.files[0]);
       }
-
-      // Real Formspree submission
+      
+      // Metadata
+      formDataPayload.append('submittedAt', new Date().toISOString());
+      formDataPayload.append('source', 'onboarding form');
+      
       try {
-        const response = await fetch(actionUrl, {
+        // Submit to our Vercel API endpoint (environment variable safe)
+        const response = await fetch('/api/submit-onboarding', {
           method: 'POST',
-          body: formData,
-          headers: {
-            'Accept': 'application/json'
-          }
+          body: formDataPayload  // using FormData for file support
         });
-
+        
         if (response.ok) {
-          // Success: show queued message, reset form, display agency wording
           showQueuedMessage();
           form.reset();
           if (fileHint) fileHint.textContent = 'No file chosen';
-          // clear checkboxes (already reset via form.reset)
-          // additional optional: clear custom states
           submitBtn.disabled = false;
           submitBtn.innerHTML = `<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13" /><polygon points="22 2 15 22 11 13 2 9 22 2" /></svg> Submit & queue project`;
-          // also remove any previous error
-          clearStatus();
         } else {
           const errorData = await response.json();
-          let errorMsg = 'Something went wrong. Please try again or contact support.';
-          if (errorData && errorData.errors) {
-            errorMsg = errorData.errors.map(e => e.message).join(', ');
-          }
+          const errorMsg = errorData.error || 'Submission failed. Please try again.';
           showError(errorMsg);
           submitBtn.disabled = false;
           submitBtn.innerHTML = `<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13" /><polygon points="22 2 15 22 11 13 2 9 22 2" /></svg> Submit & queue project`;
         }
       } catch (error) {
-        console.error('Formspree error:', error);
+        console.error('Onboarding submission error:', error);
         showError('Network error. Please check your connection and try again.');
         submitBtn.disabled = false;
         submitBtn.innerHTML = `<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13" /><polygon points="22 2 15 22 11 13 2 9 22 2" /></svg> Submit & queue project`;
