@@ -49,7 +49,7 @@
       letter-spacing: -0.02em;
     }
 
-    /* NAVIGATION (inline with hero style) */
+    /* NAVIGATION */
     .nav {
       position: sticky;
       top: 0;
@@ -131,7 +131,7 @@
       align-items: start;
     }
 
-    /* CARDS (clean white, green border accents) */
+    /* CARDS */
     .card {
       background: var(--bg-card);
       border: 1px solid var(--border);
@@ -155,7 +155,7 @@
       gap: 8px;
     }
 
-    /* PACKAGE SELECTOR (radio style) */
+    /* PACKAGE SELECTOR */
     .packages { display: flex; flex-direction: column; gap: 0.85rem; }
 
     .package-option {
@@ -178,9 +178,6 @@
       border-color: var(--green);
       background: rgba(29,158,117,0.02);
       box-shadow: 0 1px 3px rgba(0,0,0,0.02);
-    }
-    .package-option.featured-pkg.selected {
-      border-color: var(--green);
     }
 
     .pkg-left { display: flex; align-items: center; gap: 0.9rem; }
@@ -247,7 +244,7 @@
       font-family: 'DM Sans', sans-serif;
     }
 
-    /* STEPS — green accents */
+    /* STEPS */
     .steps { display: flex; flex-direction: column; gap: 0; margin-bottom: 0; }
     .step {
       display: flex;
@@ -284,7 +281,7 @@
       line-height: 1.5;
     }
 
-    /* PAYMENT METHODS (modern green toggle) */
+    /* PAYMENT METHODS */
     .payment-card { grid-column: 1 / -1; }
 
     .methods-grid {
@@ -318,6 +315,16 @@
       background: rgba(29,158,117,0.03);
       box-shadow: 0 2px 6px rgba(29,158,117,0.08);
     }
+    .method-btn.disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+      filter: grayscale(0.1);
+    }
+    .method-btn.disabled:hover {
+      border-color: var(--border);
+      background: var(--bg-card);
+      transform: none;
+    }
 
     .method-logo {
       font-size: 1.3rem;
@@ -347,8 +354,21 @@
       border-radius: var(--radius-pill);
       font-weight: 600;
     }
+    .coming-soon-badge {
+      position: absolute;
+      bottom: 0.65rem;
+      right: 0.75rem;
+      font-size: 0.55rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--text-faint);
+      background: var(--bg-surface);
+      padding: 0.2rem 0.55rem;
+      border-radius: var(--radius-pill);
+      font-weight: 500;
+    }
 
-    /* ORDER SUMMARY (green branded) */
+    /* ORDER SUMMARY */
     .summary-bar {
       border: 1px solid var(--border);
       border-radius: var(--radius);
@@ -387,7 +407,7 @@
       letter-spacing: -0.03em;
     }
 
-    /* PAY BUTTON (primary green) */
+    /* PAY BUTTON */
     .pay-btn {
       width: 100%;
       padding: 0.9rem 1.5rem;
@@ -430,7 +450,7 @@
     }
     .pay-method-hint span { color: var(--green); font-weight: 600; }
 
-    /* TRUST ROW (green ticks) */
+    /* TRUST ROW */
     .trust-row {
       display: flex;
       align-items: center;
@@ -451,7 +471,7 @@
     }
     .trust-item svg { color: var(--green); stroke-width: 1.8; }
 
-    /* FOOTER (matches hero footer) */
+    /* FOOTER */
     footer {
       border-top: 1px solid var(--border);
       background: var(--bg);
@@ -473,6 +493,29 @@
       color: var(--text-faint);
     }
 
+    /* Toast Notification */
+    .toast {
+      position: fixed;
+      bottom: 2rem;
+      left: 50%;
+      transform: translateX(-50%) translateY(100px);
+      background: var(--green-deep);
+      color: white;
+      padding: 0.75rem 1.5rem;
+      border-radius: var(--radius-pill);
+      font-size: 0.8rem;
+      font-weight: 500;
+      z-index: 1000;
+      opacity: 0;
+      transition: all 0.3s ease;
+      pointer-events: none;
+      white-space: nowrap;
+    }
+    .toast.show {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+
     /* RESPONSIVE */
     @media (max-width: 700px) {
       .nav { padding: 0 1.25rem; }
@@ -481,6 +524,7 @@
       .payment-card { grid-column: 1; }
       .methods-grid { grid-template-columns: 1fr 1fr; gap: 0.8rem; }
       .package-option { padding: 0.85rem; }
+      .toast { white-space: normal; max-width: 90%; text-align: center; }
     }
     @media (max-width: 480px) {
       .methods-grid { grid-template-columns: 1fr; }
@@ -490,7 +534,7 @@
 </head>
 <body>
 
-<!-- NAV (seamless) -->
+<!-- NAV -->
 <nav class="nav">
   <a href="/" class="nav-logo">Novex<span>ium</span></a>
   <a href="/" class="nav-back">
@@ -558,21 +602,21 @@
       </div>
     </div>
 
-    <!-- WHAT HAPPENS NEXT (steps) -->
+    <!-- WHAT HAPPENS NEXT -->
     <div class="card">
       <div class="card-label">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
         What happens next
       </div>
       <div class="steps">
-        <div class="step"><div class="step-num">1</div><div class="step-text"><div class="step-title">Secure payment processed</div><div class="step-sub">Your payment is handled securely via PayPal or Dodo. No card details stored.</div></div></div>
+        <div class="step"><div class="step-num">1</div><div class="step-text"><div class="step-title">Secure payment processed</div><div class="step-sub">Your payment is handled securely via PayPal. No card details stored.</div></div></div>
         <div class="step"><div class="step-num">2</div><div class="step-text"><div class="step-title">Confirmation email sent</div><div class="step-sub">You'll receive a confirmation + intake form within minutes.</div></div></div>
         <div class="step"><div class="step-num">3</div><div class="step-text"><div class="step-title">Manual review begins</div><div class="step-sub">I audit your website — SEO, UX, AI visibility, trust & conversion flow.</div></div></div>
         <div class="step"><div class="step-num">4</div><div class="step-text"><div class="step-title">Report delivered on time</div><div class="step-sub">PDF report (+ Loom for Growth & Authority) delivered as promised.</div></div></div>
       </div>
     </div>
 
-    <!-- PAYMENT CARD (methods, summary, cta) -->
+    <!-- PAYMENT CARD -->
     <div class="card payment-card">
       <div class="card-label">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
@@ -584,10 +628,11 @@
           <div class="method-logo paypal-logo">PayPal</div>
           <div class="method-label">Pay securely via PayPal</div>
         </button>
-        <button class="method-btn" id="dodo-btn" onclick="selectMethod('dodo')">
+        <button class="method-btn disabled" id="dodo-btn" onclick="showComingSoon()">
           <div class="method-logo dodo-logo">Dodo</div>
           <div class="method-label">Cards & local payments</div>
-          <span class="method-tag">Dodo Payments</span>
+          <span class="method-tag">Coming Soon</span>
+          <span class="coming-soon-badge">🚀</span>
         </button>
       </div>
 
@@ -605,10 +650,10 @@
 
       <button class="pay-btn" id="pay-btn" onclick="handlePay()">
         <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
-        <span id="pay-btn-text">Select payment method</span>
+        <span id="pay-btn-text">Select a payment method</span>
       </button>
 
-      <p class="pay-method-hint" id="method-hint">Choose PayPal or Dodo Payments above to continue</p>
+      <p class="pay-method-hint" id="method-hint">Choose PayPal above to continue</p>
 
       <div class="trust-row">
         <div class="trust-item"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg> Secure checkout</div>
@@ -624,6 +669,9 @@
   <span class="footer-copy">Questions? novexiumdigital@gmail.com</span>
 </footer>
 
+<!-- Toast Notification -->
+<div id="toast" class="toast">🚀 Dodo Payments coming soon! Use PayPal for now.</div>
+
 <script>
   // --------------------------------------------------------------
   // CHECKOUT LOGIC with URL parameter support
@@ -636,21 +684,31 @@
     authority: { name: 'Authority Audit',  price: '$299.99',  delivery: 'Delivered in 7–10 days' },
   };
 
-  // Payment links — replace with your actual checkout URLs
+  // PayPal only - Dodo is coming soon
   const paymentLinks = {
     paypal: {
       starter:   'https://www.paypal.com/ncp/payment/STARTER_LINK',
       growth:    'https://www.paypal.com/ncp/payment/GROWTH_LINK',
       authority: 'https://www.paypal.com/ncp/payment/AUTHORITY_LINK',
-    },
-    dodo: {
-      starter:   'https://checkout.dodopayments.com/buy/STARTER_LINK',
-      growth:    'https://checkout.dodopayments.com/buy/GROWTH_LINK',
-      authority: 'https://checkout.dodopayments.com/buy/AUTHORITY_LINK',
     }
   };
 
-  // Get URL parameter (e.g., ?package=starter)
+  // Toast notification function
+  function showToast(message) {
+    const toast = document.getElementById('toast');
+    toast.textContent = message || '🚀 Dodo Payments coming soon! Use PayPal for now.';
+    toast.classList.add('show');
+    setTimeout(() => {
+      toast.classList.remove('show');
+    }, 3000);
+  }
+
+  // Coming Soon handler
+  function showComingSoon() {
+    showToast('🚀 Dodo Payments is coming soon! Please use PayPal for now.');
+  }
+
+  // Get URL parameter
   function getUrlParameter(name) {
     const urlParams = new URLSearchParams(window.location.search);
     return urlParams.get(name);
@@ -676,6 +734,11 @@
   }
 
   function selectMethod(method) {
+    if (method === 'dodo') {
+      showComingSoon();
+      return;
+    }
+    
     selectedMethod = method;
     document.querySelectorAll('.method-btn').forEach(btn => btn.classList.remove('selected'));
     const activeBtn = document.getElementById(method + '-btn');
@@ -689,6 +752,7 @@
     const txtSpan = document.getElementById('pay-btn-text');
     const pkgKey = getSelectedPkg();
     const pkg = packages[pkgKey];
+    
     if (selectedMethod && pkg) {
       const methodName = selectedMethod === 'paypal' ? 'PayPal' : 'Dodo Payments';
       btn.disabled = false;
@@ -697,22 +761,27 @@
     } else {
       btn.disabled = true;
       txtSpan.textContent = 'Select a payment method';
-      hint.textContent = 'Choose PayPal or Dodo Payments above to continue';
+      hint.textContent = 'Choose PayPal above to continue';
     }
   }
 
   function handlePay() {
     if (!selectedMethod) return;
+    if (selectedMethod === 'dodo') {
+      showComingSoon();
+      return;
+    }
+    
     const pkgKey = getSelectedPkg();
     const url = paymentLinks[selectedMethod]?.[pkgKey];
     if (url) {
       window.location.href = url;
     } else {
-      alert("Payment integration is ready: redirect to " + selectedMethod + " for " + pkgKey);
+      alert("Payment integration is ready. Please replace with your actual PayPal checkout links.");
     }
   }
 
-  // Auto-select package based on URL parameter
+  // Auto-select package from URL
   function autoSelectPackage() {
     const packageParam = getUrlParameter('package');
     
@@ -728,11 +797,9 @@
       }
       
       if (selectedPackage) {
-        // Remove any existing selection
         document.querySelectorAll('.package-option').forEach(o => o.classList.remove('selected'));
         selectedPackage.classList.add('selected');
         
-        // Update the summary display
         const pkg = packages[packageParam];
         document.getElementById('summary-name').textContent = pkg.name;
         document.getElementById('summary-detail').textContent = pkg.delivery + ' · One-time payment';
@@ -741,18 +808,15 @@
     }
   }
 
-  // Initialize everything when page loads
+  // Initialize
   document.addEventListener('DOMContentLoaded', () => {
-    // First, try to auto-select package from URL
     autoSelectPackage();
     
-    // If no package was selected from URL, default to growth
     if (!document.querySelector('.package-option.selected')) {
       const growthPkg = packages.growth;
       document.getElementById('summary-name').innerText = growthPkg.name;
       document.getElementById('summary-detail').innerText = growthPkg.delivery + ' · One-time payment';
       document.getElementById('summary-price').innerText = growthPkg.price;
-      // Also visually select the growth option
       const growthElement = document.querySelector('.package-option[data-pkg="growth"]');
       if (growthElement) {
         growthElement.classList.add('selected');
