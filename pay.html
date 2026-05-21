@@ -529,7 +529,7 @@
           </div>
         </div>
 
-        <div class="package-option featured-pkg selected" data-pkg="growth" data-price="$119.99" data-name="Growth Audit" data-delivery="Delivered in 4–5 days" onclick="selectPackage(this)">
+        <div class="package-option featured-pkg" data-pkg="growth" data-price="$119.99" data-name="Growth Audit" data-delivery="Delivered in 4–5 days" onclick="selectPackage(this)">
           <div class="pkg-left">
             <div class="pkg-radio"><div class="pkg-radio-dot"></div></div>
             <div class="pkg-info">
@@ -626,7 +626,7 @@
 
 <script>
   // --------------------------------------------------------------
-  // CHECKOUT LOGIC (green style, updated with consistent pricing)
+  // CHECKOUT LOGIC with URL parameter support
   // --------------------------------------------------------------
   let selectedMethod = null;
 
@@ -636,7 +636,7 @@
     authority: { name: 'Authority Audit',  price: '$299.99',  delivery: 'Delivered in 7–10 days' },
   };
 
-  // dummy checkout links — replace with actual redirects
+  // Payment links — replace with your actual checkout URLs
   const paymentLinks = {
     paypal: {
       starter:   'https://www.paypal.com/ncp/payment/STARTER_LINK',
@@ -649,6 +649,12 @@
       authority: 'https://checkout.dodopayments.com/buy/AUTHORITY_LINK',
     }
   };
+
+  // Get URL parameter (e.g., ?package=starter)
+  function getUrlParameter(name) {
+    const urlParams = new URLSearchParams(window.location.search);
+    return urlParams.get(name);
+  }
 
   function getSelectedPkg() {
     const selected = document.querySelector('.package-option.selected');
@@ -703,18 +709,56 @@
       window.location.href = url;
     } else {
       alert("Payment integration is ready: redirect to " + selectedMethod + " for " + pkgKey);
-      // For demo purposes, prevent error (you can replace with actual URLs)
     }
   }
 
-  // ensure data-price on cards reflects actual numeric for consistency
-  // also init if any selected
+  // Auto-select package based on URL parameter
+  function autoSelectPackage() {
+    const packageParam = getUrlParameter('package');
+    
+    if (packageParam && packages[packageParam]) {
+      const packageElements = document.querySelectorAll('.package-option');
+      let selectedPackage = null;
+      
+      for (let pkg of packageElements) {
+        if (pkg.dataset.pkg === packageParam) {
+          selectedPackage = pkg;
+          break;
+        }
+      }
+      
+      if (selectedPackage) {
+        // Remove any existing selection
+        document.querySelectorAll('.package-option').forEach(o => o.classList.remove('selected'));
+        selectedPackage.classList.add('selected');
+        
+        // Update the summary display
+        const pkg = packages[packageParam];
+        document.getElementById('summary-name').textContent = pkg.name;
+        document.getElementById('summary-detail').textContent = pkg.delivery + ' · One-time payment';
+        document.getElementById('summary-price').textContent = pkg.price;
+      }
+    }
+  }
+
+  // Initialize everything when page loads
   document.addEventListener('DOMContentLoaded', () => {
-    // update initial summary (already selected growth by default)
-    const growthPkg = packages.growth;
-    document.getElementById('summary-name').innerText = growthPkg.name;
-    document.getElementById('summary-detail').innerText = growthPkg.delivery + ' · One-time payment';
-    document.getElementById('summary-price').innerText = growthPkg.price;
+    // First, try to auto-select package from URL
+    autoSelectPackage();
+    
+    // If no package was selected from URL, default to growth
+    if (!document.querySelector('.package-option.selected')) {
+      const growthPkg = packages.growth;
+      document.getElementById('summary-name').innerText = growthPkg.name;
+      document.getElementById('summary-detail').innerText = growthPkg.delivery + ' · One-time payment';
+      document.getElementById('summary-price').innerText = growthPkg.price;
+      // Also visually select the growth option
+      const growthElement = document.querySelector('.package-option[data-pkg="growth"]');
+      if (growthElement) {
+        growthElement.classList.add('selected');
+      }
+    }
+    
     updateButton();
   });
 </script>
