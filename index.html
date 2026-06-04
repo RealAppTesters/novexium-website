@@ -1,1401 +1,253 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Novexium — Web Development for Founders</title>
-<meta name="description" content="I build websites and web products for founders and makers who need to get online fast, look credible, and start growing.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
-<style>
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-  :root {
-    --green: #1D9E75;
-    --green-dark: #0F6E56;
-    --green-deep: #085041;
-    --green-light: #E1F5EE;
-    --green-mid: #9FE1CB;
-    --text: #0f0f0f;
-    --text-muted: #6b6b6b;
-    --text-faint: #a0a0a0;
-    --bg: #fafaf8;
-    --bg-card: #ffffff;
-    --bg-surface: #f4f4f1;
-    --border: rgba(0,0,0,0.08);
-    --border-strong: rgba(0,0,0,0.14);
-    --radius: 12px;
-    --radius-sm: 8px;
-    --radius-pill: 100px;
-  }
-
-  html { scroll-behavior: smooth; }
-
-  body {
-    font-family: 'DM Sans', sans-serif;
-    background: var(--bg);
-    color: var(--text);
-    font-size: 16px;
-    line-height: 1.6;
-    -webkit-font-smoothing: antialiased;
-  }
-
-  a { color: inherit; text-decoration: none; }
-
-  /* NAV */
-  nav {
-    position: sticky;
-    top: 0;
-    z-index: 100;
-    background: rgba(250,250,248,0.92);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border-bottom: 1px solid var(--border);
-    padding: 0 40px;
-    height: 60px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
-
-  .nav-logo {
-    font-size: 16px;
-    font-weight: 500;
-    letter-spacing: -0.4px;
-    color: var(--text);
-  }
-
-  .nav-logo span { color: var(--green); }
-
-  .nav-links {
-    display: flex;
-    align-items: center;
-    gap: 32px;
-    list-style: none;
-  }
-
-  .nav-links a {
-    font-size: 14px;
-    color: var(--text-muted);
-    transition: color 0.2s;
-  }
-
-  .nav-links a:hover { color: var(--text); }
-
-  .nav-cta {
-    font-family: 'DM Sans', sans-serif;
-    font-size: 14px;
-    font-weight: 500;
-    color: #fff;
-    background: var(--green);
-    border: none;
-    border-radius: var(--radius-sm);
-    padding: 8px 18px;
-    cursor: pointer;
-    transition: background 0.2s, transform 0.15s;
-  }
-
-  .nav-cta:hover { background: var(--green-dark); }
-  .nav-cta:active { transform: scale(0.97); }
-
-  .hamburger {
-    display: none;
-    flex-direction: column;
-    gap: 5px;
-    cursor: pointer;
-    padding: 4px;
-    background: none;
-    border: none;
-  }
-
-  .hamburger span {
-    display: block;
-    width: 22px;
-    height: 1.5px;
-    background: var(--text);
-    transition: all 0.3s;
-  }
-
-  .mobile-menu {
-    display: none;
-    position: fixed;
-    top: 60px;
-    left: 0;
-    right: 0;
-    background: var(--bg);
-    border-bottom: 1px solid var(--border);
-    padding: 24px 40px;
-    z-index: 99;
-    flex-direction: column;
-    gap: 20px;
-  }
-
-  .mobile-menu.open { display: flex; }
-  .mobile-menu a { font-size: 16px; color: var(--text-muted); }
-  .mobile-menu .nav-cta { width: fit-content; margin-top: 4px; }
-
-  /* HERO */
-  .hero {
-    padding: 100px 40px 80px;
-    max-width: 1100px;
-    margin: 0 auto;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 60px;
-    align-items: center;
-  }
-
-  .hero-badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 7px;
-    font-size: 12px;
-    font-weight: 500;
-    color: var(--green-deep);
-    background: var(--green-light);
-    border-radius: var(--radius-pill);
-    padding: 5px 14px;
-    margin-bottom: 24px;
-  }
-
-  .hero-badge-dot {
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    background: var(--green);
-    animation: pulse 2s infinite;
-  }
-
-  @keyframes pulse {
-    0%, 100% { opacity: 1; transform: scale(1); }
-    50% { opacity: 0.5; transform: scale(0.8); }
-  }
-
-  .hero h1 {
-    font-family: 'DM Serif Display', serif;
-    font-size: 52px;
-    font-weight: 400;
-    line-height: 1.1;
-    letter-spacing: -1px;
-    color: var(--text);
-    margin-bottom: 20px;
-  }
-
-  .hero h1 em {
-    font-style: italic;
-    color: var(--green);
-  }
-
-  .hero-sub {
-    font-size: 16px;
-    color: var(--text-muted);
-    line-height: 1.75;
-    margin-bottom: 36px;
-    max-width: 420px;
-  }
-
-  .hero-actions {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    margin-bottom: 48px;
-  }
-
-  .btn-primary {
-    font-family: 'DM Sans', sans-serif;
-    font-size: 14px;
-    font-weight: 500;
-    color: #fff;
-    background: var(--green);
-    border: none;
-    border-radius: var(--radius-sm);
-    padding: 12px 24px;
-    cursor: pointer;
-    transition: background 0.2s, transform 0.15s;
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-  }
-
-  .btn-primary:hover { background: var(--green-dark); }
-  .btn-primary:active { transform: scale(0.97); }
-
-  .btn-primary svg { transition: transform 0.2s; }
-  .btn-primary:hover svg { transform: translateX(3px); }
-
-  .btn-secondary {
-    font-family: 'DM Sans', sans-serif;
-    font-size: 14px;
-    color: var(--text-muted);
-    background: transparent;
-    border: 1px solid var(--border-strong);
-    border-radius: var(--radius-sm);
-    padding: 12px 24px;
-    cursor: pointer;
-    transition: border-color 0.2s, color 0.2s, transform 0.15s;
-  }
-
-  .btn-secondary:hover { border-color: var(--text-muted); color: var(--text); }
-  .btn-secondary:active { transform: scale(0.97); }
-
-  .hero-proof {
-    display: flex;
-    align-items: center;
-    gap: 0;
-    padding-top: 36px;
-    border-top: 1px solid var(--border);
-  }
-
-  .proof-item {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    gap: 3px;
-  }
-
-  .proof-item + .proof-item {
-    padding-left: 24px;
-    border-left: 1px solid var(--border);
-    margin-left: 24px;
-  }
-
-  .proof-num {
-    font-size: 22px;
-    font-weight: 500;
-    color: var(--text);
-    letter-spacing: -0.5px;
-  }
-
-  .proof-label {
-    font-size: 12px;
-    color: var(--text-faint);
-    line-height: 1.4;
-  }
-
-  /* Hero visual side */
-  .hero-visual {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-  }
-
-  .visual-card {
-    background: var(--bg-card);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    padding: 20px;
-    transition: border-color 0.2s;
-  }
-
-  .visual-card:hover { border-color: var(--border-strong); }
-
-  .visual-card-top {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 14px;
-  }
-
-  .visual-card-label {
-    font-size: 12px;
-    font-weight: 500;
-    color: var(--text-muted);
-    text-transform: uppercase;
-    letter-spacing: 0.6px;
-  }
-
-  .status-dot {
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    background: var(--green);
-  }
-
-  .visual-card-title {
-    font-size: 15px;
-    font-weight: 500;
-    color: var(--text);
-    margin-bottom: 4px;
-  }
-
-  .visual-card-sub {
-    font-size: 13px;
-    color: var(--text-muted);
-    line-height: 1.5;
-  }
-
-  .visual-tag {
-    display: inline-block;
-    font-size: 11px;
-    font-weight: 500;
-    color: var(--green-deep);
-    background: var(--green-light);
-    border-radius: var(--radius-pill);
-    padding: 3px 10px;
-    margin-top: 10px;
-  }
-
-  .visual-row {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 12px;
-  }
-
-  .visual-mini {
-    background: var(--bg-surface);
-    border-radius: var(--radius-sm);
-    padding: 16px;
-    text-align: center;
-  }
-
-  .visual-mini-num {
-    font-size: 20px;
-    font-weight: 500;
-    color: var(--text);
-    letter-spacing: -0.3px;
-  }
-
-  .visual-mini-label {
-    font-size: 11px;
-    color: var(--text-faint);
-    margin-top: 3px;
-  }
-
-  /* DIVIDER */
-  .divider {
-    height: 1px;
-    background: var(--border);
-    max-width: 1100px;
-    margin: 0 auto;
-  }
-
-  /* SECTIONS */
-  .section {
-    max-width: 1100px;
-    margin: 0 auto;
-    padding: 80px 40px;
-  }
-
-  .section-header {
-    margin-bottom: 48px;
-  }
-
-  .section-label {
-    font-size: 11px;
-    font-weight: 500;
-    color: var(--green);
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    margin-bottom: 10px;
-  }
-
-  .section-title {
-    font-family: 'DM Serif Display', serif;
-    font-size: 36px;
-    font-weight: 400;
-    letter-spacing: -0.5px;
-    color: var(--text);
-    margin-bottom: 12px;
-    line-height: 1.2;
-  }
-
-  .section-sub {
-    font-size: 15px;
-    color: var(--text-muted);
-    line-height: 1.7;
-    max-width: 440px;
-  }
-
-  /* SERVICES */
-  .services-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 16px;
-  }
-
-  .service-card {
-    background: var(--bg-card);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    padding: 28px;
-    transition: border-color 0.2s, transform 0.2s;
-  }
-
-  .service-card:hover {
-    border-color: var(--green-mid);
-    transform: translateY(-2px);
-  }
-
-  .svc-icon {
-    width: 40px;
-    height: 40px;
-    border-radius: var(--radius-sm);
-    background: var(--green-light);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 18px;
-  }
-
-  .svc-icon svg { color: var(--green-dark); }
-
-  .service-card h3 {
-    font-size: 15px;
-    font-weight: 500;
-    color: var(--text);
-    margin-bottom: 8px;
-  }
-
-  .service-card p {
-    font-size: 13px;
-    color: var(--text-muted);
-    line-height: 1.65;
-  }
-
-  /* WORK */
-  .work-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 16px;
-  }
-
-  .work-card {
-    background: var(--bg-card);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    overflow: hidden;
-    transition: border-color 0.2s, transform 0.2s;
-  }
-
-  .work-card:hover {
-    border-color: var(--border-strong);
-    transform: translateY(-2px);
-  }
-
-  .work-thumb {
-    height: 160px;
-    background: var(--bg-surface);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-bottom: 1px solid var(--border);
-    position: relative;
-    overflow: hidden;
-  }
-
-  .work-thumb-icon {
-    width: 56px;
-    height: 56px;
-    border-radius: var(--radius);
-    background: var(--bg-card);
-    border: 1px solid var(--border);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--text-faint);
-  }
-
-  .work-thumb-icon svg { width: 28px; height: 28px; }
-
-  .work-body { padding: 20px 24px 24px; }
-
-  .work-tag {
-    display: inline-block;
-    font-size: 11px;
-    font-weight: 500;
-    color: var(--green-deep);
-    background: var(--green-light);
-    border-radius: var(--radius-pill);
-    padding: 3px 10px;
-    margin-bottom: 10px;
-  }
-
-  .work-card h3 {
-    font-size: 16px;
-    font-weight: 500;
-    color: var(--text);
-    margin-bottom: 6px;
-  }
-
-  .work-card p {
-    font-size: 13px;
-    color: var(--text-muted);
-    line-height: 1.65;
-    margin-bottom: 16px;
-  }
-
-  .work-link {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    font-size: 13px;
-    font-weight: 500;
-    color: var(--green);
-    transition: gap 0.2s;
-  }
-
-  .work-link:hover { gap: 10px; }
-
-  /* PRICING */
-  .pricing-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 16px;
-    align-items: start;
-  }
-
-  .pricing-card {
-    background: var(--bg-card);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    padding: 28px;
-    transition: transform 0.2s;
-  }
-
-  .pricing-card:hover { transform: translateY(-2px); }
-
-  .pricing-card.featured {
-    border: 2px solid var(--green);
-    position: relative;
-  }
-
-  .pricing-popular {
-    display: inline-block;
-    font-size: 11px;
-    font-weight: 500;
-    color: var(--green-deep);
-    background: var(--green-light);
-    border-radius: var(--radius-pill);
-    padding: 4px 12px;
-    margin-bottom: 16px;
-  }
-
-  .pricing-card h3 {
-    font-size: 16px;
-    font-weight: 500;
-    color: var(--text);
-    margin-bottom: 6px;
-  }
-
-  .pricing-desc {
-    font-size: 13px;
-    color: var(--text-muted);
-    line-height: 1.6;
-    margin-bottom: 24px;
-  }
-
-  .pricing-price {
-    font-family: 'DM Serif Display', serif;
-    font-size: 40px;
-    font-weight: 400;
-    color: var(--text);
-    letter-spacing: -1px;
-    line-height: 1;
-    margin-bottom: 4px;
-  }
-
-  .pricing-price-sub {
-    font-family: 'DM Sans', sans-serif;
-    font-size: 13px;
-    color: var(--text-faint);
-    margin-bottom: 6px;
-  }
-
-  .pricing-delivery {
-    font-size: 12px;
-    color: var(--text-muted);
-    background: var(--bg-surface);
-    border-radius: var(--radius-sm);
-    padding: 6px 10px;
-    margin-bottom: 24px;
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-  }
-
-  .pricing-divider {
-    height: 1px;
-    background: var(--border);
-    margin-bottom: 20px;
-  }
-
-  .pricing-features {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    margin-bottom: 28px;
-  }
-
-  .feat {
-    display: flex;
-    align-items: flex-start;
-    gap: 10px;
-    font-size: 13px;
-    color: var(--text-muted);
-    line-height: 1.5;
-  }
-
-  .feat-check {
-    width: 16px;
-    height: 16px;
-    border-radius: 50%;
-    background: var(--green-light);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-    margin-top: 1px;
-  }
-
-  .feat-check svg { color: var(--green); }
-
-  .pricing-btn {
-    width: 100%;
-    font-family: 'DM Sans', sans-serif;
-    font-size: 14px;
-    font-weight: 500;
-    padding: 12px;
-    border-radius: var(--radius-sm);
-    cursor: pointer;
-    transition: all 0.2s;
-  }
-
-  .pricing-btn-outline {
-    background: transparent;
-    border: 1px solid var(--border-strong);
-    color: var(--text);
-  }
-
-  .pricing-btn-outline:hover {
-    border-color: var(--text-muted);
-    background: var(--bg-surface);
-  }
-
-  .pricing-btn-solid {
-    background: var(--green);
-    border: none;
-    color: #fff;
-  }
-
-  .pricing-btn-solid:hover { background: var(--green-dark); }
-  .pricing-btn-solid:active, .pricing-btn-outline:active { transform: scale(0.98); }
-
-  /* ABOUT */
-  .about-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 64px;
-    align-items: start;
-  }
-
-  .about-text p {
-    font-size: 15px;
-    color: var(--text-muted);
-    line-height: 1.8;
-    margin-bottom: 16px;
-  }
-
-  .about-text p:last-child { margin-bottom: 0; }
-
-  .about-highlight {
-    font-family: 'DM Serif Display', serif;
-    font-size: 22px;
-    font-style: italic;
-    color: var(--text);
-    line-height: 1.4;
-    border-left: 3px solid var(--green);
-    padding-left: 20px;
-    margin: 28px 0;
-  }
-
-  .facts {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-  }
-
-  .fact {
-    display: flex;
-    align-items: flex-start;
-    gap: 14px;
-    padding: 18px 20px;
-    background: var(--bg-card);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    transition: border-color 0.2s;
-  }
-
-  .fact:hover { border-color: var(--green-mid); }
-
-  .fact-icon {
-    width: 36px;
-    height: 36px;
-    border-radius: var(--radius-sm);
-    background: var(--green-light);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-    color: var(--green-dark);
-  }
-
-  .fact h4 {
-    font-size: 14px;
-    font-weight: 500;
-    color: var(--text);
-    margin-bottom: 3px;
-  }
-
-  .fact p {
-    font-size: 13px;
-    color: var(--text-muted);
-    line-height: 1.55;
-  }
-
-  /* CTA SECTION */
-  .cta-section {
-    background: var(--text);
-    padding: 80px 40px;
-    text-align: center;
-  }
-
-  .cta-section h2 {
-    font-family: 'DM Serif Display', serif;
-    font-size: 44px;
-    font-weight: 400;
-    color: #fff;
-    letter-spacing: -0.8px;
-    margin-bottom: 14px;
-    line-height: 1.15;
-  }
-
-  .cta-section h2 em {
-    font-style: italic;
-    color: var(--green-mid);
-  }
-
-  .cta-section p {
-    font-size: 16px;
-    color: rgba(255,255,255,0.55);
-    margin-bottom: 36px;
-    line-height: 1.65;
-  }
-
-  .cta-actions {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 12px;
-  }
-
-  .btn-white {
-    font-family: 'DM Sans', sans-serif;
-    font-size: 14px;
-    font-weight: 500;
-    color: var(--text);
-    background: #fff;
-    border: none;
-    border-radius: var(--radius-sm);
-    padding: 12px 24px;
-    cursor: pointer;
-    transition: opacity 0.2s, transform 0.15s;
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-  }
-
-  .btn-white:hover { opacity: 0.9; }
-  .btn-white:active { transform: scale(0.97); }
-
-  .btn-ghost {
-    font-family: 'DM Sans', sans-serif;
-    font-size: 14px;
-    color: rgba(255,255,255,0.7);
-    background: transparent;
-    border: 1px solid rgba(255,255,255,0.2);
-    border-radius: var(--radius-sm);
-    padding: 12px 24px;
-    cursor: pointer;
-    transition: border-color 0.2s, color 0.2s, transform 0.15s;
-  }
-
-  .btn-ghost:hover { border-color: rgba(255,255,255,0.5); color: #fff; }
-  .btn-ghost:active { transform: scale(0.97); }
-
-  /* FOOTER */
-  footer {
-    background: var(--text);
-    border-top: 1px solid rgba(255,255,255,0.08);
-    padding: 28px 40px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
-
-  .footer-logo {
-    font-size: 15px;
-    font-weight: 500;
-    color: #fff;
-    letter-spacing: -0.3px;
-  }
-
-  .footer-logo span { color: var(--green-mid); }
-
-  .footer-links {
-    display: flex;
-    gap: 24px;
-    list-style: none;
-  }
-
-  .footer-links a {
-    font-size: 13px;
-    color: rgba(255,255,255,0.4);
-    transition: color 0.2s;
-  }
-
-  .footer-links a:hover { color: rgba(255,255,255,0.8); }
-
-  .footer-copy {
-    font-size: 12px;
-    color: rgba(255,255,255,0.3);
-  }
-
-  /* SCROLL ANIMATIONS */
-  .reveal {
-    opacity: 0;
-    transform: translateY(24px);
-    transition: opacity 0.6s ease, transform 0.6s ease;
-  }
-
-  .reveal.visible {
-    opacity: 1;
-    transform: translateY(0);
-  }
-
-  .reveal-delay-1 { transition-delay: 0.1s; }
-  .reveal-delay-2 { transition-delay: 0.2s; }
-  .reveal-delay-3 { transition-delay: 0.3s; }
-
-  /* RESPONSIVE */
-  @media (max-width: 768px) {
-    nav { padding: 0 20px; }
-    .nav-links, .nav-cta { display: none; }
-    .hamburger { display: flex; }
-    .mobile-menu { padding: 24px 20px; }
-
-    .hero {
-      grid-template-columns: 1fr;
-      padding: 60px 20px 60px;
-      gap: 40px;
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Novexium — Validate, Test, and Grow Your Product with Real User Feedback</title>
+  <meta name="description" content="Website reviews, SaaS feedback, app testing, game testing, startup validation, and growth audits. Real users, actionable reports, affordable pricing.">
+  <meta name="keywords" content="app testing service, android app testers, ios app testers, testflight testers, game testing, website review, SaaS feedback, startup validation, real user feedback, conversion audit, ASO, QA as a service">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Inter', sans-serif; background: #FEFEFC; color: #111; line-height: 1.5; scroll-behavior: smooth; }
+    :root {
+      --primary: #0F6E56;
+      --primary-dark: #085041;
+      --primary-light: #E1F5EE;
+      --gray-100: #F8F9FA;
+      --gray-200: #E9ECEF;
+      --gray-700: #495057;
+      --shadow-sm: 0 8px 20px rgba(0,0,0,0.03), 0 2px 6px rgba(0,0,0,0.05);
+      --shadow-md: 0 12px 28px rgba(0,0,0,0.05);
+      --radius-lg: 24px;
+      --radius-md: 16px;
+      --radius-sm: 12px;
     }
-
-    .hero h1 { font-size: 36px; }
-    .hero-visual { display: none; }
-    .hero-proof { flex-wrap: wrap; gap: 20px; }
-    .proof-item + .proof-item { border-left: none; padding-left: 0; margin-left: 0; }
-
-    .section { padding: 60px 20px; }
-    .section-title { font-size: 28px; }
-
-    .services-grid { grid-template-columns: 1fr; }
-    .work-grid { grid-template-columns: 1fr; }
-    .pricing-grid { grid-template-columns: 1fr; }
-    .about-grid { grid-template-columns: 1fr; gap: 40px; }
-
-    .cta-section { padding: 60px 20px; }
-    .cta-section h2 { font-size: 32px; }
-    .cta-actions { flex-direction: column; }
-
-    footer {
-      flex-direction: column;
-      gap: 16px;
-      text-align: center;
-      padding: 24px 20px;
+    .container { max-width: 1280px; margin: 0 auto; padding: 0 32px; }
+    /* Navigation */
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(254,254,252,0.96); backdrop-filter: blur(8px);
+      border-bottom: 1px solid #e9ecef;
+      padding: 16px 32px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap;
     }
-
-    .footer-links { justify-content: center; }
-  }
-</style>
+    .logo { font-size: 1.8rem; font-weight: 700; letter-spacing: -0.02em; color: var(--primary); }
+    .logo span { color: #111; }
+    .nav-links { display: flex; gap: 32px; align-items: center; list-style: none; }
+    .nav-links a { text-decoration: none; font-weight: 500; color: #333; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--primary); }
+    .btn-outline-nav { background: transparent; border: 1px solid var(--primary); padding: 8px 20px; border-radius: 40px; font-weight: 600; color: var(--primary); cursor: pointer; }
+    .btn-outline-nav:hover { background: var(--primary); color: white; }
+    .hamburger { display: none; font-size: 1.6rem; cursor: pointer; }
+    @media (max-width: 768px) {
+      .nav-links { display: none; flex-direction: column; width: 100%; background: white; padding: 20px; gap: 20px; border-radius: var(--radius-md); box-shadow: var(--shadow-md); margin-top: 16px; }
+      .nav-links.show { display: flex; }
+      .hamburger { display: block; }
+      nav { flex-wrap: wrap; }
+      .container { padding: 0 20px; }
+    }
+    .btn-primary { background: var(--primary); color: white; border: none; padding: 12px 28px; border-radius: 40px; font-weight: 600; font-size: 0.95rem; cursor: pointer; transition: all 0.2s; display: inline-block; text-decoration: none; }
+    .btn-primary:hover { background: var(--primary-dark); transform: translateY(-1px); }
+    .btn-secondary { background: transparent; border: 1px solid #cbd5e1; padding: 12px 28px; border-radius: 40px; font-weight: 500; cursor: pointer; }
+    .btn-secondary:hover { border-color: var(--primary); color: var(--primary); }
+    .hero { padding: 80px 0 64px; text-align: center; }
+    .hero h1 { font-size: 3.5rem; font-weight: 800; letter-spacing: -0.02em; line-height: 1.2; max-width: 900px; margin: 0 auto 20px; }
+    .hero h1 span { color: var(--primary); }
+    .hero p { font-size: 1.2rem; color: var(--gray-700); max-width: 700px; margin: 0 auto 32px; }
+    .trust-row { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 24px; margin: 60px 0 20px; background: var(--gray-100); border-radius: var(--radius-lg); padding: 32px 24px; }
+    .trust-item { flex: 1; text-align: center; min-width: 100px; }
+    .trust-item i { font-size: 1.8rem; color: var(--primary); margin-bottom: 8px; }
+    .section-title { font-size: 2.2rem; font-weight: 700; letter-spacing: -0.01em; margin-bottom: 12px; text-align: center; }
+    .section-sub { text-align: center; color: var(--gray-700); max-width: 700px; margin: 0 auto 48px; font-size: 1.1rem; }
+    .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 32px; margin: 32px 0; }
+    .service-card { background: white; border-radius: var(--radius-md); padding: 28px; box-shadow: var(--shadow-sm); border: 1px solid #eef2f6; transition: all 0.2s; }
+    .service-card:hover { box-shadow: var(--shadow-md); transform: translateY(-2px); }
+    .service-icon { font-size: 2rem; color: var(--primary); margin-bottom: 20px; }
+    .service-card h3 { font-size: 1.4rem; margin-bottom: 12px; font-weight: 700; }
+    .service-card p { color: var(--gray-700); margin-bottom: 16px; }
+    .feature-list { list-style: none; margin-top: 16px; }
+    .feature-list li { font-size: 0.85rem; margin-bottom: 6px; display: flex; align-items: center; gap: 8px; color: #2c3e2f; }
+    .feature-list i { color: var(--primary); font-size: 0.75rem; width: 18px; }
+    .price-tag { font-weight: 700; margin-top: 20px; color: var(--primary-dark); border-top: 1px solid #eef2f6; padding-top: 16px; }
+    .pricing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; margin: 48px 0; }
+    .pricing-card { background: white; border-radius: var(--radius-md); padding: 24px; border: 1px solid #eef2f6; text-align: center; transition: all 0.2s; }
+    .pricing-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); }
+    .pricing-card h3 { font-size: 1.3rem; font-weight: 700; margin-bottom: 8px; }
+    .pricing-card .price { font-size: 1.8rem; font-weight: 800; color: var(--primary); margin: 12px 0 8px; }
+    .pricing-card .price small { font-size: 0.8rem; font-weight: 400; color: #666; }
+    .form-section { background: var(--gray-100); border-radius: var(--radius-lg); padding: 48px 40px; margin: 64px auto; box-shadow: var(--shadow-sm); }
+    .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+    .full-width { grid-column: span 2; }
+    .form-group label { font-weight: 600; display: block; margin-bottom: 6px; font-size: 0.85rem; }
+    .form-group input, .form-group select, .form-group textarea { width: 100%; padding: 12px 14px; border: 1px solid #ddd; border-radius: 12px; font-family: inherit; font-size: 0.9rem; background: white; }
+    .trust-badges-side { background: white; border-radius: var(--radius-md); padding: 24px; margin-top: 32px; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 16px; }
+    .badge-item { display: flex; align-items: center; gap: 10px; font-size: 0.85rem; font-weight: 500; }
+    footer { background: #111; color: #ccc; padding: 48px 32px 24px; margin-top: 64px; }
+    .footer-content { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 40px; }
+    .footer-col a { color: #aaa; text-decoration: none; display: block; margin-bottom: 8px; font-size: 0.85rem; }
+    @media (max-width: 750px) { .form-grid { grid-template-columns: 1fr; } .full-width { grid-column: span 1; } .hero h1 { font-size: 2.2rem; } }
+    .btn-nav-cta { background: var(--primary); color: white; border: none; padding: 8px 20px; border-radius: 40px; font-weight: 600; cursor: pointer; }
+    .success-message { background: #d1e7dd; color: #0f5132; padding: 16px; border-radius: 12px; margin-top: 20px; text-align: center; }
+  </style>
 </head>
 <body>
-
-<!-- NAV -->
 <nav>
-  <a href="#" class="nav-logo">Novex<span>ium</span></a>
-  <ul class="nav-links">
-    <li><a href="#services">Services</a></li>
-    <li><a href="#how">How it works</a></li>
-    <li><a href="#pricing">Pricing</a></li>
-    <li><a href="#about">About</a></li>
+  <div class="logo">Novex<span>ium</span></div>
+  <div class="hamburger" id="hamburger"><i class="fas fa-bars"></i></div>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#services">Services</a></li><li><a href="#pricing">Pricing</a></li><li><a href="#contact-form">Contact</a></li>
+    <li><button class="btn-nav-cta" id="navQuoteBtn">Get a quote</button></li>
   </ul>
-  <button class="nav-cta" onclick="document.getElementById('pricing').scrollIntoView({behavior:'smooth'})">Get an audit</button>
-  <button class="hamburger" id="hamburger" aria-label="Open menu">
-    <span></span><span></span><span></span>
-  </button>
 </nav>
+<main>
+  <div class="container">
+    <section class="hero">
+      <h1>Validate, improve, and grow your product with <span>real user feedback</span></h1>
+      <p>Website reviews · App testing · Game testing · SaaS feedback · Startup validation · Growth audits. All from real people, not AI.</p>
+      <div class="hero-buttons">
+        <button class="btn-primary" id="heroQuoteBtn">Get Started</button>
+        <button class="btn-secondary" onclick="document.getElementById('services').scrollIntoView({behavior:'smooth'})">View Services</button>
+      </div>
+      <div class="trust-row">
+        <div class="trust-item"><i class="fas fa-comment-dots"></i><h4>Real feedback</h4><p>Actionable insights</p></div>
+        <div class="trust-item"><i class="fas fa-users"></i><h4>Real testers</h4><p>Targeted audience</p></div>
+        <div class="trust-item"><i class="fas fa-chart-line"></i><h4>Actionable reports</h4><p>Prioritised fixes</p></div>
+        <div class="trust-item"><i class="fas fa-clock"></i><h4>Fast turnaround</h4><p>Results in days</p></div>
+        <div class="trust-item"><i class="fas fa-tag"></i><h4>Affordable pricing</h4><p>Start at $15/tester</p></div>
+      </div>
+    </section>
 
-<div class="mobile-menu" id="mobile-menu">
-  <a href="#services" onclick="closeMobile()">Services</a>
-  <a href="#how" onclick="closeMobile()">How it works</a>
-  <a href="#pricing" onclick="closeMobile()">Pricing</a>
-  <a href="#about" onclick="closeMobile()">About</a>
-  <button class="nav-cta" onclick="closeMobile(); document.getElementById('contact-form').scrollIntoView({behavior:'smooth'})">Get an audit</button>
-</div>
+    <!-- SERVICES SECTION (all 13 services) -->
+    <section id="services">
+      <h2 class="section-title">Services built for founders & indie developers</h2>
+      <p class="section-sub">No fluff, no jargon — just honest feedback from real users to help you ship better products.</p>
+      <div class="services-grid">
+        <!-- 1. Website Review Service -->
+        <div class="service-card"><div class="service-icon"><i class="fas fa-chart-simple"></i></div><h3>Website Review Service</h3><p>Why aren't people signing up? We review your site like a first-time visitor and find what's hurting conversions.</p><ul class="feature-list"><li><i class="fas fa-check-circle"></i> Landing page & CTA review</li><li><i class="fas fa-check-circle"></i> Mobile responsiveness</li><li><i class="fas fa-check-circle"></i> Trust & credibility audit</li><li><i class="fas fa-check-circle"></i> Video walkthrough + PDF report</li></ul><div class="price-tag">Starting at $99 – $299</div></div>
+        <!-- 2. SaaS Feedback -->
+        <div class="service-card"><div class="service-icon"><i class="fas fa-cloud-upload-alt"></i></div><h3>SaaS Feedback</h3><p>"Can someone review my SaaS before launch?" Get real user insights on onboarding, pricing, and signup flow.</p><ul class="feature-list"><li><i class="fas fa-check-circle"></i> Feature & onboarding review</li><li><i class="fas fa-check-circle"></i> Pricing page feedback</li><li><i class="fas fa-check-circle"></i> First-time user testing</li><li><i class="fas fa-check-circle"></i> Video recordings + structured report</li></ul><div class="price-tag">Starting at $99 – $299</div></div>
+        <!-- 3. App & Game Testing (formerly separate, now combined for clarity) -->
+        <div class="service-card"><div class="service-icon"><i class="fab fa-android"></i> <i class="fab fa-apple"></i> <i class="fas fa-gamepad"></i></div><h3>App & Game Testing</h3><p>Real users test your Android, iOS, or game — find crashes, UI bugs, and gameplay issues before launch.</p><ul class="feature-list"><li><i class="fas fa-check-circle"></i> Android / iOS / TestFlight</li><li><i class="fas fa-check-circle"></i> Mobile & browser games</li><li><i class="fas fa-check-circle"></i> Functional + exploratory testing</li><li><i class="fas fa-check-circle"></i> Bug reports, screenshots, recordings</li></ul><div class="price-tag">Starting at $15 per tester</div></div>
+        <!-- 4. Real User Feedback -->
+        <div class="service-card"><div class="service-icon"><i class="fas fa-users"></i></div><h3>Real User Feedback</h3><p>Need opinions from real people? We recruit users, run surveys, and collect unbiased feedback about your product.</p><ul class="feature-list"><li><i class="fas fa-check-circle"></i> User recruitment & surveys</li><li><i class="fas fa-check-circle"></i> Feedback database & sentiment analysis</li><li><i class="fas fa-check-circle"></i> Onboarding & ratings</li></ul><div class="price-tag">Starting at $149 – $999</div></div>
+        <!-- 5. Startup Validation -->
+        <div class="service-card"><div class="service-icon"><i class="fas fa-chart-line"></i></div><h3>Startup Validation</h3><p>Is this idea worth pursuing? Get objective feedback before you spend months building.</p><ul class="feature-list"><li><i class="fas fa-check-circle"></i> Competitor & landing page review</li><li><i class="fas fa-check-circle"></i> User feedback & market observations</li><li><i class="fas fa-check-circle"></i> Pricing & positioning recommendations</li></ul><div class="price-tag">Starting at $299 – $1500</div></div>
+        <!-- 6. Beta Testing -->
+        <div class="service-card"><div class="service-icon"><i class="fas fa-flask"></i></div><h3>Beta Testing</h3><p>Launching next week? We'll prepare your product with real beta testers, bug reports, and launch readiness checks.</p><ul class="feature-list"><li><i class="fas fa-check-circle"></i> Tester recruitment & bug reporting</li><li><i class="fas fa-check-circle"></i> App store / website review</li><li><i class="fas fa-check-circle"></i> User feedback & launch confidence</li></ul><div class="price-tag">Starting at $199 – $799</div></div>
+        <!-- 7. App Store Optimization (ASO) -->
+        <div class="service-card"><div class="service-icon"><i class="fas fa-chart-line"></i></div><h3>App Store Optimization</h3><p>Get more downloads. We optimize your app title, keywords, description, and screenshots for App Store and Google Play.</p><ul class="feature-list"><li><i class="fas fa-check-circle"></i> Keyword & title optimization</li><li><i class="fas fa-check-circle"></i> Description & graphic review</li><li><i class="fas fa-check-circle"></i> Competitor ASO analysis</li></ul><div class="price-tag">Starting at $99 – $499</div></div>
+        <!-- 8. SaaS Growth Audit -->
+        <div class="service-card"><div class="service-icon"><i class="fas fa-chart-line"></i></div><h3>SaaS Growth Audit</h3><p>Why aren't you getting users? We review your landing page, onboarding, pricing, and messaging to find growth blockers.</p><ul class="feature-list"><li><i class="fas fa-check-circle"></i> Conversion analysis & CRO</li><li><i class="fas fa-check-circle"></i> Onboarding & pricing review</li><li><i class="fas fa-check-circle"></i> Actionable growth recommendations</li></ul><div class="price-tag">Starting at $149 – $999</div></div>
+        <!-- 9. SEO & GEO Optimization -->
+        <div class="service-card"><div class="service-icon"><i class="fas fa-search"></i></div><h3>SEO & GEO Optimization</h3><p>Technical SEO, content audit, and AI search optimization (GEO) — help ChatGPT and Google find your site.</p><ul class="feature-list"><li><i class="fas fa-check-circle"></i> Technical SEO & content audit</li><li><i class="fas fa-check-circle"></i> AI search (GEO) recommendations</li><li><i class="fas fa-check-circle"></i> Landing page optimization</li></ul><div class="price-tag">Starting at $149 – $999</div></div>
+        <!-- 10. Conversion Rate Optimization (CRO) -->
+        <div class="service-card"><div class="service-icon"><i class="fas fa-chart-line"></i></div><h3>Conversion Rate Optimization</h3><p>Fix your funnel. We analyze signup flow, checkout, and user journey to remove bottlenecks.</p><ul class="feature-list"><li><i class="fas fa-check-circle"></i> Funnel & checkout review</li><li><i class="fas fa-check-circle"></i> CTA & form optimization</li><li><i class="fas fa-check-circle"></i> A/B testing recommendations</li></ul><div class="price-tag">Starting at $149 – $999</div></div>
+        <!-- 11. QA as a Service (Monthly) -->
+        <div class="service-card"><div class="service-icon"><i class="fas fa-code-branch"></i></div><h3>QA as a Service</h3><p>Monthly retainer for startups that release often. Ongoing testing, regression, and release verification.</p><ul class="feature-list"><li><i class="fas fa-check-circle"></i> Regression & release testing</li><li><i class="fas fa-check-circle"></i> Bug reporting & verification</li><li><i class="fas fa-check-circle"></i> Dedicated QA coordinator</li></ul><div class="price-tag">$299 – $2000 / month</div></div>
+        <!-- 12. Founder Review Service -->
+        <div class="service-card"><div class="service-icon"><i class="fas fa-chalkboard-user"></i></div><h3>Founder Review Service</h3><p>Submit your website, app, SaaS, or idea. Get a recorded walkthrough with honest feedback and growth suggestions.</p><ul class="feature-list"><li><i class="fas fa-check-circle"></i> Recorded video walkthrough</li><li><i class="fas fa-check-circle"></i> Actionable recommendations</li><li><i class="fas fa-check-circle"></i> Growth & positioning advice</li></ul><div class="price-tag">Starting at $99 – $499</div></div>
+        <!-- 13. Additional: already covered but keep consistency -->
+        <div class="service-card"><div class="service-icon"><i class="fas fa-handshake"></i></div><h3>Custom Consulting</h3><p>Need something else? We can help with product strategy, growth experiments, or user research. Just ask.</p><ul class="feature-list"><li><i class="fas fa-check-circle"></i> Tailored to your startup</li><li><i class="fas fa-check-circle"></i> Hourly or project-based</li></ul><div class="price-tag">From $99/h</div></div>
+      </div>
+    </section>
 
-<!-- HERO -->
-<section class="hero">
-  <div class="hero-left">
-    <div class="hero-badge">
-      <div class="hero-badge-dot"></div>
-      Manual SEO &amp; UX audits — done by a human
-    </div>
-    <h1>Your website is losing customers <em>and ranking in silence.</em></h1>
-    <p class="hero-sub">I manually audit websites for startups, SaaS products, restaurants, agencies, and online brands — uncovering SEO problems, UX failures, AI visibility gaps, weak trust signals, and conversion mistakes that quietly kill growth.</p>
-    <div class="hero-actions">
-      <button class="btn-primary" onclick="document.getElementById('contact-form').scrollIntoView({behavior:'smooth'})">
-        Get a website audit
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-      </button>
-      <button class="btn-secondary" onclick="document.getElementById('pricing').scrollIntoView({behavior:'smooth'})">View pricing</button>
-    </div>
-    <div class="hero-proof">
-      <div class="proof-item">
-        <span class="proof-num">100+</span>
-        <span class="proof-label">Websites audited</span>
+    <!-- PRICING SUMMARY (compact) -->
+    <section id="pricing">
+      <h2 class="section-title">Simple, no-surprise pricing</h2>
+      <div class="pricing-grid">
+        <div class="pricing-card"><h3>Website Review</h3><div class="price">$99 – $299</div><button class="btn-primary quote-trigger" style="width:100%;">Get quote</button></div>
+        <div class="pricing-card"><h3>SaaS Feedback</h3><div class="price">$99 – $299</div><button class="btn-primary quote-trigger" style="width:100%;">Get quote</button></div>
+        <div class="pricing-card"><h3>App/Game Testing</h3><div class="price">$15 <small>/tester</small></div><button class="btn-primary quote-trigger" style="width:100%;">Get quote</button></div>
+        <div class="pricing-card"><h3>Startup Validation</h3><div class="price">$299 – $1500</div><button class="btn-primary quote-trigger" style="width:100%;">Get quote</button></div>
+        <div class="pricing-card"><h3>Beta Testing</h3><div class="price">$199 – $799</div><button class="btn-primary quote-trigger" style="width:100%;">Get quote</button></div>
+        <div class="pricing-card"><h3>ASO / SEO / CRO</h3><div class="price">$99 – $999</div><button class="btn-primary quote-trigger" style="width:100%;">Get quote</button></div>
+        <div class="pricing-card"><h3>QA as a Service</h3><div class="price">$299/mo</div><button class="btn-primary quote-trigger" style="width:100%;">Contact us</button></div>
+        <div class="pricing-card"><h3>Founder Review</h3><div class="price">$99 – $499</div><button class="btn-primary quote-trigger" style="width:100%;">Get quote</button></div>
       </div>
-      <div class="proof-item">
-        <span class="proof-num">3–5 days</span>
-        <span class="proof-label">Typical delivery</span>
-      </div>
-      <div class="proof-item">
-        <span class="proof-num">24 hrs</span>
-        <span class="proof-label">Average response time</span>
-      </div>
-    </div>
-  </div>
-  <div class="hero-visual">
-    <div class="visual-card">
-      <div class="visual-card-top">
-        <span class="visual-card-label">What I uncover</span>
-        <div class="status-dot"></div>
-      </div>
-      <div class="visual-card-title">SEO &amp; visibility gaps</div>
-      <div class="visual-card-sub">Missing meta structure, poor crawlability, slow page speed, broken internal links — all the technical issues suppressing your rankings.</div>
-      <span class="visual-tag">SEO audit</span>
-    </div>
-    <div class="visual-row">
-      <div class="visual-mini">
-        <div class="visual-mini-num">SEO</div>
-        <div class="visual-mini-label">Search visibility</div>
-      </div>
-      <div class="visual-mini">
-        <div class="visual-mini-num">GEO</div>
-        <div class="visual-mini-label">AI engine presence</div>
-      </div>
-    </div>
-    <div class="visual-card">
-      <div class="visual-card-top">
-        <span class="visual-card-label">What you get</span>
-        <div class="status-dot"></div>
-      </div>
-      <div class="visual-card-title">Prioritised action plan</div>
-      <div class="visual-card-sub">No vague advice. A clear, prioritised list of specific fixes — written in plain language so you know exactly what to do next and why it matters.</div>
-      <span class="visual-tag">Brutally honest</span>
-    </div>
-  </div>
-</section>
+    </section>
 
-<div class="divider"></div>
-
-<!-- AI VISIBILITY -->
-<section class="section" id="ai-visibility">
-  <div class="section-header reveal">
-    <p class="section-label">The shift you cannot ignore</p>
-    <h2 class="section-title">Search is moving to AI. <em>Most websites are invisible.</em></h2>
-    <p class="section-sub">40% of searches now happen inside AI engines. Your competitors are showing up in ChatGPT, Gemini, and Perplexity — and you might not be.</p>
-  </div>
-  <div class="services-grid">
-    <div class="service-card reveal reveal-delay-1">
-      <div class="svc-icon">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
-      </div>
-      <h3>Search is changing fast</h3>
-      <p>Traditional Google rankings still matter — but LLMs like ChatGPT, Gemini, and Perplexity now answer questions directly. If your website is not structured to be cited, crawled, and understood by AI engines, you are missing a growing share of traffic that your competitors are quietly capturing.</p>
-    </div>
-    <div class="service-card reveal reveal-delay-2">
-      <div class="svc-icon">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a10 10 0 100 20A10 10 0 0012 2zm0 0v20M2 12h20"/></svg>
-      </div>
-      <h3>GEO: Generative Engine Optimisation</h3>
-      <p>GEO is the emerging discipline of making your brand citable, trustworthy, and accessible to AI engines — not just Google. I review your site for LLM accessibility, identity signals, structured data, and citability factors that determine whether AI models surface your brand in their answers.</p>
-    </div>
-    <div class="service-card reveal reveal-delay-3">
-      <div class="svc-icon">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
-      </div>
-      <h3>Why manual beats automated</h3>
-      <p>Automated tools flag technical errors — but they cannot judge whether your homepage communicates trust, whether your messaging is confusing, or whether your content is something an LLM would actually cite. That human judgement is what separates a useful audit from a list of scores.</p>
-    </div>
-  </div>
-</section>
-
-<div class="divider"></div>
-
-<!-- SERVICES -->
-<section class="section" id="services">
-  <div class="section-header reveal">
-    <p class="section-label">What I audit</p>
-    <h2 class="section-title">Every angle that affects your growth</h2>
-    <p class="section-sub">A manual, expert-led review across every dimension that impacts how your website is found, trusted, and converted.</p>
-  </div>
-  <div class="services-grid">
-    <div class="service-card reveal reveal-delay-1">
-      <div class="svc-icon">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
-      </div>
-      <h3>SEO &amp; technical health</h3>
-      <p>Meta tags, heading structure, crawlability, internal linking, page speed, SSL, schema markup, sitemap integrity, image optimisation, and canonical tags. Every technical factor that search engines use to rank — and penalise — your site.</p>
-    </div>
-    <div class="service-card reveal reveal-delay-2">
-      <div class="svc-icon">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
-      </div>
-      <h3>UX &amp; conversion review</h3>
-      <p>How visitors move through your site, where they get confused, where they drop off, and what stops them from taking action. Navigation clarity, CTA placement, visual hierarchy, mobile usability, and page-level messaging — reviewed with genuinely fresh eyes.</p>
-    </div>
-    <div class="service-card reveal reveal-delay-3">
-      <div class="svc-icon">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a10 10 0 100 20A10 10 0 0012 2zm0 0v20M2 12h20"/></svg>
-      </div>
-      <h3>AI &amp; GEO visibility</h3>
-      <p>Whether your site is structured for LLM discoverability — including identity signals, authoritative content formatting, schema, and citability. As AI search continues to grow, this is the audit layer most businesses have never had done.</p>
-    </div>
-    <div class="service-card reveal reveal-delay-1">
-      <div class="svc-icon">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-      </div>
-      <h3>Trust &amp; credibility signals</h3>
-      <p>First impressions, branding consistency, social proof placement, contact accessibility, security indicators, and whether your site communicates authority before a visitor reads a single sentence. Weak trust costs you conversions silently.</p>
-    </div>
-    <div class="service-card reveal reveal-delay-2">
-      <div class="svc-icon">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
-      </div>
-      <h3>Landing page analysis</h3>
-      <p>Your landing page has one job: convert visitors into leads or customers. I review headline clarity, above-the-fold messaging, value proposition strength, CTA placement, objection handling, and social proof — and tell you precisely what is undermining conversions.</p>
-    </div>
-    <div class="service-card reveal reveal-delay-3">
-      <div class="svc-icon">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2M9 11a4 4 0 100-8 4 4 0 000 8zM23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
-      </div>
-      <h3>Competitor comparison</h3>
-      <p>How does your site measure up against top performers in your space? I compare your SEO signals, content depth, trust indicators, and conversion structure against key competitors — so you can see exactly where you are being outranked and why.</p>
-    </div>
-  </div>
-</section>
-
-<div class="divider"></div>
-
-<!-- HOW IT WORKS -->
-<section class="section" id="how">
-  <div class="section-header reveal">
-    <p class="section-label">Process</p>
-    <h2 class="section-title">How the audit works</h2>
-    <p class="section-sub">Simple, clear, and fast — from the moment you reach out to the moment you have a full action plan in hand.</p>
-  </div>
-  <div class="work-grid">
-    <div class="work-card reveal reveal-delay-1">
-      <div class="work-thumb">
-        <div class="work-thumb-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+    <!-- LEAD FORM (updated with all services and optional description) -->
+    <div id="contact-form" class="form-section">
+      <h2 class="section-title" style="text-align: left;">Tell us about your project</h2>
+      <p style="margin-bottom: 32px;">Get a custom quote within 24 hours. No obligation, just honest advice.</p>
+      <form id="quoteForm" action="https://formspree.io/f/xwvyzjej" method="POST">
+        <div class="form-grid">
+          <div class="form-group"><label>Full name *</label><input type="text" name="name" required placeholder="John Smith"></div>
+          <div class="form-group"><label>Email address *</label><input type="email" name="email" required placeholder="john@example.com"></div>
+          <div class="form-group"><label>Product type</label><select name="product_type">
+            <option>Mobile App</option><option>SaaS</option><option>Website</option><option>Mobile Game</option>
+            <option>Browser Game</option><option>PC Game</option><option>Startup Idea</option><option>Other</option>
+          </select></div>
+          <div class="form-group"><label>Service required</label><select name="service_required">
+            <option>Website Review Service</option><option>SaaS Feedback</option><option>App & Game Testing</option>
+            <option>Real User Feedback</option><option>Startup Validation</option><option>Beta Testing</option>
+            <option>App Store Optimization (ASO)</option><option>SaaS Growth Audit</option><option>SEO & GEO Optimization</option>
+            <option>Conversion Rate Optimization (CRO)</option><option>QA as a Service (Monthly)</option>
+            <option>Founder Review Service</option><option>Custom Consulting</option>
+          </select></div>
+          <div class="form-group"><label>Number of testers needed</label><select name="testers_needed">
+            <option>1</option><option>5</option><option>10</option><option>25</option><option>50+</option>
+          </select></div>
+          <div class="form-group"><label>Budget range</label><select name="budget_range">
+            <option>Under $50</option><option>$50-$100</option><option>$100-$250</option><option>$250-$500</option>
+            <option>$500-$1000</option><option>$1000-$2500</option><option>$2500+</option>
+          </select></div>
+          <div class="form-group"><label>Project URL (optional)</label><input type="url" name="project_url" placeholder="https://example.com"></div>
+          <div class="form-group"><label>How did you hear about us?</label><select name="referral_source">
+            <option>Google</option><option>Reddit</option><option>X/Twitter</option><option>LinkedIn</option>
+            <option>Indie Hackers</option><option>Referral</option><option>Other</option>
+          </select></div>
+          <div class="full-width form-group"><label>Project description (optional)</label><textarea name="message" rows="4" placeholder="Tell us about your app, game, website, or startup. What kind of feedback or testing do you need? (Optional)"></textarea></div>
         </div>
-      </div>
-      <div class="work-body">
-        <span class="work-tag">Step 1</span>
-        <h3>Send me your website</h3>
-        <p>Share your URL, your goals, and what you think is not working. The more context you give, the sharper the audit. I will confirm your package and get started within 24 hours.</p>
-      </div>
-    </div>
-    <div class="work-card reveal reveal-delay-2">
-      <div class="work-thumb">
-        <div class="work-thumb-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+        <button type="submit" class="btn-primary" style="width:100%; margin-top: 12px;">Get My Quote →</button>
+        <div class="trust-badges-side">
+          <span class="badge-item"><i class="fas fa-clock"></i> Response within 24h</span>
+          <span class="badge-item"><i class="fas fa-file-invoice-dollar"></i> No obligation quote</span>
+          <span class="badge-item"><i class="fas fa-users"></i> Real testers, actionable feedback</span>
+          <span class="badge-item"><i class="fas fa-box-open"></i> Flexible for startups & indie devs</span>
         </div>
-      </div>
-      <div class="work-body">
-        <span class="work-tag">Step 2</span>
-        <h3>I manually review everything</h3>
-        <p>I go through your site page by page — analysing SEO structure, UX flow, AI visibility, trust signals, mobile performance, and conversion barriers. No automated checklist. Every finding is written by hand with context and reasoning.</p>
-      </div>
-    </div>
-    <div class="work-card reveal reveal-delay-1">
-      <div class="work-thumb">
-        <div class="work-thumb-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
-        </div>
-      </div>
-      <div class="work-body">
-        <span class="work-tag">Step 3</span>
-        <h3>You receive a clear, prioritised report</h3>
-        <p>A detailed PDF report with every issue explained in plain language, ranked by impact. No jargon, no vague scores. You will know exactly what to fix first, why it matters, and what result to expect. Growth Audit clients also receive a Loom video walkthrough.</p>
-      </div>
-    </div>
-    <div class="work-card reveal reveal-delay-2">
-      <div class="work-thumb">
-        <div class="work-thumb-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
-        </div>
-      </div>
-      <div class="work-body">
-        <span class="work-tag">Step 4</span>
-        <h3>Take action with confidence</h3>
-        <p>Every recommendation is specific and actionable. Whether you implement the changes yourself, brief a developer, or use the report to justify investment — you will have everything you need to move forward without guessing.</p>
-      </div>
+        <p style="margin-top: 24px; font-size: 0.8rem; text-align: center; color: #5a6e7a;">We work with indie developers, SaaS founders, game creators, and entrepreneurs who want real-world feedback before launch.</p>
+      </form>
+      <div id="formSuccessMessage" style="display: none;" class="success-message">✓ Thank you! We'll review your project and get back to you within 24 hours.</div>
     </div>
   </div>
-</section>
+</main>
 
-<div class="divider"></div>
-
-<!-- PRICING -->
-<section class="section" id="pricing">
-  <div class="section-header reveal">
-    <p class="section-label">Pricing</p>
-    <h2 class="section-title">Simple, transparent pricing</h2>
-    <p class="section-sub">No hidden fees. No automated reports passed off as expert reviews. Every package is a manual audit done by a real person — with clear deliverables and honest findings.</p>
-  </div>
-  <div class="pricing-grid">
-
-    <div class="pricing-card reveal reveal-delay-1">
-      <h3>Starter Audit</h3>
-      <p class="pricing-desc">For businesses who need a clear, honest snapshot of what is holding their homepage back.</p>
-      <div class="pricing-price">$49,99</div>
-      <p class="pricing-price-sub">one-time payment</p>
-      <div class="pricing-delivery">
-        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
-        Delivered in 2–3 days
-      </div>
-      <div class="pricing-divider"></div>
-      <div class="pricing-features">
-        <div class="feat"><div class="feat-check"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></div>Homepage UX review</div>
-        <div class="feat"><div class="feat-check"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></div>Mobile responsiveness audit</div>
-        <div class="feat"><div class="feat-check"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></div>On-page SEO review</div>
-        <div class="feat"><div class="feat-check"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></div>Trust &amp; branding feedback</div>
-        <div class="feat"><div class="feat-check"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></div>Prioritised PDF report</div>
-      </div>
-      <button class="pricing-btn pricing-btn-outline" onclick="window.location.href='/pay.html?package=starter'">Get started</button>
-    </div>
-
-    <div class="pricing-card featured reveal reveal-delay-2">
-      <div class="pricing-popular">Most popular</div>
-      <h3>Growth Audit</h3>
-      <p class="pricing-desc">For businesses serious about fixing what is costing them traffic, leads, and sales.</p>
-      <div class="pricing-price">$199,99</div>
-      <p class="pricing-price-sub">one-time payment</p>
-      <div class="pricing-delivery">
-        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
-        Delivered in 4–5 days
-      </div>
-      <div class="pricing-divider"></div>
-      <div class="pricing-features">
-        <div class="feat"><div class="feat-check"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></div>Full website audit (all pages)</div>
-        <div class="feat"><div class="feat-check"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></div>SEO &amp; technical health review</div>
-        <div class="feat"><div class="feat-check"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></div>UX &amp; conversion analysis</div>
-        <div class="feat"><div class="feat-check"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></div>AI &amp; GEO visibility check</div>
-        <div class="feat"><div class="feat-check"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></div>Competitor comparison</div>
-        <div class="feat"><div class="feat-check"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></div>Loom video walkthrough</div>
-        <div class="feat"><div class="feat-check"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></div>Prioritised PDF report</div>
-      </div>
-      <button class="pricing-btn pricing-btn-outline" onclick="window.location.href='/pay.html?package=growth'">Get started</button>
-    </div>
-
-    <div class="pricing-card reveal reveal-delay-3">
-      <h3>Authority Audit</h3>
-      <p class="pricing-desc">For businesses that want the full picture — SEO, GEO, UX, conversion, and a complete strategic roadmap.</p>
-      <div class="pricing-price">$305,49</div>
-      <p class="pricing-price-sub">one-time payment</p>
-      <div class="pricing-delivery">
-        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
-        Delivered in 7–10 days
-      </div>
-      <div class="pricing-divider"></div>
-      <div class="pricing-features">
-        <div class="feat"><div class="feat-check"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></div>Everything in Growth Audit</div>
-        <div class="feat"><div class="feat-check"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></div>Advanced GEO &amp; LLM citability audit</div>
-        <div class="feat"><div class="feat-check"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></div>Full conversion funnel breakdown</div>
-        <div class="feat"><div class="feat-check"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></div>Schema &amp; structured data review</div>
-        <div class="feat"><div class="feat-check"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></div>Content strategy recommendations</div>
-        <div class="feat"><div class="feat-check"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></div>Trust &amp; credibility deep-dive</div>
-        <div class="feat"><div class="feat-check"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></div>Priority support &amp; follow-up call</div>
-      </div>
-      <button class="pricing-btn pricing-btn-outline" onclick="window.location.href='/pay.html?package=authority'">Get started</button>
-    </div>
-
-  </div>
-</section>
-
-<div class="divider"></div>
-
-<!-- EXPERIENCE -->
-<section class="section" id="work">
-  <div class="section-header reveal">
-    <p class="section-label">Experience</p>
-    <h2 class="section-title">I've been on both sides</h2>
-    <p class="section-sub">I've run real products with real users — so when I audit your site, I understand what it actually takes to earn trust, rank, and convert. Not just what a checklist says.</p>
-  </div>
-  <div class="work-grid">
-    <div class="work-card reveal reveal-delay-1">
-      <div class="work-thumb">
-        <div class="work-thumb-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M12 18h.01"/></svg>
-        </div>
-      </div>
-      <div class="work-body">
-        <span class="work-tag">Live product</span>
-        <h3>RealAppTesters</h3>
-        <p>A service platform with 1,000+ paying users — where I learned first-hand how trust signals, pricing clarity, page speed, and SEO structure directly determine whether a visitor converts or bounces. Every audit I deliver draws on real lessons from running this.</p>
-        <a href="https://www.realapptesters.com" target="_blank" class="work-link">
-          View live
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/></svg>
-        </a>
-      </div>
-    </div>
-    <div class="work-card reveal reveal-delay-2">
-      <div class="work-thumb">
-        <div class="work-thumb-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="20" height="12" rx="2"/><path d="M12 12m-2 0a2 2 0 104 0 2 2 0 10-4 0M6 12h.01M18 12h.01"/></svg>
-        </div>
-      </div>
-      <div class="work-body">
-        <span class="work-tag">Live product</span>
-        <h3>QuickGames</h3>
-        <p>A platform built around low friction and high retention — where I tested navigation architecture, content hierarchy, and onboarding flows with real users at scale. That hands-on experience directly informs how I evaluate UX and usability in every audit.</p>
-        <a href="https://www.quickgames.live" target="_blank" class="work-link">
-          View live
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/></svg>
-        </a>
-      </div>
-    </div>
-  </div>
-</section>
-
-<div class="divider"></div>
-
-<!-- ABOUT -->
-<section class="section" id="about">
-  <div class="section-header reveal">
-    <p class="section-label">About</p>
-    <h2 class="section-title">Why work with me</h2>
-  </div>
-  <div class="about-grid">
-    <div class="about-text reveal">
-      <p>I run Novexium as a focused, manual website auditing service. I started it because most of the "audits" businesses receive are either auto-generated reports dressed up as expert feedback, or shallow reviews that flag what is wrong without explaining why it matters or what to do about it.</p>
-      <div class="about-highlight">"I've run products with real users, real SEO pressure, and real conversion goals. I audit websites the way I'd want my own audited — honestly, specifically, and without padding."</div>
-      <p>Every audit is done by me personally. I review your site the way a new visitor would — then layer in SEO analysis, AI visibility checks, trust signal evaluation, and conversion thinking. You get one cohesive report, not a stack of disconnected tool outputs.</p>
-      <p>I keep my client load intentionally small. Not for optics — but because a genuinely useful audit requires full attention. You will not get a boilerplate report with your URL swapped in.</p>
-    </div>
-    <div class="facts reveal reveal-delay-1">
-      <div class="fact">
-        <div class="fact-icon">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
-        </div>
-        <div>
-          <h4>100% manual — no automated reports</h4>
-          <p>Every finding is written by hand with context. You are paying for expert analysis and honest judgement — not a tool output with a name on it.</p>
-        </div>
-      </div>
-      <div class="fact">
-        <div class="fact-icon">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
-        </div>
-        <div>
-          <h4>No fake praise</h4>
-          <p>If your site has serious problems, I will say so clearly — before you waste more time or money on something that is not working.</p>
-        </div>
-      </div>
-      <div class="fact">
-        <div class="fact-icon">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a10 10 0 100 20A10 10 0 0012 2zm0 0v20M2 12h20"/></svg>
-        </div>
-        <div>
-          <h4>SEO + GEO + UX in one review</h4>
-          <p>Most audits cover one dimension. Mine covers traditional SEO, AI visibility (GEO), UX, conversion, and trust — in a single, prioritised report.</p>
-        </div>
-      </div>
-      <div class="fact">
-        <div class="fact-icon">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
-        </div>
-        <div>
-          <h4>Fast turnaround</h4>
-          <p>Starter audits in 2–3 days. Growth audits in 4–5 days. No weeks-long waits to find out your contact form was broken the whole time.</p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- CTA -->
-<section class="cta-section" id="contact-form">
-  <h2>Ready to find out what's <em>really</em> holding your site back?</h2>
-  <p>Send me your website URL and I will show you what is hurting your SEO, AI visibility, conversions, and trust — in plain language, with clear priorities.</p>
-  <div class="cta-actions">
-    <a href="mailto:novexiumdigital@gmail.com">
-      <button class="btn-white">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-        Request an audit
-      </button>
-    </a>
-    <button class="btn-ghost" onclick="document.getElementById('pricing').scrollIntoView({behavior:'smooth'})">View pricing</button>
-  </div>
-</section>
-
-<!-- FOOTER -->
 <footer>
-  <span class="footer-logo">Novex<span>ium</span></span>
-  <ul class="footer-links">
-    <li><a href="#services">Services</a></li>
-    <li><a href="#how">How it works</a></li>
-    <li><a href="#pricing">Pricing</a></li>
-    <li><a href="#about">About</a></li>
-  </ul>
-  <span class="footer-copy">Manual SEO &amp; UX audits — honest, specific, actionable.</span>
+  <div class="container">
+    <div class="footer-content">
+      <div><div class="logo" style="color:white; font-size:1.4rem;">Novexium</div><p style="margin-top: 8px;">Real user feedback for startups & indie builders</p></div>
+      <div class="footer-col"><h4>Services</h4><a href="#services">Website Review</a><a href="#services">App & Game Testing</a><a href="#services">SaaS Feedback</a><a href="#services">Startup Validation</a></div>
+      <div class="footer-col"><h4>Resources</h4><a href="#pricing">Pricing</a><a href="#contact-form">Get a quote</a></div>
+      <div class="footer-col"><h4>Legal</h4><a href="#">Privacy</a><a href="#">Terms</a></div>
+    </div>
+    <div style="border-top: 1px solid #2a2a2a; margin-top: 40px; padding-top: 24px; text-align: center; font-size: 0.8rem;">© 2025 Novexium — Helping founders validate, test, and grow their products.</div>
+  </div>
 </footer>
 
 <script>
   const hamburger = document.getElementById('hamburger');
-  const mobileMenu = document.getElementById('mobile-menu');
-
-  hamburger.addEventListener('click', () => {
-    mobileMenu.classList.toggle('open');
-  });
-
-  function closeMobile() {
-    mobileMenu.classList.remove('open');
-  }
-
-  const reveals = document.querySelectorAll('.reveal');
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('visible');
-        observer.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.12 });
-
-  reveals.forEach(el => observer.observe(el));
-
-  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function(e) {
-      const target = document.querySelector(this.getAttribute('href'));
-      if (target) {
-        e.preventDefault();
-        target.scrollIntoView({ behavior: 'smooth' });
-        closeMobile();
-      }
-    });
+  const navLinks = document.getElementById('navLinks');
+  hamburger.addEventListener('click', () => navLinks.classList.toggle('show'));
+  document.querySelectorAll('.nav-links a').forEach(link => link.addEventListener('click', () => navLinks.classList.remove('show')));
+  const scrollToForm = () => document.getElementById('contact-form').scrollIntoView({ behavior: 'smooth' });
+  document.getElementById('heroQuoteBtn')?.addEventListener('click', scrollToForm);
+  document.getElementById('navQuoteBtn')?.addEventListener('click', scrollToForm);
+  document.querySelectorAll('.quote-trigger').forEach(btn => btn.addEventListener('click', scrollToForm));
+  const form = document.getElementById('quoteForm');
+  const successDiv = document.getElementById('formSuccessMessage');
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const formData = new FormData(form);
+    try {
+      const response = await fetch(form.action, { method: 'POST', body: formData, headers: { 'Accept': 'application/json' } });
+      if (response.ok) {
+        form.reset();
+        successDiv.style.display = 'block';
+        setTimeout(() => successDiv.style.display = 'none', 5000);
+      } else alert('Submission error. Please email us directly.');
+    } catch (err) { alert('Network error. Please try again.'); }
   });
 </script>
 </body>
