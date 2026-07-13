@@ -1629,4 +1629,26 @@
         grid-template-columns: 1fr;
     }
     
-    .header-search-btn .search-shortcut
+    .header-search-btn .search-shortcut {
+        display: none;
+    }
+    
+    .dashboard-breadcrumbs {
+        display: none;
+    }
+}
+
+@media (max-width: 480px) {
+    .overview-cards-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .welcome-title {
+        font-size: 1.25rem;
+    }
+    
+    .profile-dropdown {
+        width: 240px;
+        right: -16px;
+    }
+}
