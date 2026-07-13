@@ -13,6 +13,7 @@ Production-ready Python web application built with FastAPI, PostgreSQL, Redis, a
 - **Docker** - Containerization
 - **Kubernetes** - Orchestration
 
+
 ## Getting Started
 
 ```bash
@@ -66,3 +67,10 @@ services:
 volumes:
   postgres_data:
   redis_data:
+# Novexium Layout & Navigation System
+
+## Overview
+
+This is the complete global layout system for Novexium. Every page in the application inherits from these templates.
+
+## File Structure
