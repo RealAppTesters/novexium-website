@@ -1,0 +1,24 @@
+{% extends "base/public.html" %}
+
+{% block title %}Email Verified — Novexium{% endblock %}
+
+{% block page_content %}
+<div class="auth-page auth-small">
+    <div class="auth-container">
+        <div class="auth-success">
+            <div class="auth-success-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polyline points="20 6 9 17 4 12"/>
+                </svg>
+            </div>
+            <h1 class="auth-success-title">Email verified!</h1>
+            <p class="auth-success-text">
+                Your email address has been verified. You can now access all Novexium features.
+            </p>
+            <div class="auth-success-actions">
+                <a href="/dashboard" class="btn-primary btn-block">Go to Dashboard</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
