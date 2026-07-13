@@ -1,0 +1,43 @@
+{% extends "base/public.html" %}
+
+{% block title %}Simple Pricing That Grows With You — Novexium{% endblock %}
+
+{% block description %}
+Choose the plan that fits your apps today. Upgrade anytime as your business grows. Start your 7-day free trial.
+{% endblock %}
+
+{% block og_title %}Simple Pricing That Grows With You{% endblock %}
+{% block og_description %}Choose the plan that fits your apps today. Start your 7-day free trial.{% endblock %}
+
+{% block page_content %}
+    <!-- Hero -->
+    {% include 'components/pricing/_pricing_hero.html' %}
+    
+    <!-- Pricing Cards -->
+    {% include 'components/pricing/_pricing_cards.html' %}
+    
+    <!-- Plan Comparison -->
+    {% include 'components/pricing/_pricing_comparison.html' %}
+    
+    <!-- Why Novexium -->
+    {% include 'components/pricing/_pricing_why.html' %}
+    
+    <!-- ROI Section -->
+    {% include 'components/pricing/_pricing_roi.html' %}
+    
+    <!-- Security -->
+    {% include 'components/pricing/_pricing_security.html' %}
+    
+    <!-- Testimonials -->
+    {% include 'components/pricing/_pricing_testimonials.html' %}
+    
+    <!-- FAQ -->
+    {% include 'components/pricing/_pricing_faq.html' %}
+    
+    <!-- Final CTA -->
+    {% include 'components/pricing/_pricing_cta.html' %}
+{% endblock %}
+
+{% block extra_js %}
+<script src="{{ url_for('static', path='js/pricing.js') }}"></script>
+{% endblock %}
