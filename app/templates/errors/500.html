@@ -1,0 +1,24 @@
+{% extends "base/public.html" %}
+
+{% block title %}Server Error — Novexium{% endblock %}
+
+{% block page_content %}
+<div class="error-page">
+    <div class="error-container">
+        <div class="error-icon">
+            <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <circle cx="12" cy="12" r="10"/>
+                <path d="M12 8V12M12 16H12.01"/>
+            </svg>
+        </div>
+        <h1 class="error-title">Something went wrong</h1>
+        <p class="error-description">
+            We're experiencing technical difficulties. Our team has been notified.
+        </p>
+        <div class="error-actions">
+            <a href="/" class="btn-primary">Go Home</a>
+            <button onclick="window.location.reload()" class="btn-secondary">Try Again</button>
+        </div>
+    </div>
+</div>
+{% endblock %}
