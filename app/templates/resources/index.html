@@ -1,0 +1,49 @@
+{% extends "base/public.html" %}
+
+{% block title %}Resources — Master App Growth | Novexium{% endblock %}
+
+{% block description %}
+Explore guides, checklists, best practices, and practical resources to improve your App Store and Google Play performance.
+{% endblock %}
+
+{% block og_title %}Resources — Master App Growth{% endblock %}
+{% block og_description %}Explore guides, checklists, best practices, and practical resources for app growth.{% endblock %}
+
+{% block page_content %}
+    <!-- Hero -->
+    {% include 'components/resources/_resources_hero.html' %}
+    
+    <!-- Featured Resources -->
+    {% include 'components/resources/_resources_featured.html' %}
+    
+    <!-- Categories -->
+    {% include 'components/resources/_resources_categories.html' %}
+    
+    <!-- Featured Guides -->
+    {% include 'components/resources/_resources_guides.html' %}
+    
+    <!-- Downloads -->
+    {% include 'components/resources/_resources_downloads.html' %}
+    
+    <!-- Learning Paths -->
+    {% include 'components/resources/_resources_learning.html' %}
+    
+    <!-- Tools -->
+    {% include 'components/resources/_resources_tools.html' %}
+    
+    <!-- Newsletter -->
+    {% include 'components/resources/_resources_newsletter.html' %}
+    
+    <!-- Community -->
+    {% include 'components/resources/_resources_community.html' %}
+    
+    <!-- FAQ -->
+    {% include 'components/resources/_resources_faq.html' %}
+    
+    <!-- Final CTA -->
+    {% include 'components/resources/_resources_cta.html' %}
+{% endblock %}
+
+{% block extra_js %}
+<script src="{{ url_for('static', path='js/resources.js') }}"></script>
+{% endblock %}
