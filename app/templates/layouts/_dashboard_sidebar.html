@@ -1,0 +1,210 @@
+<aside class="dashboard-sidebar" id="dashboardSidebar" role="navigation" aria-label="Dashboard navigation">
+    <!-- Sidebar Header with Logo -->
+    <div class="sidebar-header">
+        <a href="/dashboard" class="sidebar-logo">
+            <svg class="logo-icon" viewBox="0 0 32 32" fill="none">
+                <rect width="32" height="32" rx="8" fill="#4F46E5"/>
+                <path d="M8 24L16 8L24 24" stroke="white" stroke-width="2.5" stroke-linecap="round"/>
+                <path d="M12 18L20 18" stroke="white" stroke-width="2.5" stroke-linecap="round"/>
+            </svg>
+            <span class="logo-text">Novexium</span>
+        </a>
+        <button class="sidebar-collapse" id="sidebarCollapse" aria-label="Collapse sidebar">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M15 18L9 12L15 6"/>
+            </svg>
+        </button>
+    </div>
+    
+    <!-- Search -->
+    <div class="sidebar-search">
+        <button class="sidebar-search-btn" id="sidebarSearchBtn">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="11" cy="11" r="8"/>
+                <path d="M21 21L17 17"/>
+            </svg>
+            <span>Search</span>
+            <kbd>⌘K</kbd>
+        </button>
+    </div>
+    
+    <!-- Navigation -->
+    <nav class="sidebar-nav">
+        <!-- Main -->
+        <ul class="sidebar-nav-list">
+            <li class="sidebar-nav-item">
+                <a href="/dashboard" class="sidebar-nav-link active">
+                    <svg class="sidebar-nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="3" y="3" width="7" height="7" rx="1"/>
+                        <rect x="14" y="3" width="7" height="7" rx="1"/>
+                        <rect x="3" y="14" width="7" height="7" rx="1"/>
+                        <rect x="14" y="14" width="7" height="7" rx="1"/>
+                    </svg>
+                    <span>Dashboard</span>
+                    <span class="sidebar-nav-badge">5</span>
+                </a>
+            </li>
+            <li class="sidebar-nav-item">
+                <a href="/apps" class="sidebar-nav-link">
+                    <svg class="sidebar-nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="2" y="2" width="20" height="20" rx="4"/>
+                        <line x1="8" y1="2" x2="8" y2="22"/>
+                        <line x1="16" y1="2" x2="16" y2="22"/>
+                        <line x1="2" y1="8" x2="22" y2="8"/>
+                        <line x1="2" y1="16" x2="22" y2="16"/>
+                    </svg>
+                    <span>My Apps</span>
+                    <span class="sidebar-nav-count">3</span>
+                </a>
+            </li>
+        </ul>
+        
+        <!-- ASO Tools -->
+        <div class="sidebar-nav-group">
+            <span class="sidebar-nav-group-title">ASO Tools</span>
+            <ul class="sidebar-nav-list">
+                <li class="sidebar-nav-item">
+                    <a href="/audits" class="sidebar-nav-link">
+                        <svg class="sidebar-nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                            <path d="M12 8v4M12 16h.01"/>
+                        </svg>
+                        <span>Audits</span>
+                        <span class="sidebar-nav-badge">2</span>
+                    </a>
+                </li>
+                <li class="sidebar-nav-item">
+                    <a href="/keywords" class="sidebar-nav-link">
+                        <svg class="sidebar-nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M21 21L15 15M17 9C17 13.4183 13.4183 17 9 17C4.58172 17 1 13.4183 1 9C1 4.58172 4.58172 1 9 1C13.4183 1 17 4.58172 17 9Z"/>
+                        </svg>
+                        <span>Keywords</span>
+                    </a>
+                </li>
+                <li class="sidebar-nav-item">
+                    <a href="/store-listing" class="sidebar-nav-link">
+                        <svg class="sidebar-nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M4 6h16M4 12h16M4 18h16"/>
+                        </svg>
+                        <span>Store Listing</span>
+                    </a>
+                </li>
+                <li class="sidebar-nav-item">
+                    <a href="/creative-studio" class="sidebar-nav-link">
+                        <svg class="sidebar-nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="2" y="2" width="20" height="20" rx="4"/>
+                            <circle cx="12" cy="12" r="4"/>
+                            <circle cx="12" cy="12" r="2"/>
+                        </svg>
+                        <span>Creative Studio</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        
+        <!-- Intelligence -->
+        <div class="sidebar-nav-group">
+            <span class="sidebar-nav-group-title">Intelligence</span>
+            <ul class="sidebar-nav-list">
+                <li class="sidebar-nav-item">
+                    <a href="/competitors" class="sidebar-nav-link">
+                        <svg class="sidebar-nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M9 19V10M15 19V14M21 19V4M3 19V16"/>
+                        </svg>
+                        <span>Competitors</span>
+                        <span class="sidebar-nav-badge warning">3</span>
+                    </a>
+                </li>
+                <li class="sidebar-nav-item">
+                    <a href="/reviews" class="sidebar-nav-link">
+                        <svg class="sidebar-nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M12 4.5C7.5 4.5 3.5 6.5 1 9.5C3.5 12.5 7.5 14.5 12 14.5C16.5 14.5 20.5 12.5 23 9.5C20.5 6.5 16.5 4.5 12 4.5Z"/>
+                            <circle cx="12" cy="9.5" r="3"/>
+                        </svg>
+                        <span>Reviews</span>
+                        <span class="sidebar-nav-badge">12</span>
+                    </a>
+                </li>
+                <li class="sidebar-nav-item">
+                    <a href="/rank-tracking" class="sidebar-nav-link">
+                        <svg class="sidebar-nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M2 12L6 8L10 12L14 8L18 12L22 8"/>
+                            <path d="M2 16L6 12L10 16L14 12L18 16L22 12"/>
+                        </svg>
+                        <span>Rank Tracking</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        
+        <!-- Reports & Settings -->
+        <div class="sidebar-nav-group">
+            <span class="sidebar-nav-group-title">Reports</span>
+            <ul class="sidebar-nav-list">
+                <li class="sidebar-nav-item">
+                    <a href="/reports" class="sidebar-nav-link">
+                        <svg class="sidebar-nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                            <polyline points="14 2 14 8 20 8"/>
+                            <line x1="16" y1="13" x2="8" y2="13"/>
+                            <line x1="16" y1="17" x2="8" y2="17"/>
+                            <polyline points="10 9 9 9 8 9"/>
+                        </svg>
+                        <span>Reports</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        
+        <!-- Bottom -->
+        <div class="sidebar-bottom">
+            <ul class="sidebar-nav-list">
+                <li class="sidebar-nav-item">
+                    <a href="/notifications" class="sidebar-nav-link">
+                        <svg class="sidebar-nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/>
+                            <path d="M13.73 21a2 2 0 0 1-3.46 0"/>
+                        </svg>
+                        <span>Notifications</span>
+                        <span class="sidebar-nav-badge danger">5</span>
+                    </a>
+                </li>
+                <li class="sidebar-nav-item">
+                    <a href="/billing" class="sidebar-nav-link">
+                        <svg class="sidebar-nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="2" y="5" width="20" height="14" rx="2"/>
+                            <line x1="2" y1="10" x2="22" y2="10"/>
+                            <path d="M7 15h.01M12 15h.01M17 15h.01"/>
+                        </svg>
+                        <span>Billing</span>
+                    </a>
+                </li>
+                <li class="sidebar-nav-item">
+                    <a href="/settings" class="sidebar-nav-link">
+                        <svg class="sidebar-nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/>
+                            <circle cx="12" cy="12" r="3"/>
+                        </svg>
+                        <span>Settings</span>
+                    </a>
+                </li>
+            </ul>
+            
+            <!-- User Profile (bottom) -->
+            <div class="sidebar-user">
+                <div class="sidebar-user-avatar">MK</div>
+                <div class="sidebar-user-info">
+                    <span class="sidebar-user-name">Metse Kgatla</span>
+                    <span class="sidebar-user-plan">Professional</span>
+                </div>
+                <button class="sidebar-user-menu" aria-label="User menu">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="1"/>
+                        <circle cx="12" cy="5" r="1"/>
+                        <circle cx="12" cy="19" r="1"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </nav>
+</aside>
