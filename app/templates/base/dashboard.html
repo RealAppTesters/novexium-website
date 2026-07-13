@@ -1,27 +1,36 @@
 {% extends "base/base.html" %}
 
+{% block title %}Dashboard — Novexium{% endblock %}
+
+{% block body_class %}dashboard-body{% endblock %}
+
 {% block content %}
-    <div class="dashboard-layout">
-        <!-- Top Navigation -->
-        {% include 'layouts/_header.html' %}
+<div class="dashboard-wrapper">
+    <!-- Dashboard Header -->
+    {% include 'layouts/_dashboard_header.html' %}
+    
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        {% include 'layouts/_dashboard_sidebar.html' %}
         
-        <div class="dashboard-container">
-            <!-- Sidebar -->
-            {% include 'layouts/_sidebar.html' %}
-            
-            <!-- Mobile Navigation -->
-            {% include 'layouts/_mobile_nav.html' %}
-            
-            <!-- Main Content -->
-            <main class="dashboard-main">
-                <!-- Breadcrumbs -->
-                {% include 'components/_breadcrumbs.html' %}
-                
-                <!-- Page Content -->
-                {% block dashboard_content %}
-                    <!-- Dashboard specific content -->
-                {% endblock %}
-            </main>
-        </div>
+        <!-- Main Content -->
+        <main class="dashboard-main" id="dashboardMain" role="main">
+            {% block dashboard_content %}
+                <!-- Dashboard content goes here -->
+            {% endblock %}
+        </main>
+        
+        <!-- Optional Right Sidebar -->
+        {% block dashboard_right_sidebar %}
+            <!-- Right sidebar content -->
+        {% endblock %}
     </div>
+    
+    <!-- Mobile Navigation -->
+    {% include 'layouts/_dashboard_mobile_nav.html' %}
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="{{ url_for('static', path='js/dashboard.js') }}"></script>
 {% endblock %}
