@@ -1,0 +1,125 @@
+<section class="growth-blueprint">
+    <div class="growth-blueprint-header">
+        <div class="growth-blueprint-title-group">
+            <span class="growth-blueprint-badge">Signature Feature</span>
+            <h2 class="growth-blueprint-title">Today's Growth Blueprint</h2>
+            <p class="growth-blueprint-subtitle">Priority actions to boost your app growth</p>
+        </div>
+        <button class="growth-blueprint-refresh" onclick="refreshBlueprint()">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M23 4v6h-6"/>
+                <path d="M1 20v-6h6"/>
+                <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/>
+            </svg>
+            <span>Refresh</span>
+        </button>
+    </div>
+    
+    <div class="blueprint-tasks">
+        <!-- Task 1: High Priority -->
+        <div class="blueprint-task priority-high">
+            <div class="blueprint-task-status">
+                <span class="blueprint-task-dot high"></span>
+            </div>
+            <div class="blueprint-task-content">
+                <div class="blueprint-task-header">
+                    <h4 class="blueprint-task-title">Rewrite App Title</h4>
+                    <span class="blueprint-task-priority">High Priority</span>
+                </div>
+                <p class="blueprint-task-description">
+                    Update your app title to include your primary keywords for better discoverability.
+                </p>
+                <div class="blueprint-task-metrics">
+                    <span class="blueprint-task-impact positive">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M2 12L6 8L10 12L14 8L18 12L22 8"/>
+                            <path d="M2 16L6 12L10 16L14 12L18 16L22 12"/>
+                        </svg>
+                        +7% Visibility
+                    </span>
+                    <span class="blueprint-task-difficulty">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="10"/>
+                            <path d="M12 6v6l4 2"/>
+                        </svg>
+                        15 min
+                    </span>
+                </div>
+            </div>
+            <button class="blueprint-task-action btn-primary btn-sm">Apply Now</button>
+        </div>
+        
+        <!-- Task 2: Medium Priority -->
+        <div class="blueprint-task priority-medium">
+            <div class="blueprint-task-status">
+                <span class="blueprint-task-dot medium"></span>
+            </div>
+            <div class="blueprint-task-content">
+                <div class="blueprint-task-header">
+                    <h4 class="blueprint-task-title">Replace Screenshot #2</h4>
+                    <span class="blueprint-task-priority">Medium Priority</span>
+                </div>
+                <p class="blueprint-task-description">
+                    Your second screenshot isn't converting. Replace it with a lifestyle shot showing your app in action.
+                </p>
+                <div class="blueprint-task-metrics">
+                    <span class="blueprint-task-impact positive">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M2 12L6 8L10 12L14 8L18 12L22 8"/>
+                            <path d="M2 16L6 12L10 16L14 12L18 16L22 12"/>
+                        </svg>
+                        +10% Conversion
+                    </span>
+                    <span class="blueprint-task-difficulty">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="10"/>
+                            <path d="M12 6v6l4 2"/>
+                        </svg>
+                        30 min
+                    </span>
+                </div>
+            </div>
+            <button class="blueprint-task-action btn-secondary btn-sm">Apply Now</button>
+        </div>
+        
+        <!-- Task 3: Low Priority -->
+        <div class="blueprint-task priority-low">
+            <div class="blueprint-task-status">
+                <span class="blueprint-task-dot low"></span>
+            </div>
+            <div class="blueprint-task-content">
+                <div class="blueprint-task-header">
+                    <h4 class="blueprint-task-title">Reply to Recent Reviews</h4>
+                    <span class="blueprint-task-priority">Low Priority</span>
+                </div>
+                <p class="blueprint-task-description">
+                    Respond to recent 1-star reviews to show you care about user feedback.
+                </p>
+                <div class="blueprint-task-metrics">
+                    <span class="blueprint-task-impact positive">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M2 12L6 8L10 12L14 8L18 12L22 8"/>
+                            <path d="M2 16L6 12L10 16L14 12L18 16L22 12"/>
+                        </svg>
+                        +5% Rating
+                    </span>
+                    <span class="blueprint-task-difficulty">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="10"/>
+                            <path d="M12 6v6l4 2"/>
+                        </svg>
+                        10 min
+                    </span>
+                </div>
+            </div>
+            <button class="blueprint-task-action btn-ghost btn-sm">Apply Now</button>
+        </div>
+    </div>
+    
+    <div class="blueprint-progress">
+        <div class="blueprint-progress-bar">
+            <div class="blueprint-progress-fill" style="width: 33%"></div>
+        </div>
+        <span class="blueprint-progress-text">1 of 3 tasks completed</span>
+    </div>
+</section>
