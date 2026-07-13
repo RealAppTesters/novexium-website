@@ -1,0 +1,21 @@
+{% extends "base/base.html" %}
+
+{% block content %}
+    <div class="public-layout">
+        <!-- Header -->
+        {% include 'layouts/_header.html' %}
+        
+        <!-- Mobile Navigation -->
+        {% include 'layouts/_mobile_nav.html' %}
+        
+        <!-- Page Content -->
+        <main class="main-content">
+            {% block page_content %}
+                <!-- Page specific content -->
+            {% endblock %}
+        </main>
+        
+        <!-- Footer -->
+        {% include 'layouts/_footer.html' %}
+    </div>
+{% endblock %}
