@@ -1,0 +1,106 @@
+<header class="dashboard-header" id="dashboardHeader" role="banner">
+    <div class="dashboard-header-inner">
+        <!-- Left: Mobile toggle + breadcrumbs -->
+        <div class="dashboard-header-left">
+            <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle navigation" aria-expanded="false">
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+            </button>
+            
+            <div class="dashboard-breadcrumbs">
+                <span class="breadcrumb-item active">Dashboard</span>
+            </div>
+        </div>
+        
+        <!-- Right: Actions -->
+        <div class="dashboard-header-right">
+            <!-- Global Search -->
+            <button class="header-search-btn" id="headerSearchBtn" aria-label="Search">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="11" cy="11" r="8"/>
+                    <path d="M21 21L17 17"/>
+                </svg>
+                <span class="search-shortcut">⌘K</span>
+            </button>
+            
+            <!-- Quick Actions -->
+            <div class="header-actions-dropdown">
+                <button class="header-action-btn" aria-label="Quick actions">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="12" y1="5" x2="12" y2="19"/>
+                        <line x1="5" y1="12" x2="19" y2="12"/>
+                    </svg>
+                </button>
+            </div>
+            
+            <!-- Notifications -->
+            <button class="header-action-btn" id="notificationsBtn" aria-label="Notifications">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/>
+                    <path d="M13.73 21a2 2 0 0 1-3.46 0"/>
+                </svg>
+                <span class="notification-dot">5</span>
+            </button>
+            
+            <!-- Theme Toggle -->
+            {% include 'components/_theme_toggle.html' %}
+            
+            <!-- Profile Menu -->
+            <div class="header-profile">
+                <button class="header-profile-btn" id="profileMenuBtn" aria-label="Profile menu" aria-expanded="false">
+                    <div class="header-avatar">MK</div>
+                    <svg class="profile-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M6 9L12 15L18 9"/>
+                    </svg>
+                </button>
+                
+                <!-- Profile Dropdown -->
+                <div class="profile-dropdown" id="profileDropdown" role="menu">
+                    <div class="profile-dropdown-header">
+                        <div class="profile-dropdown-avatar">MK</div>
+                        <div class="profile-dropdown-info">
+                            <span class="profile-dropdown-name">Metse Kgatla</span>
+                            <span class="profile-dropdown-email">metse@novexium.com</span>
+                            <span class="profile-dropdown-plan">Professional Plan</span>
+                        </div>
+                    </div>
+                    <div class="profile-dropdown-divider"></div>
+                    <a href="/profile" class="profile-dropdown-item" role="menuitem">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+                            <circle cx="12" cy="7" r="4"/>
+                        </svg>
+                        My Profile
+                    </a>
+                    <a href="/settings" class="profile-dropdown-item" role="menuitem">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/>
+                            <circle cx="12" cy="12" r="3"/>
+                        </svg>
+                        Settings
+                    </a>
+                    <a href="/billing" class="profile-dropdown-item" role="menuitem">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="2" y="5" width="20" height="14" rx="2"/>
+                            <line x1="2" y1="10" x2="22" y2="10"/>
+                            <path d="M7 15h.01M12 15h.01M17 15h.01"/>
+                        </svg>
+                        Billing
+                    </a>
+                    <div class="profile-dropdown-divider"></div>
+                    <form method="POST" action="/auth/logout">
+                        <button type="submit" class="profile-dropdown-item logout" role="menuitem">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/>
+                                <polyline points="16 17 21 12 16 7"/>
+                                <line x1="21" y1="12" x2="9" y2="12"/>
+                            </svg>
+                            Log Out
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
