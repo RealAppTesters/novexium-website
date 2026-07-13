@@ -1,0 +1,78 @@
+<div class="connect-preview">
+    <div class="connect-preview-header">
+        <div class="connect-preview-badge">✓ App found</div>
+        <h2 class="connect-preview-title">Everything looks good</h2>
+        <p class="connect-preview-subtitle">
+            We found your app. Review the details below and connect it to Novexium.
+        </p>
+    </div>
+    
+    <div class="connect-preview-card">
+        <div class="connect-preview-app">
+            <div class="connect-preview-app-icon">
+                <img src="{{ app_icon }}" alt="{{ app_name }}" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%2248%22 height=%2248%22><rect width=%2248%22 height=%2248%22 rx=%228%22 fill=%22%234F46E5%22/><text x=%2224%22 y=%2232%22 text-anchor=%22middle%22 fill=%22white%22 font-size=%2220%22 font-weight=%22600%22>{{ app_name[0] }}</text></svg>'">
+            </div>
+            <div class="connect-preview-app-info">
+                <h3 class="connect-preview-app-name">{{ app_name }}</h3>
+                <span class="connect-preview-app-developer">{{ developer }}</span>
+                <div class="connect-preview-app-meta">
+                    <span class="connect-preview-platform-badge {{ store }}">
+                        {{ store|title }}
+                    </span>
+                    <span class="connect-preview-app-category">{{ category }}</span>
+                    <span class="connect-preview-app-rating">⭐ {{ rating }} ({{ review_count }} reviews)</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="connect-preview-details">
+            <div class="connect-preview-detail">
+                <span class="connect-preview-detail-label">Package Name</span>
+                <span class="connect-preview-detail-value">{{ package_name }}</span>
+            </div>
+            <div class="connect-preview-detail">
+                <span class="connect-preview-detail-label">Store URL</span>
+                <a href="{{ store_url }}" target="_blank" class="connect-preview-detail-link">{{ store_url|truncate(50) }}</a>
+            </div>
+            <div class="connect-preview-detail">
+                <span class="connect-preview-detail-label">Last Updated</span>
+                <span class="connect-preview-detail-value">{{ last_updated }}</span>
+            </div>
+            <div class="connect-preview-detail">
+                <span class="connect-preview-detail-label">Country</span>
+                <span class="connect-preview-detail-value">{{ country }}</span>
+            </div>
+        </div>
+        
+        <div class="connect-preview-screenshots">
+            <span class="connect-preview-screenshots-label">Screenshots ({{ screenshots|length }})</span>
+            <div class="connect-preview-screenshots-grid">
+                {% for screenshot in screenshots[:4] %}
+                    <div class="connect-preview-screenshot">
+                        <img src="{{ screenshot }}" alt="Screenshot {{ loop.index }}">
+                    </div>
+                {% endfor %}
+                {% if screenshots|length > 4 %}
+                    <div class="connect-preview-screenshot connect-preview-screenshot-more">
+                        +{{ screenshots|length - 4 }}
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+        
+        <div class="connect-preview-description">
+            <span class="connect-preview-description-label">Description</span>
+            <p class="connect-preview-description-text">{{ description|truncate(200) }}</p>
+        </div>
+    </div>
+    
+    <div class="connect-preview-actions">
+        <button type="button" class="btn-secondary" onclick="goBackToConnect()">Back</button>
+        <button type="button" class="btn-primary" onclick="connectApp()">
+            Connect App
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M5 12H19M19 12L13 6M19 12L13 18"/>
+            </svg>
+        </button>
+    </div>
+</div>
