@@ -1,0 +1,69 @@
+<div class="mobile-nav-overlay" id="mobileNav" role="dialog" aria-modal="true" aria-label="Mobile navigation">
+    <div class="mobile-nav">
+        <div class="mobile-nav-header">
+            <a href="/" class="mobile-logo" aria-label="Novexium Home">
+                <svg class="logo-icon" viewBox="0 0 32 32" fill="none">
+                    <rect width="32" height="32" rx="8" fill="#4F46E5"/>
+                    <path d="M8 24L16 8L24 24" stroke="white" stroke-width="2.5" stroke-linecap="round"/>
+                    <path d="M12 18L20 18" stroke="white" stroke-width="2.5" stroke-linecap="round"/>
+                </svg>
+                <span class="logo-text">Novexium</span>
+            </a>
+            <button class="mobile-nav-close" aria-label="Close menu">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M18 6L6 18M6 6L18 18"/>
+                </svg>
+            </button>
+        </div>
+        
+        <nav class="mobile-nav-body">
+            <ul class="mobile-nav-list">
+                <li class="mobile-nav-item">
+                    <a href="/features" class="mobile-nav-link">Features</a>
+                </li>
+                <li class="mobile-nav-item mobile-accordion">
+                    <button class="mobile-nav-link mobile-accordion-trigger" aria-expanded="false">
+                        Solutions
+                        <svg class="accordion-arrow" width="16" height="16" viewBox="0 0 16 16">
+                            <path d="M4 6L8 10L12 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                        </svg>
+                    </button>
+                    <div class="mobile-accordion-content">
+                        <a href="/solutions/aso" class="mobile-sub-link">ASO Optimization</a>
+                        <a href="/solutions/analytics" class="mobile-sub-link">Analytics</a>
+                        <a href="/solutions/competitors" class="mobile-sub-link">Competitor Tracking</a>
+                    </div>
+                </li>
+                <li class="mobile-nav-item">
+                    <a href="/pricing" class="mobile-nav-link">Pricing</a>
+                </li>
+                <li class="mobile-nav-item mobile-accordion">
+                    <button class="mobile-nav-link mobile-accordion-trigger" aria-expanded="false">
+                        Resources
+                        <svg class="accordion-arrow" width="16" height="16" viewBox="0 0 16 16">
+                            <path d="M4 6L8 10L12 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                        </svg>
+                    </button>
+                    <div class="mobile-accordion-content">
+                        <a href="/blog" class="mobile-sub-link">Blog</a>
+                        <a href="/guides" class="mobile-sub-link">Guides</a>
+                        <a href="/documentation" class="mobile-sub-link">Documentation</a>
+                    </div>
+                </li>
+                <li class="mobile-nav-item">
+                    <a href="/contact" class="mobile-nav-link">Contact</a>
+                </li>
+            </ul>
+        </nav>
+        
+        <div class="mobile-nav-footer">
+            <div class="mobile-auth">
+                <a href="/auth/login" class="btn-secondary btn-block">Log in</a>
+                <a href="/auth/register" class="btn-primary btn-block">Start Free Trial</a>
+            </div>
+            <div class="mobile-theme-toggle">
+                {% include 'components/_theme_toggle.html' %}
+            </div>
+        </div>
+    </div>
+</div>
