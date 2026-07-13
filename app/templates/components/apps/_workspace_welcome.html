@@ -1,0 +1,376 @@
+<div class="workspace-welcome" id="workspaceWelcome">
+    <!-- Welcome Panel -->
+    <div class="workspace-welcome-panel">
+        <div class="workspace-welcome-header">
+            <div class="workspace-welcome-icon">
+                <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="#22C55E" stroke-width="1.5">
+                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                    <polyline points="9 12 11 14 15 10"/>
+                </svg>
+            </div>
+            <h1 class="workspace-welcome-title">Welcome to Novexium</h1>
+            <p class="workspace-welcome-subtitle">
+                Your app has been analyzed. Here are your first opportunities.
+            </p>
+        </div>
+        
+        <!-- Score Overview -->
+        <div class="workspace-scores">
+            <div class="workspace-score">
+                <span class="workspace-score-label">Overall Growth Score</span>
+                <div class="workspace-score-value">
+                    81
+                    <span class="workspace-score-change positive">↑ 0 (baseline)</span>
+                </div>
+                <div class="workspace-score-bar">
+                    <div class="workspace-score-fill" style="width: 81%"></div>
+                </div>
+            </div>
+            
+            <div class="workspace-score">
+                <span class="workspace-score-label">Visibility Score</span>
+                <div class="workspace-score-value">
+                    74
+                    <span class="workspace-score-change neutral">—</span>
+                </div>
+                <div class="workspace-score-bar">
+                    <div class="workspace-score-fill" style="width: 74%"></div>
+                </div>
+            </div>
+            
+            <div class="workspace-score">
+                <span class="workspace-score-label">Store Health</span>
+                <div class="workspace-score-value">
+                    88
+                    <span class="workspace-score-change positive">↑</span>
+                </div>
+                <div class="workspace-score-bar">
+                    <div class="workspace-score-fill" style="width: 88%"></div>
+                </div>
+            </div>
+            
+            <div class="workspace-score">
+                <span class="workspace-score-label">Keyword Score</span>
+                <div class="workspace-score-value">
+                    65
+                    <span class="workspace-score-change negative">↓</span>
+                </div>
+                <div class="workspace-score-bar">
+                    <div class="workspace-score-fill" style="width: 65%"></div>
+                </div>
+            </div>
+            
+            <div class="workspace-score">
+                <span class="workspace-score-label">Creative Score</span>
+                <div class="workspace-score-value">
+                    72
+                    <span class="workspace-score-change neutral">—</span>
+                </div>
+                <div class="workspace-score-bar">
+                    <div class="workspace-score-fill" style="width: 72%"></div>
+                </div>
+            </div>
+            
+            <div class="workspace-score">
+                <span class="workspace-score-label">Review Score</span>
+                <div class="workspace-score-value">
+                    91
+                    <span class="workspace-score-change positive">↑</span>
+                </div>
+                <div class="workspace-score-bar">
+                    <div class="workspace-score-fill" style="width: 91%"></div>
+                </div>
+            </div>
+            
+            <div class="workspace-score">
+                <span class="workspace-score-label">Competitor Score</span>
+                <div class="workspace-score-value">
+                    56
+                    <span class="workspace-score-change negative">↓</span>
+                </div>
+                <div class="workspace-score-bar">
+                    <div class="workspace-score-fill" style="width: 56%"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Your Next Win -->
+    <div class="workspace-next-win">
+        <div class="workspace-next-win-badge">⚡ Your Next Win</div>
+        <div class="workspace-next-win-content">
+            <div class="workspace-next-win-info">
+                <h3 class="workspace-next-win-title">Rewrite your app title</h3>
+                <p class="workspace-next-win-description">
+                    Your current title is missing primary keywords. Updating it could significantly improve your discoverability.
+                </p>
+                <div class="workspace-next-win-metrics">
+                    <span class="workspace-next-win-impact">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#22C55E" stroke-width="2">
+                            <path d="M2 12L6 8L10 12L14 8L18 12L22 8"/>
+                            <path d="M2 16L6 12L10 16L14 12L18 16L22 12"/>
+                        </svg>
+                        +8% Visibility
+                    </span>
+                    <span class="workspace-next-win-time">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="10"/>
+                            <polyline points="12 6 12 12 16 14"/>
+                        </svg>
+                        10 minutes
+                    </span>
+                    <span class="workspace-next-win-difficulty">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="10"/>
+                            <path d="M8 8L16 16M8 16L16 8"/>
+                        </svg>
+                        Easy
+                    </span>
+                </div>
+            </div>
+            <div class="workspace-next-win-actions">
+                <button class="workspace-next-win-primary" onclick="startRecommendation()">
+                    Start Now
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M5 12H19M19 12L13 6M19 12L13 18"/>
+                    </svg>
+                </button>
+                <button class="workspace-next-win-secondary" onclick="viewBlueprint()">
+                    View Growth Blueprint
+                </button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Growth Blueprint -->
+    <div class="workspace-blueprint">
+        <div class="workspace-blueprint-header">
+            <h2 class="workspace-blueprint-title">Growth Blueprint</h2>
+            <p class="workspace-blueprint-subtitle">Your prioritized roadmap to growth</p>
+        </div>
+        
+        <div class="workspace-blueprint-list">
+            <div class="workspace-blueprint-item priority-1">
+                <div class="workspace-blueprint-item-status">
+                    <span class="workspace-blueprint-item-priority">Priority 1</span>
+                    <span class="workspace-blueprint-item-impact">+8% Visibility</span>
+                </div>
+                <div class="workspace-blueprint-item-content">
+                    <h4 class="workspace-blueprint-item-title">Rewrite app title</h4>
+                    <p class="workspace-blueprint-item-description">
+                        Add primary keywords to your title for better discoverability
+                    </p>
+                    <div class="workspace-blueprint-item-meta">
+                        <span class="workspace-blueprint-item-difficulty easy">Easy</span>
+                        <span class="workspace-blueprint-item-time">10 min</span>
+                    </div>
+                </div>
+                <button class="workspace-blueprint-item-action btn-primary btn-sm">Start</button>
+            </div>
+            
+            <div class="workspace-blueprint-item priority-2">
+                <div class="workspace-blueprint-item-status">
+                    <span class="workspace-blueprint-item-priority">Priority 2</span>
+                    <span class="workspace-blueprint-item-impact">+11% Conversion</span>
+                </div>
+                <div class="workspace-blueprint-item-content">
+                    <h4 class="workspace-blueprint-item-title">Replace Screenshot #1</h4>
+                    <p class="workspace-blueprint-item-description">
+                        Current screenshot isn't converting. Use a lifestyle shot showing your app in action.
+                    </p>
+                    <div class="workspace-blueprint-item-meta">
+                        <span class="workspace-blueprint-item-difficulty medium">Medium</span>
+                        <span class="workspace-blueprint-item-time">30 min</span>
+                    </div>
+                </div>
+                <button class="workspace-blueprint-item-action btn-secondary btn-sm">Start</button>
+            </div>
+            
+            <div class="workspace-blueprint-item priority-3">
+                <div class="workspace-blueprint-item-status">
+                    <span class="workspace-blueprint-item-priority">Priority 3</span>
+                    <span class="workspace-blueprint-item-impact">+6% Visibility</span>
+                </div>
+                <div class="workspace-blueprint-item-content">
+                    <h4 class="workspace-blueprint-item-title">Add 5 new keywords</h4>
+                    <p class="workspace-blueprint-item-description">
+                        Target high-volume keywords your competitors are missing
+                    </p>
+                    <div class="workspace-blueprint-item-meta">
+                        <span class="workspace-blueprint-item-difficulty easy">Easy</span>
+                        <span class="workspace-blueprint-item-time">15 min</span>
+                    </div>
+                </div>
+                <button class="workspace-blueprint-item-action btn-secondary btn-sm">Start</button>
+            </div>
+            
+            <div class="workspace-blueprint-item priority-4">
+                <div class="workspace-blueprint-item-status">
+                    <span class="workspace-blueprint-item-priority">Priority 4</span>
+                    <span class="workspace-blueprint-item-impact">Rating Improvement</span>
+                </div>
+                <div class="workspace-blueprint-item-content">
+                    <h4 class="workspace-blueprint-item-title">Reply to recent reviews</h4>
+                    <p class="workspace-blueprint-item-description">
+                        Respond to recent 1-star reviews to show you value user feedback
+                    </p>
+                    <div class="workspace-blueprint-item-meta">
+                        <span class="workspace-blueprint-item-difficulty easy">Easy</span>
+                        <span class="workspace-blueprint-item-time">5 min</span>
+                    </div>
+                </div>
+                <button class="workspace-blueprint-item-action btn-secondary btn-sm">Start</button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Opportunity Finder -->
+    <div class="workspace-opportunities">
+        <div class="workspace-opportunities-header">
+            <h2 class="workspace-opportunities-title">New Opportunities</h2>
+            <p class="workspace-opportunities-subtitle">Discover untapped growth opportunities</p>
+        </div>
+        
+        <div class="workspace-opportunities-grid">
+            <div class="workspace-opportunity">
+                <div class="workspace-opportunity-badge">Competitor</div>
+                <div class="workspace-opportunity-content">
+                    <h4 class="workspace-opportunity-title">Competitor lost ranking for "photo editing"</h4>
+                    <p class="workspace-opportunity-description">
+                        Your main competitor dropped 12 positions. Quick win opportunity.
+                    </p>
+                    <div class="workspace-opportunity-metrics">
+                        <span class="workspace-opportunity-score">92</span>
+                        <span class="workspace-opportunity-impact">High Impact</span>
+                    </div>
+                </div>
+                <button class="workspace-opportunity-action btn-primary btn-sm">View Details</button>
+            </div>
+            
+            <div class="workspace-opportunity">
+                <div class="workspace-opportunity-badge">Trending</div>
+                <div class="workspace-opportunity-content">
+                    <h4 class="workspace-opportunity-title">"Fitness tracker" keyword trending</h4>
+                    <p class="workspace-opportunity-description">
+                        Search volume increased 340% in the last 30 days. Low competition.
+                    </p>
+                    <div class="workspace-opportunity-metrics">
+                        <span class="workspace-opportunity-score">87</span>
+                        <span class="workspace-opportunity-impact">High Impact</span>
+                    </div>
+                </div>
+                <button class="workspace-opportunity-action btn-primary btn-sm">View Details</button>
+            </div>
+            
+            <div class="workspace-opportunity">
+                <div class="workspace-opportunity-badge">Review</div>
+                <div class="workspace-opportunity-content">
+                    <h4 class="workspace-opportunity-title">Users requesting dark mode</h4>
+                    <p class="workspace-opportunity-description">
+                        47 reviews mention dark mode. Could improve rating by 0.5 stars.
+                    </p>
+                    <div class="workspace-opportunity-metrics">
+                        <span class="workspace-opportunity-score">76</span>
+                        <span class="workspace-opportunity-impact">Medium Impact</span>
+                    </div>
+                </div>
+                <button class="workspace-opportunity-action btn-secondary btn-sm">View Details</button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Benchmark -->
+    <div class="workspace-benchmark">
+        <div class="workspace-benchmark-header">
+            <h2 class="workspace-benchmark-title">How you compare</h2>
+            <p class="workspace-benchmark-subtitle">Your app vs similar apps in your category</p>
+        </div>
+        
+        <div class="workspace-benchmark-content">
+            <div class="workspace-benchmark-stats">
+                <div class="workspace-benchmark-stat">
+                    <span class="workspace-benchmark-stat-label">Your Score</span>
+                    <span class="workspace-benchmark-stat-value">81</span>
+                </div>
+                <div class="workspace-benchmark-stat">
+                    <span class="workspace-benchmark-stat-label">Category Average</span>
+                    <span class="workspace-benchmark-stat-value">68</span>
+                </div>
+                <div class="workspace-benchmark-stat">
+                    <span class="workspace-benchmark-stat-label">Top 10%</span>
+                    <span class="workspace-benchmark-stat-value">89</span>
+                </div>
+                <div class="workspace-benchmark-stat">
+                    <span class="workspace-benchmark-stat-label">Top 1%</span>
+                    <span class="workspace-benchmark-stat-value">94</span>
+                </div>
+            </div>
+            
+            <div class="workspace-benchmark-bar">
+                <div class="workspace-benchmark-bar-fill" style="width: 81%"></div>
+                <div class="workspace-benchmark-bar-marker" style="left: 68%">
+                    <span class="workspace-benchmark-bar-label">Average</span>
+                </div>
+                <div class="workspace-benchmark-bar-marker" style="left: 89%">
+                    <span class="workspace-benchmark-bar-label">Top 10%</span>
+                </div>
+            </div>
+            
+            <div class="workspace-benchmark-message">
+                <p>
+                    You're performing better than <strong>72%</strong> of apps in your category.
+                    You're only <strong>8 points</strong> away from the top 10%.
+                </p>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Potential Score -->
+    <div class="workspace-potential">
+        <div class="workspace-potential-header">
+            <h2 class="workspace-potential-title">Your Potential</h2>
+            <p class="workspace-potential-subtitle">How much you can grow with our recommendations</p>
+        </div>
+        
+        <div class="workspace-potential-content">
+            <div class="workspace-potential-current">
+                <span class="workspace-potential-label">Current Score</span>
+                <span class="workspace-potential-value">81</span>
+            </div>
+            
+            <div class="workspace-potential-arrow">
+                <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#22C55E" stroke-width="2">
+                    <path d="M5 12H19M19 12L13 6M19 12L13 18"/>
+                </svg>
+            </div>
+            
+            <div class="workspace-potential-target">
+                <span class="workspace-potential-label">Potential Score</span>
+                <span class="workspace-potential-value">94</span>
+                <span class="workspace-potential-change">+13</span>
+            </div>
+        </div>
+        
+        <div class="workspace-potential-details">
+            <div class="workspace-potential-detail">
+                <span class="workspace-potential-detail-label">Estimated Difficulty</span>
+                <span class="workspace-potential-detail-value">Medium</span>
+            </div>
+            <div class="workspace-potential-detail">
+                <span class="workspace-potential-detail-label">Estimated Time</span>
+                <span class="workspace-potential-detail-value">2–3 hours</span>
+            </div>
+            <div class="workspace-potential-detail">
+                <span class="workspace-potential-detail-label">Recommendations</span>
+                <span class="workspace-potential-detail-value">12</span>
+            </div>
+        </div>
+        
+        <div class="workspace-potential-progress">
+            <div class="workspace-potential-progress-bar">
+                <div class="workspace-potential-progress-fill" style="width: 0%"></div>
+            </div>
+            <span class="workspace-potential-progress-text">0% of potential unlocked</span>
+        </div>
+    </div>
+</div>
