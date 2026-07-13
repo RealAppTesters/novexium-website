@@ -1,72 +1,3 @@
-# Novexium Website
-
-Production-ready Python web application built with FastAPI, PostgreSQL, Redis, and Docker.
-
-## Architecture
-
-- **FastAPI** - Modern web framework
-- **Jinja2** - Template engine
-- **Tailwind CSS** - Styling
-- **PostgreSQL** - Database
-- **Redis** - Cache & session management
-- **Celery** - Background jobs
-- **Docker** - Containerization
-- **Kubernetes** - Orchestration
-
-
-## Getting Started
-
-```bash
-# Install dependencies
-pip install -r requirements.txt
-
-# Run development server
-uvicorn app.main:app --reload
-
-
-### Create `docker-compose.yml`:
-```bash
-cat > docker-compose.yml << 'EOF'
-version: '3.8'
-
-services:
-  app:
-    build:
-      context: .
-      dockerfile: docker/app/Dockerfile
-    ports:
-      - "8000:8000"
-    environment:
-      - DATABASE_URL=postgresql://postgres:postgres@db:5432/novexium
-      - REDIS_URL=redis://redis:6379/0
-    depends_on:
-      - db
-      - redis
-    volumes:
-      - ./app:/app
-    command: uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
-
-  db:
-    image: postgres:15-alpine
-    environment:
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=postgres
-      - POSTGRES_DB=novexium
-    ports:
-      - "5432:5432"
-    volumes:
-      - postgres_data:/var/lib/postgresql/data
-
-  redis:
-    image: redis:7-alpine
-    ports:
-      - "6379:6379"
-    volumes:
-      - redis_data:/data
-
-volumes:
-  postgres_data:
-  redis_data:
 # Novexium Layout & Navigation System
 
 ## Overview
@@ -74,3 +5,121 @@ volumes:
 This is the complete global layout system for Novexium. Every page in the application inherits from these templates.
 
 ## File Structure
+templates/
+├── base/
+│ ├── base.html # Root template with all global elements
+│ ├── public.html # Public-facing layout
+│ └── dashboard.html # Dashboard layout
+├── layouts/
+│ ├── _header.html # Top navigation
+│ ├── _footer.html # Global footer
+│ └── _sidebar.html # Dashboard sidebar
+├── components/
+│ ├── _buttons.html # All button variants
+│ ├── _cards.html # Card components
+│ ├── _badges.html # Badge variants
+│ ├── _alerts.html # Alert messages
+│ ├── _toasts.html # Toast notifications
+│ ├── _search.html # Search overlay
+│ └── _theme_toggle.html # Theme switcher
+└── errors/
+├── 404.html
+├── 500.html
+└── 403.html
+
+text
+
+## How to Use
+
+### Extend the Base Template
+
+```html
+{% extends "base/public.html" %}
+
+{% block page_content %}
+    <!-- Your content here -->
+{% endblock %}
+Available Blocks
+Block	Description
+title	Page title
+description	Meta description
+og_title	Open Graph title
+og_description	Open Graph description
+page_content	Main page content (public)
+dashboard_content	Dashboard content
+extra_css	Additional CSS
+extra_js	Additional JavaScript
+Components
+All components are available as partials:
+
+html
+{% include 'components/_buttons.html' %}
+{% include 'components/_cards.html' %}
+{% include 'components/_badges.html' %}
+{% include 'components/_alerts.html' %}
+JavaScript
+Global JavaScript functions:
+
+javascript
+// Show notification
+showNotification('Message', 'success|error|warning|info');
+
+// Show toast
+showToast('Message', 'success|error|warning|info');
+
+// Theme management
+window.themeManager.toggle();
+Responsive Breakpoints
+Breakpoint	Width
+Mobile	< 640px
+Tablet	640px - 768px
+Laptop	768px - 1024px
+Desktop	1024px - 1280px
+Wide	> 1280px
+Accessibility
+Keyboard navigable
+
+Screen reader support
+
+Focus indicators
+
+ARIA labels
+
+Semantic HTML
+
+Color contrast compliant
+
+Performance
+Fonts preloaded
+
+CSS optimized
+
+JavaScript modular
+
+Lazy loading ready
+
+No render-blocking resources
+
+text
+
+---
+
+## ✅ Summary
+
+You now have a complete, production-ready global layout system for Novexium:
+
+- ✅ **Base Layout** with SEO, OG tags, and global elements
+- ✅ **Public Layout** for marketing pages
+- ✅ **Dashboard Layout** for authenticated users
+- ✅ **Premium Navigation** with sticky behavior
+- ✅ **Mobile Navigation** with smooth transitions
+- ✅ **Mega Menus** for solutions and resources
+- ✅ **Global Footer** with newsletter and social links
+- ✅ **Search Overlay** with keyboard shortcuts
+- ✅ **Theme Switcher** with preference persistence
+- ✅ **Notification System** with toasts and alerts
+- ✅ **Reusable Components** (buttons, cards, badges, etc.)
+- ✅ **Error Pages** (404, 500, 403)
+- ✅ **Responsive Design** for all devices
+- ✅ **Accessibility** support
+- ✅ **Performance** optimized
