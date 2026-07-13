@@ -1,0 +1,31 @@
+<section class="dashboard-welcome">
+    <div class="welcome-content">
+        <div class="welcome-text">
+            <h1 class="welcome-title">
+                Good {{ time_of_day }}, {{ user.full_name }}
+                <span class="welcome-wave">👋</span>
+            </h1>
+            <p class="welcome-subtitle">
+                Here's what's happening with your apps today.
+            </p>
+        </div>
+        <div class="welcome-stats">
+            <div class="welcome-stat">
+                <span class="welcome-stat-label">Current Date</span>
+                <span class="welcome-stat-value">{{ current_date }}</span>
+            </div>
+            <div class="welcome-stat">
+                <span class="welcome-stat-label">Subscription</span>
+                <span class="welcome-stat-value welcome-stat-badge">{{ user.subscription_plan|title }}</span>
+            </div>
+            <div class="welcome-stat">
+                <span class="welcome-stat-label">Apps Tracked</span>
+                <span class="welcome-stat-value">{{ app_count }}</span>
+            </div>
+            <div class="welcome-stat">
+                <span class="welcome-stat-label">Trial Days Left</span>
+                <span class="welcome-stat-value welcome-stat-highlight">{{ trial_days_left }}</span>
+            </div>
+        </div>
+    </div>
+</section>
