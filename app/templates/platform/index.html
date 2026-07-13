@@ -1,0 +1,49 @@
+{% extends "base/public.html" %}
+
+{% block title %}Platform — Everything You Need to Grow Your App | Novexium{% endblock %}
+
+{% block description %}
+Novexium brings every part of App Store Optimization together in one platform. Stop guessing, start improving, and grow with confidence.
+{% endblock %}
+
+{% block og_title %}Platform — Everything You Need to Grow Your App{% endblock %}
+{% block og_description %}Novexium brings every part of App Store Optimization together in one platform.{% endblock %}
+
+{% block page_content %}
+    <!-- Hero -->
+    {% include 'components/platform/_platform_hero.html' %}
+    
+    <!-- Trust Section -->
+    {% include 'components/platform/_platform_trust.html' %}
+    
+    <!-- Product Tour Modules -->
+    {% include 'components/platform/_platform_modules.html' %}
+    
+    <!-- Platform Advantages -->
+    {% include 'components/platform/_platform_advantages.html' %}
+    
+    <!-- Your Next Win -->
+    {% include 'components/platform/_platform_next_win.html' %}
+    
+    <!-- Before & After Simulator -->
+    {% include 'components/platform/_platform_simulator.html' %}
+    
+    <!-- Growth Missions -->
+    {% include 'components/platform/_platform_missions.html' %}
+    
+    <!-- Platform Comparison -->
+    {% include 'components/platform/_platform_comparison.html' %}
+    
+    <!-- Testimonials -->
+    {% include 'components/platform/_platform_testimonials.html' %}
+    
+    <!-- FAQ -->
+    {% include 'components/platform/_platform_faq.html' %}
+    
+    <!-- Final CTA -->
+    {% include 'components/platform/_platform_cta.html' %}
+{% endblock %}
+
+{% block extra_js %}
+<script src="{{ url_for('static', path='js/platform.js') }}"></script>
+{% endblock %}
