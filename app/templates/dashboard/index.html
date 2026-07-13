@@ -1,0 +1,46 @@
+{% extends "base/dashboard.html" %}
+
+{% block dashboard_content %}
+<div class="dashboard-content">
+    <!-- Welcome Section -->
+    {% include 'components/dashboard/_welcome.html' %}
+    
+    <!-- Quick Actions -->
+    {% include 'components/dashboard/_quick_actions.html' %}
+    
+    <!-- Overview Cards -->
+    {% include 'components/dashboard/_overview_cards.html' %}
+    
+    <!-- Charts Row -->
+    {% include 'components/dashboard/_charts.html' %}
+    
+    <!-- Main Dashboard Grid -->
+    <div class="dashboard-grid">
+        <!-- Left Column -->
+        <div class="dashboard-grid-left">
+            <!-- Growth Blueprint -->
+            {% include 'components/dashboard/_growth_blueprint.html' %}
+            
+            <!-- Opportunity Finder -->
+            {% include 'components/dashboard/_opportunity_finder.html' %}
+            
+            <!-- Growth Missions -->
+            {% include 'components/dashboard/_growth_missions.html' %}
+        </div>
+        
+        <!-- Right Column -->
+        <div class="dashboard-grid-right">
+            <!-- Before & After Simulator -->
+            {% include 'components/dashboard/_before_after.html' %}
+            
+            <!-- Recent Activity -->
+            {% include 'components/dashboard/_recent_activity.html' %}
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block dashboard_right_sidebar %}
+    <!-- Notifications Panel -->
+    {% include 'components/dashboard/_notifications.html' %}
+{% endblock %}
