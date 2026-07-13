@@ -1,0 +1,28 @@
+{% extends "base/public.html" %}
+
+{% block title %}Check Your Email — Novexium{% endblock %}
+
+{% block page_content %}
+<div class="auth-page auth-small">
+    <div class="auth-container">
+        <div class="auth-success">
+            <div class="auth-success-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/>
+                </svg>
+            </div>
+            <h1 class="auth-success-title">Check your email</h1>
+            <p class="auth-success-text">
+                We've sent a verification link to your email address. Click the link to verify your account.
+            </p>
+            <div class="auth-success-actions">
+                <a href="/auth/login" class="btn-primary btn-block">Return to Login</a>
+                <form method="POST" action="/auth/verify/resend">
+                    <input type="hidden" name="email" value="">
+                    <button type="submit" class="btn-secondary btn-block">Resend Verification Email</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
