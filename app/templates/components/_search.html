@@ -1,0 +1,99 @@
+<div class="search-overlay" id="searchOverlay" role="dialog" aria-label="Global search">
+    <div class="search-modal">
+        <div class="search-header">
+            <svg class="search-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="11" cy="11" r="8"/>
+                <path d="M21 21L17 17"/>
+            </svg>
+            <input 
+                type="text" 
+                class="search-input" 
+                placeholder="Search documentation, features, and more..."
+                id="searchInput"
+                autocomplete="off"
+                aria-label="Search"
+            >
+            <div class="search-shortcuts">
+                <kbd>Esc</kbd>
+                <span>to close</span>
+            </div>
+        </div>
+        
+        <div class="search-body">
+            <!-- Recent Searches -->
+            <div class="search-section" id="recentSearches">
+                <h4 class="search-section-title">Recent Searches</h4>
+                <div class="search-items">
+                    <div class="search-item">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="4 7 4 4 20 4 20 7"/>
+                            <line x1="4" y1="10" x2="20" y2="10"/>
+                            <polyline points="4 14 4 20 20 20 20 14"/>
+                        </svg>
+                        <span>ASO keyword research</span>
+                    </div>
+                    <div class="search-item">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="4 7 4 4 20 4 20 7"/>
+                            <line x1="4" y1="10" x2="20" y2="10"/>
+                            <polyline points="4 14 4 20 20 20 20 14"/>
+                        </svg>
+                        <span>Competitor analysis report</span>
+                    </div>
+                    <div class="search-item">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="4 7 4 4 20 4 20 7"/>
+                            <line x1="4" y1="10" x2="20" y2="10"/>
+                            <polyline points="4 14 4 20 20 20 20 14"/>
+                        </svg>
+                        <span>App store optimization guide</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Quick Navigation -->
+            <div class="search-section">
+                <h4 class="search-section-title">Quick Navigation</h4>
+                <div class="search-items">
+                    <a href="/dashboard" class="search-item">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="3" y="3" width="7" height="7" rx="1"/>
+                            <rect x="14" y="3" width="7" height="7" rx="1"/>
+                            <rect x="3" y="14" width="7" height="7" rx="1"/>
+                            <rect x="14" y="14" width="7" height="7" rx="1"/>
+                        </svg>
+                        <span>Dashboard</span>
+                    </a>
+                    <a href="/apps" class="search-item">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="2" y="2" width="20" height="20" rx="4"/>
+                            <line x1="8" y1="2" x2="8" y2="22"/>
+                            <line x1="16" y1="2" x2="16" y2="22"/>
+                            <line x1="2" y1="8" x2="22" y2="8"/>
+                            <line x1="2" y1="16" x2="22" y2="16"/>
+                        </svg>
+                        <span>My Apps</span>
+                    </a>
+                    <a href="/analytics" class="search-item">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="18" y1="20" x2="18" y2="10"/>
+                            <line x1="12" y1="20" x2="12" y2="4"/>
+                            <line x1="6" y1="20" x2="6" y2="14"/>
+                        </svg>
+                        <span>Analytics</span>
+                    </a>
+                </div>
+            </div>
+            
+            <!-- No Results -->
+            <div class="search-empty" style="display: none;">
+                <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                    <circle cx="11" cy="11" r="8"/>
+                    <path d="M21 21L17 17"/>
+                </svg>
+                <h5>No results found</h5>
+                <p>Try adjusting your search terms</p>
+            </div>
+        </div>
+    </div>
+</div>
