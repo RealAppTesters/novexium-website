@@ -1,0 +1,73 @@
+.error-page {
+    min-height: 80vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--space-5);
+}
+
+.error-container {
+    text-align: center;
+    max-width: 480px;
+}
+
+.error-code {
+    font-size: 6rem;
+    font-weight: 800;
+    color: var(--brand-primary);
+    line-height: 1;
+    margin-bottom: var(--space-3);
+}
+
+.error-icon {
+    color: var(--accent-warning);
+    margin-bottom: var(--space-4);
+}
+
+.error-title {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: var(--space-3);
+}
+
+.error-description {
+    color: var(--text-secondary);
+    margin-bottom: var(--space-6);
+}
+
+.error-actions {
+    display: flex;
+    gap: var(--space-3);
+    justify-content: center;
+    margin-bottom: var(--space-8);
+}
+
+.error-suggestions {
+    padding-top: var(--space-6);
+    border-top: 1px solid var(--border-subtle);
+}
+
+.error-suggestions p {
+    color: var(--text-muted);
+    font-size: 0.875rem;
+    margin-bottom: var(--space-3);
+}
+
+.error-suggestions ul {
+    list-style: none;
+    display: flex;
+    gap: var(--space-4);
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.error-suggestions ul a {
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-size: 0.875rem;
+    transition: color 0.2s ease;
+}
+
+.error-suggestions ul a:hover {
+    color: var(--text-primary);
+}
