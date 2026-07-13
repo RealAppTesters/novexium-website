@@ -1,0 +1,65 @@
+{% extends "base/dashboard.html" %}
+
+{% block dashboard_content %}
+<div class="empty-state">
+    <div class="empty-state-content">
+        <div class="empty-state-illustration">
+            <svg width="120" height="120" viewBox="0 0 200 200" fill="none">
+                <circle cx="100" cy="100" r="80" fill="#111113"/>
+                <circle cx="100" cy="100" r="60" fill="#18181B"/>
+                <rect x="70" y="60" width="60" height="80" rx="8" fill="#4F46E5" opacity="0.2"/>
+                <rect x="80" y="70" width="40" height="10" rx="4" fill="#4F46E5" opacity="0.4"/>
+                <rect x="80" y="85" width="40" height="10" rx="4" fill="#4F46E5" opacity="0.3"/>
+                <rect x="80" y="100" width="40" height="10" rx="4" fill="#4F46E5" opacity="0.2"/>
+                <svg x="85" y="120" width="30" height="20">
+                    <rect x="0" y="0" width="10" height="20" rx="2" fill="#4F46E5" opacity="0.3"/>
+                    <rect x="12" y="0" width="10" height="20" rx="2" fill="#4F46E5" opacity="0.3"/>
+                    <rect x="24" y="0" width="10" height="20" rx="2" fill="#4F46E5" opacity="0.3"/>
+                </svg>
+                <circle cx="100" cy="55" r="8" fill="#4F46E5" opacity="0.6"/>
+            </svg>
+        </div>
+        
+        <h2 class="empty-state-title">Welcome to Novexium</h2>
+        <p class="empty-state-description">
+            Let's connect your first app to start discovering growth opportunities.
+        </p>
+        
+        <div class="empty-state-actions">
+            <button onclick="location.href='/apps/connect'" class="btn-primary btn-lg">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="2" y="2" width="20" height="20" rx="4"/>
+                    <line x1="8" y1="2" x2="8" y2="22"/>
+                    <line x1="16" y1="2" x2="16" y2="22"/>
+                    <line x1="2" y1="8" x2="22" y2="8"/>
+                    <line x1="2" y1="16" x2="22" y2="16"/>
+                </svg>
+                Connect Your First App
+            </button>
+            <button onclick="location.href='/audits/new'" class="btn-secondary btn-lg">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                    <line x1="12" y1="8" x2="12" y2="16"/>
+                    <line x1="8" y1="12" x2="16" y2="12"/>
+                </svg>
+                Run Your First Audit
+            </button>
+        </div>
+        
+        <div class="empty-state-features">
+            <div class="empty-state-feature">
+                <span class="empty-state-feature-icon">✓</span>
+                <span>2-min setup</span>
+            </div>
+            <div class="empty-state-feature">
+                <span class="empty-state-feature-icon">✓</span>
+                <span>No credit card</span>
+            </div>
+            <div class="empty-state-feature">
+                <span class="empty-state-feature-icon">✓</span>
+                <span>7-day trial</span>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
