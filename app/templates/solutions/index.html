@@ -1,0 +1,43 @@
+{% extends "base/public.html" %}
+
+{% block title %}Solutions for Every Stage of App Growth — Novexium{% endblock %}
+
+{% block description %}
+Whether you're launching your first app or managing a portfolio, Novexium gives you the tools to grow with confidence.
+{% endblock %}
+
+{% block og_title %}Solutions for Every Stage of App Growth{% endblock %}
+{% block og_description %}Whether you're launching your first app or managing a portfolio, Novexium gives you the tools to grow with confidence.{% endblock %}
+
+{% block page_content %}
+    <!-- Hero -->
+    {% include 'components/solutions/_solutions_hero.html' %}
+    
+    <!-- Who It's For -->
+    {% include 'components/solutions/_solutions_audiences.html' %}
+    
+    <!-- Common Challenges -->
+    {% include 'components/solutions/_solutions_challenges.html' %}
+    
+    <!-- Customer Journeys -->
+    {% include 'components/solutions/_solutions_journeys.html' %}
+    
+    <!-- Feature Matching -->
+    {% include 'components/solutions/_solutions_matching.html' %}
+    
+    <!-- Success Stories -->
+    {% include 'components/solutions/_solutions_stories.html' %}
+    
+    <!-- Why Novexium -->
+    {% include 'components/solutions/_solutions_why.html' %}
+    
+    <!-- FAQ -->
+    {% include 'components/solutions/_solutions_faq.html' %}
+    
+    <!-- Final CTA -->
+    {% include 'components/solutions/_solutions_cta.html' %}
+{% endblock %}
+
+{% block extra_js %}
+<script src="{{ url_for('static', path='js/solutions.js') }}"></script>
+{% endblock %}
