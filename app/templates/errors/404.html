@@ -1,0 +1,27 @@
+{% extends "base/public.html" %}
+
+{% block title %}Page Not Found — Novexium{% endblock %}
+
+{% block page_content %}
+<div class="error-page">
+    <div class="error-container">
+        <div class="error-code">404</div>
+        <h1 class="error-title">Page not found</h1>
+        <p class="error-description">
+            Sorry, we couldn't find the page you're looking for.
+        </p>
+        <div class="error-actions">
+            <a href="/" class="btn-primary">Go Home</a>
+            <a href="/contact" class="btn-secondary">Contact Support</a>
+        </div>
+        <div class="error-suggestions">
+            <p>You might want to check:</p>
+            <ul>
+                <li><a href="/features">Features</a></li>
+                <li><a href="/pricing">Pricing</a></li>
+                <li><a href="/documentation">Documentation</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+{% endblock %}
