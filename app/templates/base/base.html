@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en" class="{% if theme == 'dark' %}dark{% endif %}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    
+    <!-- SEO -->
+    <title>{% block title %}Novexium — Grow Your App with Confidence{% endblock %}</title>
+    <meta name="description" content="{% block description %}ASO intelligence platform for app developers. Optimize, track, and grow your app store presence.{% endblock %}">
+    <meta name="keywords" content="ASO, app store optimization, app growth, mobile apps, app marketing">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="{{ request.url }}">
+    
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="{{ request.url }}">
+    <meta property="og:title" content="{% block og_title %}Novexium — Grow Your App with Confidence{% endblock %}">
+    <meta property="og:description" content="{% block og_description %}ASO intelligence platform for app developers. Optimize, track, and grow your app store presence.{% endblock %}">
+    <meta property="og:image" content="{{ url_for('static', path='images/og-image.png') }}">
+    
+    <!-- Twitter Cards -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@novexium">
+    <meta name="twitter:title" content="{% block twitter_title %}Novexium — Grow Your App with Confidence{% endblock %}">
+    <meta name="twitter:description" content="{% block twitter_description %}ASO intelligence platform for app developers.{% endblock %}">
+    <meta name="twitter:image" content="{{ url_for('static', path='images/twitter-card.png') }}">
+    
+    <!-- Favicon -->
+    <link rel="icon" href="{{ url_for('static', path='images/logo/favicon.ico') }}">
+    <link rel="apple-touch-icon" href="{{ url_for('static', path='images/logo/apple-touch-icon.png') }}">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Theme -->
+    <script src="{{ url_for('static', path='js/theme.js') }}"></script>
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', path='css/tailwind.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', path='css/design-system.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', path='css/layout.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', path='css/components.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', path='css/animations.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', path='css/responsive.css') }}">
+    
+    <!-- Additional CSS -->
+    {% block extra_css %}{% endblock %}
+</head>
+<body>
+    <!-- Loading Overlay -->
+    <div id="loading-overlay" class="loading-overlay">
+        <div class="loading-spinner"></div>
+    </div>
+    
+    <!-- Flash Messages -->
+    <div id="flash-container">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="flash flash-{{ category }}" role="alert">
+                        <span>{{ message }}</span>
+                        <button class="flash-dismiss" aria-label="Dismiss">&times;</button>
+                    </div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+    </div>
+    
+    <!-- Toast Container -->
+    <div id="toast-container" class="toast-container"></div>
+    
+    <!-- Global Notification System -->
+    <div id="notification-container"></div>
+    
+    <!-- Main Content -->
+    <div id="app">
+        {% block content %}
+            <!-- Page content goes here -->
+        {% endblock %}
+    </div>
+    
+    <!-- Search Overlay -->
+    {% include 'components/_search.html' %}
+    
+    <!-- Modals Container -->
+    <div id="modals-container"></div>
+    
+    <!-- Global Scripts -->
+    <script src="{{ url_for('static', path='js/utils.js') }}"></script>
+    <script src="{{ url_for('static', path='js/app.js') }}"></script>
+    <script src="{{ url_for('static', path='js/navigation.js') }}"></script>
+    <script src="{{ url_for('static', path='js/search.js') }}"></script>
+    <script src="{{ url_for('static', path='js/notifications.js') }}"></script>
+    <script src="{{ url_for('static', path='js/modals.js') }}"></script>
+    <script src="{{ url_for('static', path='js/dropdowns.js') }}"></script>
+    <script src="{{ url_for('static', path='js/tabs.js') }}"></script>
+    <script src="{{ url_for('static', path='js/animations.js') }}"></script>
+    
+    <!-- Additional Scripts -->
+    {% block extra_js %}{% endblock %}
+</body>
+</html>
