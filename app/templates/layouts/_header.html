@@ -1,0 +1,76 @@
+<header class="header {% if is_scrolled %}header-scrolled{% endif %}" role="banner">
+    <nav class="header-nav" role="navigation" aria-label="Main navigation">
+        <!-- Logo -->
+        <div class="header-brand">
+            <a href="/" class="header-logo" aria-label="Novexium Home">
+                <svg class="logo-icon" viewBox="0 0 32 32" fill="none">
+                    <rect width="32" height="32" rx="8" fill="#4F46E5"/>
+                    <path d="M8 24L16 8L24 24" stroke="white" stroke-width="2.5" stroke-linecap="round"/>
+                    <path d="M12 18L20 18" stroke="white" stroke-width="2.5" stroke-linecap="round"/>
+                </svg>
+                <span class="logo-text">Novexium</span>
+            </a>
+        </div>
+        
+        <!-- Desktop Navigation -->
+        <ul class="header-links" role="menubar">
+            <li role="none">
+                <a href="/features" class="header-link" role="menuitem">Features</a>
+            </li>
+            <li role="none" class="dropdown-trigger">
+                <button class="header-link" role="menuitem" aria-haspopup="true" aria-expanded="false">
+                    Solutions
+                    <svg class="dropdown-arrow" width="12" height="12" viewBox="0 0 12 12">
+                        <path d="M2 4L6 8L10 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                    </svg>
+                </button>
+                <!-- Mega Menu -->
+                {% include 'components/_mega_menu_solutions.html' %}
+            </li>
+            <li role="none">
+                <a href="/pricing" class="header-link" role="menuitem">Pricing</a>
+            </li>
+            <li role="none" class="dropdown-trigger">
+                <button class="header-link" role="menuitem" aria-haspopup="true" aria-expanded="false">
+                    Resources
+                    <svg class="dropdown-arrow" width="12" height="12" viewBox="0 0 12 12">
+                        <path d="M2 4L6 8L10 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                    </svg>
+                </button>
+                <!-- Mega Menu -->
+                {% include 'components/_mega_menu_resources.html' %}
+            </li>
+            <li role="none">
+                <a href="/blog" class="header-link" role="menuitem">Blog</a>
+            </li>
+            <li role="none">
+                <a href="/contact" class="header-link" role="menuitem">Contact</a>
+            </li>
+        </ul>
+        
+        <!-- Header Actions -->
+        <div class="header-actions">
+            <button class="header-search-btn" aria-label="Search" title="Search (Ctrl+K)">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="11" cy="11" r="8"/>
+                    <path d="M21 21L17 17"/>
+                </svg>
+                <span class="search-shortcut">⌘K</span>
+            </button>
+            
+            <!-- Theme Toggle -->
+            {% include 'components/_theme_toggle.html' %}
+            
+            <!-- Auth Buttons -->
+            <a href="/auth/login" class="btn-ghost btn-sm">Log in</a>
+            <a href="/auth/register" class="btn-primary btn-sm">Start Free Trial</a>
+        </div>
+        
+        <!-- Mobile Menu Button -->
+        <button class="mobile-menu-toggle" aria-label="Toggle menu" aria-expanded="false">
+            <span class="hamburger-line"></span>
+            <span class="hamburger-line"></span>
+            <span class="hamburger-line"></span>
+        </button>
+    </nav>
+</header>
