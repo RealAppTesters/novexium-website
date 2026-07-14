@@ -1,0 +1,182 @@
+{% extends "base/dashboard.html" %}
+
+{% block title %}Rank Tracking — Novexium{% endblock %}
+
+{% block dashboard_content %}
+<div class="rank-page">
+    <!-- Header -->
+    <header class="rank-header">
+        <div class="rank-header-left">
+            <h1 class="rank-title">Rank Tracking</h1>
+            <p class="rank-subtitle">Monitor your keyword positions and visibility</p>
+        </div>
+        <div class="rank-header-right">
+            <div class="rank-controls">
+                <select class="rank-country-select" id="countrySelect">
+                    <option value="US" {% if country == 'US' %}selected{% endif %}>🇺🇸 United States</option>
+                    <option value="GB" {% if country == 'GB' %}selected{% endif %}>🇬🇧 United Kingdom</option>
+                    <option value="CA" {% if country == 'CA' %}selected{% endif %}>🇨🇦 Canada</option>
+                    <option value="AU" {% if country == 'AU' %}selected{% endif %}>🇦🇺 Australia</option>
+                </select>
+                <select class="rank-language-select" id="languageSelect">
+                    <option value="en" {% if language == 'en' %}selected{% endif %}>English</option>
+                    <option value="es" {% if language == 'es' %}selected{% endif %}>Español</option>
+                    <option value="fr" {% if language == 'fr' %}selected{% endif %}>Français</option>
+                </select>
+            </div>
+            <button class="btn-secondary" onclick="refreshRankings()">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M23 4v6h-6"/>
+                    <path d="M1 20v-6h6"/>
+                    <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/>
+                </svg>
+                Refresh
+            </button>
+        </div>
+    </header>
+    
+    <!-- Visibility Cards -->
+    <section class="rank-visibility">
+        <div class="visibility-cards">
+            <div class="visibility-card">
+                <div class="visibility-card-icon">📊</div>
+                <div class="visibility-card-content">
+                    <span class="visibility-card-label">Visibility Score</span>
+                    <span class="visibility-card-value">{{ visibility.visibility_score|round(1) }}</span>
+                    <span class="visibility-card-change {{ 'positive' if visibility.visibility_change > 0 else 'negative' }}">
+                        {{ '+' if visibility.visibility_change > 0 }}{{ visibility.visibility_change|round(1) }}
+                    </span>
+                </div>
+            </div>
+            
+            <div class="visibility-card">
+                <div class="visibility-card-icon">🔑</div>
+                <div class="visibility-card-content">
+                    <span class="visibility-card-label">Tracked Keywords</span>
+                    <span class="visibility-card-value">{{ visibility.tracked_keywords or 0 }}</span>
+                </div>
+            </div>
+            
+            <div class="visibility-card">
+                <div class="visibility-card-icon">🥇</div>
+                <div class="visibility-card-content">
+                    <span class="visibility-card-label">Top 3</span>
+                    <span class="visibility-card-value">{{ visibility.top_3_count or 0 }}</span>
+                </div>
+            </div>
+            
+            <div class="visibility-card">
+                <div class="visibility-card-icon">🏆</div>
+                <div class="visibility-card-content">
+                    <span class="visibility-card-label">Top 10</span>
+                    <span class="visibility-card-value">{{ visibility.top_10_count or 0 }}</span>
+                </div>
+            </div>
+            
+            <div class="visibility-card">
+                <div class="visibility-card-icon">📈</div>
+                <div class="visibility-card-content">
+                    <span class="visibility-card-label">Top 25</span>
+                    <span class="visibility-card-value">{{ visibility.top_25_count or 0 }}</span>
+                </div>
+            </div>
+            
+            <div class="visibility-card">
+                <div class="visibility-card-icon">👁️</div>
+                <div class="visibility-card-content">
+                    <span class="visibility-card-label">Organic Reach</span>
+                    <span class="visibility-card-value">{{ visibility.organic_reach_estimate or 0 }}</span>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Alerts -->
+    {% if alerts %}
+    <section class="rank-alerts">
+        <h2 class="rank-section-title">🔔 Alerts</h2>
+        <div class="alerts-list">
+            {% for alert in alerts[:5] %}
+            <div class="alert-item {{ alert.severity }}">
+                <div class="alert-icon">
+                    {% if alert.alert_type == 'top_10' %}🏆
+                    {% elif alert.alert_type == 'drop' %}📉
+                    {% elif alert.alert_type == 'improvement' %}📈
+                    {% else %}🔔{% endif %}
+                </div>
+                <div class="alert-content">
+                    <span class="alert-title">{{ alert.title }}</span>
+                    <span class="alert-description">{{ alert.description }}</span>
+                    <span class="alert-date">{{ alert.alert_date }}</span>
+                </div>
+                <button class="alert-acknowledge" onclick="acknowledgeAlert('{{ alert.id }}')">
+                    ✓
+                </button>
+            </div>
+            {% endfor %}
+        </div>
+    </section>
+    {% endif %}
+    
+    <!-- Rank Table -->
+    <section class="rank-table-section">
+        <h2 class="rank-section-title">📋 Keyword Rankings</h2>
+        <div class="rank-table-container">
+            {% if rankings %}
+            <table class="rank-table">
+                <thead>
+                    <tr>
+                        <th>Keyword</th>
+                        <th>Position</th>
+                        <th>Change</th>
+                        <th>Best</th>
+                        <th>Worst</th>
+                        <th>Visibility</th>
+                        <th>Trend</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for rank in rankings %}
+                    <tr>
+                        <td class="rank-keyword">
+                            <span class="rank-favorite" onclick="toggleFavorite('{{ rank.id }}')">
+                                {{ '★' if rank.is_favorite else '☆' }}
+                            </span>
+                            {{ rank.keyword }}
+                        </td>
+                        <td class="rank-position">#{{ rank.current_position or '—' }}</td>
+                        <td class="rank-change {{ 'positive' if rank.position_change and rank.position_change > 0 else 'negative' if rank.position_change and rank.position_change < 0 else 'neutral' }}">
+                            {{ '+' if rank.position_change and rank.position_change > 0 }}{{ rank.position_change or '—' }}
+                        </td>
+                        <td>#{{ rank.best_position or '—' }}</td>
+                        <td>#{{ rank.worst_position or '—' }}</td>
+                        <td>{{ rank.visibility_score|round(1) }}</td>
+                        <td>
+                            <span class="rank-trend {{ 'up' if rank.position_change and rank.position_change > 0 else 'down' if rank.position_change and rank.position_change < 0 else 'stable' }}">
+                                {{ '↗' if rank.position_change and rank.position_change > 0 else '↘' if rank.position_change and rank.position_change < 0 else '→' }}
+                            </span>
+                        </td>
+                        <td>
+                            <button class="rank-history-btn" onclick="viewHistory('{{ rank.keyword }}')">📊</button>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            {% else %}
+            <div class="rank-empty">
+                <div class="rank-empty-icon">📊</div>
+                <h3>No Ranking Data Yet</h3>
+                <p>Start tracking your keywords to see rankings here.</p>
+                <button class="btn-primary" onclick="startTracking()">Start Tracking</button>
+            </div>
+            {% endif %}
+        </div>
+    </section>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="{{ url_for('static', path='js/rank.js') }}"></script>
+{% endblock %}
