@@ -1,0 +1,120 @@
+{% extends "base/dashboard.html" %}
+
+{% block title %}Keyword Intelligence — Novexium{% endblock %}
+
+{% block dashboard_content %}
+<div class="keywords-page">
+    <!-- Header -->
+    <header class="keywords-header">
+        <div class="keywords-header-left">
+            <h1 class="keywords-title">Keyword Intelligence</h1>
+            <p class="keywords-subtitle">Discover, track, and optimize your app's keywords</p>
+        </div>
+        <div class="keywords-header-right">
+            <a href="{{ url_for('keywords_explorer', app_id=app_id) }}" class="btn-primary">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M21 21L15 15M17 9C17 13.4183 13.4183 17 9 17C4.58172 17 1 13.4183 1 9C1 4.58172 4.58172 1 9 1C13.4183 1 17 4.58172 17 9Z"/>
+                </svg>
+                Explore Keywords
+            </a>
+        </div>
+    </header>
+    
+    <!-- Dashboard Cards -->
+    <section class="keywords-dashboard">
+        <div class="keywords-cards">
+            <div class="keyword-card">
+                <div class="keyword-card-icon">🔑</div>
+                <div class="keyword-card-content">
+                    <span class="keyword-card-label">Tracked Keywords</span>
+                    <span class="keyword-card-value">{{ dashboard.tracked_count }}</span>
+                </div>
+            </div>
+            
+            <div class="keyword-card">
+                <div class="keyword-card-icon">📊</div>
+                <div class="keyword-card-content">
+                    <span class="keyword-card-label">Average Ranking</span>
+                    <span class="keyword-card-value">
+                        #{{ dashboard.avg_ranking or '—' }}
+                        {% if dashboard.ranking_change %}
+                            <span class="keyword-card-change {{ 'positive' if dashboard.ranking_change > 0 else 'negative' }}">
+                                {{ '+' if dashboard.ranking_change > 0 }}{{ dashboard.ranking_change }}
+                            </span>
+                        {% endif %}
+                    </span>
+                </div>
+            </div>
+            
+            <div class="keyword-card">
+                <div class="keyword-card-icon">🚀</div>
+                <div class="keyword-card-content">
+                    <span class="keyword-card-label">Opportunities</span>
+                    <span class="keyword-card-value">{{ dashboard.opportunities|length }}</span>
+                </div>
+            </div>
+            
+            <div class="keyword-card">
+                <div class="keyword-card-icon">⚡</div>
+                <div class="keyword-card-content">
+                    <span class="keyword-card-label">Quick Wins</span>
+                    <span class="keyword-card-value">{{ dashboard.quick_wins|length }}</span>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Quick Wins -->
+    {% if dashboard.quick_wins %}
+    <section class="keywords-quick-wins">
+        <h2 class="keywords-section-title">⚡ Quick Wins</h2>
+        <div class="quick-wins-grid">
+            {% for kw in dashboard.quick_wins %}
+            <div class="quick-win-card">
+                <div class="quick-win-content">
+                    <h4 class="quick-win-keyword">{{ kw.keyword }}</h4>
+                    <div class="quick-win-metrics">
+                        <span class="quick-win-metric">
+                            Volume: {{ kw.search_volume or '—' }}
+                        </span>
+                        <span class="quick-win-metric">
+                            Difficulty: {{ kw.difficulty or '—' }}
+                        </span>
+                        <span class="quick-win-metric">
+                            Opportunity: {{ kw.opportunity_score or '—' }}
+                        </span>
+                    </div>
+                </div>
+                <button class="quick-win-track" onclick="trackKeyword('{{ app_id }}', '{{ kw.id }}')">
+                    Track
+                </button>
+            </div>
+            {% endfor %}
+        </div>
+    </section>
+    {% endif %}
+    
+    <!-- Recent Changes -->
+    {% if dashboard.recent_changes %}
+    <section class="keywords-recent">
+        <h2 class="keywords-section-title">📈 Recent Changes</h2>
+        <div class="recent-changes-list">
+            {% for change in dashboard.recent_changes %}
+            <div class="recent-change-item">
+                <span class="recent-change-keyword">{{ change.keyword }}</span>
+                <span class="recent-change-ranking">#{{ change.current_ranking }}</span>
+                <span class="recent-change-delta {{ 'positive' if change.ranking_change and change.ranking_change > 0 else 'negative' }}">
+                    {{ '+' if change.ranking_change and change.ranking_change > 0 }}{{ change.ranking_change or 0 }}
+                </span>
+                <span class="recent-change-date">{{ change.date }}</span>
+            </div>
+            {% endfor %}
+        </div>
+    </section>
+    {% endif %}
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="{{ url_for('static', path='js/keywords.js') }}"></script>
+{% endblock %}
