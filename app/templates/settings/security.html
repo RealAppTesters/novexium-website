@@ -1,0 +1,111 @@
+{% extends "settings/index.html" %}
+
+{% block settings_content %}
+<div class="settings-section">
+    <h2 class="settings-section-title">Security</h2>
+    <p class="settings-section-description">Manage your account security settings</p>
+</div>
+
+<!-- Change Password -->
+<div class="settings-card">
+    <h3 class="settings-card-title">Change Password</h3>
+    <form class="settings-form" id="passwordForm" method="POST" action="/api/v1/settings/security/password">
+        <div class="settings-grid">
+            <div class="settings-field">
+                <label class="settings-label" for="current_password">Current Password</label>
+                <input type="password" id="current_password" name="current_password" class="settings-input" required>
+            </div>
+            <div class="settings-field">
+                <label class="settings-label" for="new_password">New Password</label>
+                <input type="password" id="new_password" name="new_password" class="settings-input" required>
+                <div class="password-strength" id="passwordStrength">
+                    <div class="password-strength-bar">
+                        <div class="password-strength-fill" style="width: 0%"></div>
+                    </div>
+                    <span class="password-strength-text">Enter a strong password</span>
+                </div>
+            </div>
+            <div class="settings-field">
+                <label class="settings-label" for="confirm_password">Confirm Password</label>
+                <input type="password" id="confirm_password" name="confirm_password" class="settings-input" required>
+            </div>
+        </div>
+        <button type="submit" class="btn-primary">Update Password</button>
+    </form>
+</div>
+
+<!-- Two-Factor Authentication -->
+<div class="settings-card">
+    <h3 class="settings-card-title">Two-Factor Authentication</h3>
+    <p class="settings-card-description">Add an extra layer of security to your account</p>
+    
+    {% if user.two_factor_enabled %}
+    <div class="settings-status success">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#22C55E" stroke-width="2">
+            <polyline points="20 6 9 17 4 12"/>
+        </svg>
+        <span>Two-factor authentication is enabled</span>
+    </div>
+    <button class="btn-secondary" onclick="disable2FA()">Disable 2FA</button>
+    {% else %}
+    <div class="settings-status info">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#3B82F6" stroke-width="2">
+            <circle cx="12" cy="12" r="10"/>
+            <line x1="12" y1="8" x2="12" y2="12"/>
+            <line x1="12" y1="16" x2="12.01" y2="16"/>
+        </svg>
+        <span>Two-factor authentication is disabled</span>
+    </div>
+    <button class="btn-primary" onclick="enable2FA()">Enable 2FA</button>
+    {% endif %}
+</div>
+
+<!-- Active Sessions -->
+<div class="settings-card">
+    <h3 class="settings-card-title">Active Sessions</h3>
+    <div class="sessions-list">
+        <div class="session-item current">
+            <div class="session-info">
+                <span class="session-device">Chrome on macOS</span>
+                <span class="session-location">New York, US</span>
+                <span class="session-time">Last active: Now</span>
+            </div>
+            <span class="session-badge">Current</span>
+        </div>
+        <div class="session-item">
+            <div class="session-info">
+                <span class="session-device">Safari on iPhone</span>
+                <span class="session-location">New York, US</span>
+                <span class="session-time">Last active: 2 hours ago</span>
+            </div>
+            <button class="session-revoke" onclick="revokeSession('session_id')">Revoke</button>
+        </div>
+    </div>
+    <button class="btn-danger" onclick="revokeAllSessions()">Sign Out All Devices</button>
+</div>
+
+<!-- Login History -->
+<div class="settings-card">
+    <h3 class="settings-card-title">Login History</h3>
+    <div class="login-history">
+        <div class="login-item">
+            <span class="login-device">Chrome on macOS</span>
+            <span class="login-location">New York, US</span>
+            <span class="login-time">Today, 14:32</span>
+            <span class="login-status success">Successful</span>
+        </div>
+        <div class="login-item">
+            <span class="login-device">Safari on iPhone</span>
+            <span class="login-location">New York, US</span>
+            <span class="login-time">Today, 12:15</span>
+            <span class="login-status success">Successful</span>
+        </div>
+        <div class="login-item">
+            <span class="login-device">Chrome on Windows</span>
+            <span class="login-location">Chicago, US</span>
+            <span class="login-time">Yesterday, 09:43</span>
+            <span class="login-status warning">Unrecognized</span>
+        </div>
+    </div>
+</div>
+{% endblock %}
