@@ -1,0 +1,81 @@
+{% extends "admin/base.html" %}
+
+{% block title %}User Management — Novexium{% endblock %}
+
+{% block admin_content %}
+<div class="admin-users">
+    <div class="admin-section-header">
+        <h2 class="admin-section-title">👥 User Management</h2>
+        <div class="admin-section-actions">
+            <input type="text" class="admin-search" placeholder="Search users..." id="userSearch">
+            <select class="admin-filter" id="userFilter">
+                <option value="all">All Users</option>
+                <option value="active">Active</option>
+                <option value="trial">Trial</option>
+                <option value="paid">Paid</option>
+                <option value="suspended">Suspended</option>
+            </select>
+            <button class="admin-export-btn" onclick="exportUsers()">Export</button>
+        </div>
+    </div>
+    
+    <div class="admin-table-container">
+        <table class="admin-table">
+            <thead>
+                <tr>
+                    <th>User</th>
+                    <th>Email</th>
+                    <th>Plan</th>
+                    <th>Apps</th>
+                    <th>Status</th>
+                    <th>Joined</th>
+                    <th>Last Login</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for user in users %}
+                <tr>
+                    <td>
+                        <div class="user-cell">
+                            <div class="user-avatar">{{ user.initials }}</div>
+                            <span class="user-name">{{ user.full_name }}</span>
+                        </div>
+                    </td>
+                    <td>{{ user.email }}</td>
+                    <td>
+                        <span class="plan-badge {{ user.plan }}">{{ user.plan|title }}</span>
+                    </td>
+                    <td>{{ user.app_count }}</td>
+                    <td>
+                        <span class="status-badge {{ user.status }}">
+                            {{ user.status|title }}
+                        </span>
+                    </td>
+                    <td>{{ user.created_at }}</td>
+                    <td>{{ user.last_login or 'Never' }}</td>
+                    <td>
+                        <div class="action-dropdown">
+                            <button class="action-btn" onclick="toggleDropdown('{{ user.id }}')">•••</button>
+                            <div class="dropdown-menu" id="dropdown-{{ user.id }}">
+                                <a href="#" onclick="viewUser('{{ user.id }}')">View Profile</a>
+                                <a href="#" onclick="impersonateUser('{{ user.id }}')">Impersonate</a>
+                                <a href="#" onclick="resetPassword('{{ user.id }}')">Reset Password</a>
+                                <a href="#" onclick="suspendUser('{{ user.id }}')" class="danger">Suspend</a>
+                                <a href="#" onclick="deleteUser('{{ user.id }}')" class="danger">Delete</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    
+    <div class="admin-pagination">
+        <button class="pagination-btn">Previous</button>
+        <span class="pagination-info">Page 1 of 10</span>
+        <button class="pagination-btn">Next</button>
+    </div>
+</div>
+{% endblock %}
