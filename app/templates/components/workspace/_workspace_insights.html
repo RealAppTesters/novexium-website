@@ -1,0 +1,36 @@
+<div class="workspace-insights-panel">
+    <div class="workspace-insights-header">
+        <h3 class="workspace-insights-title">Insights</h3>
+        <span class="workspace-insights-count">{{ insights|length }}</span>
+    </div>
+    
+    <div class="workspace-insights-list">
+        {% for insight in insights %}
+            <div class="workspace-insight {{ insight.type }}">
+                <div class="workspace-insight-icon">
+                    {% if insight.type == 'positive' %}
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#22C55E" stroke-width="2">
+                            <polyline points="20 6 9 17 4 12"/>
+                        </svg>
+                    {% elif insight.type == 'warning' %}
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#F59E0B" stroke-width="2">
+                            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                            <line x1="12" y1="8" x2="12" y2="12"/>
+                            <line x1="12" y1="16" x2="12.01" y2="16"/>
+                        </svg>
+                    {% else %}
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#3B82F6" stroke-width="2">
+                            <circle cx="12" cy="12" r="10"/>
+                            <line x1="12" y1="8" x2="12" y2="12"/>
+                            <line x1="12" y1="16" x2="12.01" y2="16"/>
+                        </svg>
+                    {% endif %}
+                </div>
+                <div class="workspace-insight-content">
+                    <p class="workspace-insight-text">{{ insight.text }}</p>
+                    <span class="workspace-insight-time">{{ insight.time }}</span>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
