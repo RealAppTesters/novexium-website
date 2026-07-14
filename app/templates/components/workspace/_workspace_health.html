@@ -1,0 +1,115 @@
+<div class="workspace-health-widgets">
+    <div class="workspace-health-header">
+        <h3 class="workspace-health-title">App Health</h3>
+    </div>
+    
+    <div class="workspace-health-grid">
+        <div class="workspace-health-item">
+            <div class="workspace-health-item-header">
+                <span class="workspace-health-item-label">Visibility</span>
+                <span class="workspace-health-item-score {{ 'high' if health.visibility >= 70 else 'medium' if health.visibility >= 50 else 'low' }}">
+                    {{ health.visibility }}%
+                </span>
+            </div>
+            <div class="workspace-health-item-bar">
+                <div class="workspace-health-item-fill" style="width: {{ health.visibility }}%"></div>
+            </div>
+            <div class="workspace-health-item-footer">
+                <span class="workspace-health-item-trend {{ 'positive' if health.visibility_trend > 0 else 'negative' }}">
+                    {{ '+' if health.visibility_trend > 0 }}{{ health.visibility_trend }}%
+                </span>
+                <span class="workspace-health-item-recommendation">{{ health.visibility_rec }}</span>
+            </div>
+        </div>
+        
+        <div class="workspace-health-item">
+            <div class="workspace-health-item-header">
+                <span class="workspace-health-item-label">Keywords</span>
+                <span class="workspace-health-item-score {{ 'high' if health.keywords >= 70 else 'medium' if health.keywords >= 50 else 'low' }}">
+                    {{ health.keywords }}%
+                </span>
+            </div>
+            <div class="workspace-health-item-bar">
+                <div class="workspace-health-item-fill" style="width: {{ health.keywords }}%"></div>
+            </div>
+            <div class="workspace-health-item-footer">
+                <span class="workspace-health-item-trend {{ 'positive' if health.keywords_trend > 0 else 'negative' }}">
+                    {{ '+' if health.keywords_trend > 0 }}{{ health.keywords_trend }}%
+                </span>
+                <span class="workspace-health-item-recommendation">{{ health.keywords_rec }}</span>
+            </div>
+        </div>
+        
+        <div class="workspace-health-item">
+            <div class="workspace-health-item-header">
+                <span class="workspace-health-item-label">Creatives</span>
+                <span class="workspace-health-item-score {{ 'high' if health.creatives >= 70 else 'medium' if health.creatives >= 50 else 'low' }}">
+                    {{ health.creatives }}%
+                </span>
+            </div>
+            <div class="workspace-health-item-bar">
+                <div class="workspace-health-item-fill" style="width: {{ health.creatives }}%"></div>
+            </div>
+            <div class="workspace-health-item-footer">
+                <span class="workspace-health-item-trend {{ 'positive' if health.creatives_trend > 0 else 'negative' }}">
+                    {{ '+' if health.creatives_trend > 0 }}{{ health.creatives_trend }}%
+                </span>
+                <span class="workspace-health-item-recommendation">{{ health.creatives_rec }}</span>
+            </div>
+        </div>
+        
+        <div class="workspace-health-item">
+            <div class="workspace-health-item-header">
+                <span class="workspace-health-item-label">Reviews</span>
+                <span class="workspace-health-item-score {{ 'high' if health.reviews >= 70 else 'medium' if health.reviews >= 50 else 'low' }}">
+                    {{ health.reviews }}%
+                </span>
+            </div>
+            <div class="workspace-health-item-bar">
+                <div class="workspace-health-item-fill" style="width: {{ health.reviews }}%"></div>
+            </div>
+            <div class="workspace-health-item-footer">
+                <span class="workspace-health-item-trend {{ 'positive' if health.reviews_trend > 0 else 'negative' }}">
+                    {{ '+' if health.reviews_trend > 0 }}{{ health.reviews_trend }}%
+                </span>
+                <span class="workspace-health-item-recommendation">{{ health.reviews_rec }}</span>
+            </div>
+        </div>
+        
+        <div class="workspace-health-item">
+            <div class="workspace-health-item-header">
+                <span class="workspace-health-item-label">Competitors</span>
+                <span class="workspace-health-item-score {{ 'high' if health.competitors >= 70 else 'medium' if health.competitors >= 50 else 'low' }}">
+                    {{ health.competitors }}%
+                </span>
+            </div>
+            <div class="workspace-health-item-bar">
+                <div class="workspace-health-item-fill" style="width: {{ health.competitors }}%"></div>
+            </div>
+            <div class="workspace-health-item-footer">
+                <span class="workspace-health-item-trend {{ 'positive' if health.competitors_trend > 0 else 'negative' }}">
+                    {{ '+' if health.competitors_trend > 0 }}{{ health.competitors_trend }}%
+                </span>
+                <span class="workspace-health-item-recommendation">{{ health.competitors_rec }}</span>
+            </div>
+        </div>
+        
+        <div class="workspace-health-item">
+            <div class="workspace-health-item-header">
+                <span class="workspace-health-item-label">Metadata</span>
+                <span class="workspace-health-item-score {{ 'high' if health.metadata >= 70 else 'medium' if health.metadata >= 50 else 'low' }}">
+                    {{ health.metadata }}%
+                </span>
+            </div>
+            <div class="workspace-health-item-bar">
+                <div class="workspace-health-item-fill" style="width: {{ health.metadata }}%"></div>
+            </div>
+            <div class="workspace-health-item-footer">
+                <span class="workspace-health-item-trend {{ 'positive' if health.metadata_trend > 0 else 'negative' }}">
+                    {{ '+' if health.metadata_trend > 0 }}{{ health.metadata_trend }}%
+                </span>
+                <span class="workspace-health-item-recommendation">{{ health.metadata_rec }}</span>
+            </div>
+        </div>
+    </div>
+</div>
