@@ -1,0 +1,79 @@
+{% extends "settings/index.html" %}
+
+{% block settings_content %}
+<form class="settings-form" id="profileForm" method="POST" action="/api/v1/settings/profile">
+    <div class="settings-section">
+        <h2 class="settings-section-title">Profile Information</h2>
+        <p class="settings-section-description">Update your personal information</p>
+        
+        <div class="settings-grid">
+            <div class="settings-field">
+                <label class="settings-label" for="avatar">Profile Photo</label>
+                <div class="avatar-upload">
+                    <div class="avatar-preview">
+                        <div class="avatar-placeholder">{{ user.initials }}</div>
+                    </div>
+                    <button type="button" class="avatar-upload-btn">Upload Photo</button>
+                </div>
+            </div>
+            
+            <div class="settings-field">
+                <label class="settings-label" for="full_name">Full Name</label>
+                <input type="text" id="full_name" name="full_name" class="settings-input" value="{{ user.full_name }}" required>
+            </div>
+            
+            <div class="settings-field">
+                <label class="settings-label" for="company">Company</label>
+                <input type="text" id="company" name="company" class="settings-input" value="{{ user.company or '' }}" placeholder="Your company name">
+            </div>
+            
+            <div class="settings-field">
+                <label class="settings-label" for="job_title">Job Title</label>
+                <input type="text" id="job_title" name="job_title" class="settings-input" value="{{ user.job_title or '' }}" placeholder="Your role">
+            </div>
+            
+            <div class="settings-field">
+                <label class="settings-label" for="email">Email Address</label>
+                <input type="email" id="email" name="email" class="settings-input" value="{{ user.email }}" required>
+                <span class="settings-hint">Verified ✓</span>
+            </div>
+            
+            <div class="settings-field">
+                <label class="settings-label" for="phone">Phone Number</label>
+                <input type="tel" id="phone" name="phone" class="settings-input" value="{{ user.phone or '' }}" placeholder="+1 (555) 000-0000">
+            </div>
+            
+            <div class="settings-field">
+                <label class="settings-label" for="country">Country</label>
+                <select id="country" name="country" class="settings-select">
+                    <option value="US" {% if user.country == 'US' %}selected{% endif %}>United States</option>
+                    <option value="GB" {% if user.country == 'GB' %}selected{% endif %}>United Kingdom</option>
+                    <option value="CA" {% if user.country == 'CA' %}selected{% endif %}>Canada</option>
+                    <option value="AU" {% if user.country == 'AU' %}selected{% endif %}>Australia</option>
+                </select>
+            </div>
+            
+            <div class="settings-field">
+                <label class="settings-label" for="timezone">Time Zone</label>
+                <select id="timezone" name="timezone" class="settings-select">
+                    <option value="America/New_York">Eastern Time (ET)</option>
+                    <option value="America/Chicago">Central Time (CT)</option>
+                    <option value="America/Denver">Mountain Time (MT)</option>
+                    <option value="America/Los_Angeles">Pacific Time (PT)</option>
+                    <option value="UTC">UTC</option>
+                </select>
+            </div>
+            
+            <div class="settings-field settings-field-full">
+                <label class="settings-label" for="bio">Bio</label>
+                <textarea id="bio" name="bio" class="settings-textarea" rows="3" placeholder="Tell us a bit about yourself...">{{ user.bio or '' }}</textarea>
+            </div>
+        </div>
+    </div>
+    
+    <div class="settings-actions">
+        <button type="submit" class="btn-primary">Save Changes</button>
+        <button type="reset" class="btn-secondary">Cancel</button>
+    </div>
+</form>
+{% endblock %}
