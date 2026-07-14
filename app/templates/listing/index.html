@@ -1,0 +1,57 @@
+{% extends "base/dashboard.html" %}
+
+{% block title %}Store Listing Optimizer — Novexium{% endblock %}
+
+{% block dashboard_content %}
+<div class="listing-workspace">
+    <!-- Header -->
+    <header class="listing-header">
+        <div class="listing-header-left">
+            <h1 class="listing-title">Store Listing Optimizer</h1>
+            <p class="listing-subtitle">Write, optimize, and preview your store listing</p>
+        </div>
+        <div class="listing-header-right">
+            <div class="listing-score-badge">
+                <span class="listing-score-label">Optimization Score</span>
+                <span class="listing-score-value">{{ listing.optimization_score if listing else 0 }}</span>
+            </div>
+            <button class="btn-secondary" onclick="saveDraft()">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/>
+                    <polyline points="17 21 17 13 7 13 7 21"/>
+                    <polyline points="7 3 7 8 15 8"/>
+                </svg>
+                Save Draft
+            </button>
+            <button class="btn-primary" onclick="publishListing()">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/>
+                </svg>
+                Publish
+            </button>
+        </div>
+    </header>
+    
+    <!-- Main Workspace -->
+    <div class="listing-workspace-grid">
+        <!-- Editor Panel -->
+        <div class="listing-editor-panel">
+            {% include 'components/listing/_editor.html' %}
+        </div>
+        
+        <!-- Preview Panel -->
+        <div class="listing-preview-panel">
+            {% include 'components/listing/_preview.html' %}
+        </div>
+        
+        <!-- Insights Panel -->
+        <div class="listing-insights-panel">
+            {% include 'components/listing/_insights.html' %}
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="{{ url_for('static', path='js/listing.js') }}"></script>
+{% endblock %}
