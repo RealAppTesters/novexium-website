@@ -1,0 +1,97 @@
+{% extends "base/dashboard.html" %}
+
+{% block title %}Notifications — Novexium{% endblock %}
+
+{% block dashboard_content %}
+<div class="notifications-page">
+    <!-- Header -->
+    <header class="notifications-header">
+        <div class="notifications-header-left">
+            <h1 class="notifications-title">Notifications</h1>
+            <p class="notifications-subtitle">Stay informed about your apps and account</p>
+        </div>
+        <div class="notifications-header-right">
+            <div class="notifications-stats">
+                <span class="notifications-stat">
+                    <span class="notifications-stat-value">{{ notifications|selectattr('is_read', 'equalto', False)|list|length }}</span>
+                    <span class="notifications-stat-label">Unread</span>
+                </span>
+                <span class="notifications-stat">
+                    <span class="notifications-stat-value">{{ notifications|length }}</span>
+                    <span class="notifications-stat-label">Total</span>
+                </span>
+            </div>
+            <button class="btn-secondary" onclick="markAllRead()">Mark All Read</button>
+        </div>
+    </header>
+    
+    <!-- Filters -->
+    <div class="notifications-filters">
+        <button class="filter-btn active" data-filter="all">All</button>
+        <button class="filter-btn" data-filter="unread">Unread</button>
+        <button class="filter-btn" data-filter="high">High Priority</button>
+        <button class="filter-btn" data-filter="bookmarked">Bookmarked</button>
+        <div class="filter-spacer"></div>
+        <select class="filter-select">
+            <option value="newest">Newest First</option>
+            <option value="oldest">Oldest First</option>
+            <option value="priority">By Priority</option>
+        </select>
+    </div>
+    
+    <!-- Notification List -->
+    <div class="notifications-list">
+        {% if notifications %}
+            {% for notification in notifications %}
+            <div class="notification-item {{ notification.priority }} {{ 'unread' if not notification.is_read }}">
+                <div class="notification-icon">
+                    {% if notification.type == 'success' %}✅
+                    {% elif notification.type == 'warning' %}⚠️
+                    {% elif notification.type == 'important' %}🔔
+                    {% elif notification.type == 'system' %}⚙️
+                    {% elif notification.type == 'billing' %}💳
+                    {% elif notification.type == 'security' %}🔒
+                    {% else %}📬{% endif %}
+                </div>
+                <div class="notification-content">
+                    <div class="notification-header">
+                        <span class="notification-title">{{ notification.title }}</span>
+                        <span class="notification-priority {{ notification.priority }}">
+                            {{ notification.priority|title }}
+                        </span>
+                    </div>
+                    {% if notification.description %}
+                    <p class="notification-description">{{ notification.description }}</p>
+                    {% endif %}
+                    <div class="notification-footer">
+                        <span class="notification-source">{{ notification.source_module|title or 'System' }}</span>
+                        <span class="notification-time">{{ notification.notification_date }}</span>
+                        {% if notification.action_label and notification.action_url %}
+                        <a href="{{ notification.action_url }}" class="notification-action">
+                            {{ notification.action_label }}
+                        </a>
+                        {% endif %}
+                        <button class="notification-bookmark" onclick="bookmarkNotification('{{ notification.id }}')">
+                            {{ '★' if notification.is_bookmarked else '☆' }}
+                        </button>
+                        <button class="notification-dismiss" onclick="dismissNotification('{{ notification.id }}')">
+                            ✕
+                        </button>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        {% else %}
+        <div class="notifications-empty">
+            <div class="empty-icon">🎉</div>
+            <h3>You're All Caught Up</h3>
+            <p>We'll notify you when something important happens.</p>
+        </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="{{ url_for('static', path='js/notifications.js') }}"></script>
+{% endblock %}
