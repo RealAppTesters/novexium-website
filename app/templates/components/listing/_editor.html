@@ -1,0 +1,124 @@
+<div class="listing-editor">
+    <div class="listing-editor-header">
+        <span class="listing-editor-title">📝 Editor</span>
+        <div class="listing-editor-controls">
+            <select class="listing-platform-select" id="platformSelect">
+                <option value="app_store" {% if listing and listing.platform == 'app_store' %}selected{% endif %}>App Store</option>
+                <option value="google_play" {% if listing and listing.platform == 'google_play' %}selected{% endif %}>Google Play</option>
+            </select>
+            <select class="listing-language-select" id="languageSelect">
+                <option value="en">English</option>
+                <option value="es">Español</option>
+                <option value="fr">Français</option>
+                <option value="de">Deutsch</option>
+            </select>
+        </div>
+    </div>
+    
+    <div class="listing-editor-fields">
+        <!-- Title -->
+        <div class="editor-field">
+            <label class="editor-field-label">
+                Title
+                <span class="editor-field-counter">
+                    <span id="titleCount">{{ listing.title|length if listing else 0 }}</span>
+                    <span>/</span>
+                    <span id="titleMax">30</span>
+                </span>
+            </label>
+            <input 
+                type="text" 
+                class="editor-field-input" 
+                id="titleInput"
+                value="{{ listing.title if listing else '' }}"
+                placeholder="Enter your app title..."
+                maxlength="50"
+                oninput="updateListing('title')"
+            >
+            <div class="editor-field-bar">
+                <div class="editor-field-fill" id="titleBar" style="width: {{ (listing.title|length / 30 * 100) if listing else 0 }}%"></div>
+            </div>
+            <span class="editor-field-hint">Keep it concise and include your primary keyword</span>
+        </div>
+        
+        <!-- Short Description -->
+        <div class="editor-field">
+            <label class="editor-field-label">
+                Short Description
+                <span class="editor-field-counter">
+                    <span id="shortDescCount">{{ listing.short_description|length if listing else 0 }}</span>
+                    <span>/</span>
+                    <span id="shortDescMax">150</span>
+                </span>
+            </label>
+            <input 
+                type="text" 
+                class="editor-field-input" 
+                id="shortDescInput"
+                value="{{ listing.short_description if listing else '' }}"
+                placeholder="A short description of your app..."
+                maxlength="150"
+                oninput="updateListing('short_description')"
+            >
+            <div class="editor-field-bar">
+                <div class="editor-field-fill" id="shortDescBar" style="width: {{ (listing.short_description|length / 150 * 100) if listing else 0 }}%"></div>
+            </div>
+        </div>
+        
+        <!-- Long Description -->
+        <div class="editor-field">
+            <label class="editor-field-label">
+                Long Description
+                <span class="editor-field-counter">
+                    <span id="longDescCount">{{ listing.long_description|length if listing else 0 }}</span>
+                    <span>/</span>
+                    <span id="longDescMax">4000</span>
+                </span>
+            </label>
+            <textarea 
+                class="editor-field-textarea" 
+                id="longDescInput"
+                placeholder="Describe your app in detail..."
+                rows="8"
+                oninput="updateListing('long_description')"
+            >{{ listing.long_description if listing else '' }}</textarea>
+            <div class="editor-field-bar">
+                <div class="editor-field-fill" id="longDescBar" style="width: {{ (listing.long_description|length / 4000 * 100) if listing else 0 }}%"></div>
+            </div>
+            <span class="editor-field-hint">
+                <span id="keywordHighlight">🔍 Tracked keywords:</span>
+                <span id="keywordStatus">0 found</span>
+            </span>
+        </div>
+        
+        <!-- What's New / Release Notes -->
+        <div class="editor-field">
+            <label class="editor-field-label">
+                What's New
+                <span class="editor-field-counter">
+                    <span id="whatsNewCount">{{ listing.what_new|length if listing else 0 }}</span>
+                    <span>/</span>
+                    <span id="whatsNewMax">4000</span>
+                </span>
+            </label>
+            <textarea 
+                class="editor-field-textarea" 
+                id="whatsNewInput"
+                placeholder="What's new in this version..."
+                rows="3"
+                oninput="updateListing('what_new')"
+            >{{ listing.what_new if listing else '' }}</textarea>
+        </div>
+    </div>
+    
+    <div class="listing-editor-footer">
+        <span class="editor-autosave" id="autosaveStatus">Auto-saved</span>
+        <button class="editor-format-btn" onclick="formatText()">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M12 2L15 8.5L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L9 8.5L12 2Z"/>
+            </svg>
+            Format
+        </button>
+        <button class="editor-clear-btn" onclick="clearListing()">Clear All</button>
+    </div>
+</div>
