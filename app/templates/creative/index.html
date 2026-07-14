@@ -1,0 +1,130 @@
+{% extends "base/dashboard.html" %}
+
+{% block title %}Creative Studio — Novexium{% endblock %}
+
+{% block dashboard_content %}
+<div class="creative-studio">
+    <!-- Header -->
+    <header class="creative-header">
+        <div class="creative-header-left">
+            <h1 class="creative-title">Creative Studio</h1>
+            <p class="creative-subtitle">Analyze and optimize your app's visual assets</p>
+        </div>
+        <div class="creative-header-right">
+            <div class="creative-score-badge">
+                <span class="creative-score-label">Creative Score</span>
+                <span class="creative-score-value">{{ dashboard.overall_score or 0 }}</span>
+            </div>
+            <button class="btn-secondary" onclick="refreshAssets()">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M23 4v6h-6"/>
+                    <path d="M1 20v-6h6"/>
+                    <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/>
+                </svg>
+                Refresh
+            </button>
+        </div>
+    </header>
+    
+    <!-- Quick Wins -->
+    {% if dashboard.quick_wins %}
+    <section class="creative-quick-wins">
+        <h2 class="creative-section-title">⚡ Quick Wins</h2>
+        <div class="quick-wins-grid">
+            {% for win in dashboard.quick_wins %}
+            <div class="quick-win-card">
+                <div class="quick-win-content">
+                    <span class="quick-win-type">{{ win.type|title }}</span>
+                    <span class="quick-win-score">Score: {{ win.score }}</span>
+                </div>
+                <button class="quick-win-action btn-primary btn-sm" onclick="viewAsset('{{ win.id }}')">
+                    Improve
+                </button>
+            </div>
+            {% endfor %}
+        </div>
+    </section>
+    {% endif %}
+    
+    <!-- Asset Gallery -->
+    <section class="creative-gallery">
+        <h2 class="creative-section-title">📸 Your Assets</h2>
+        <div class="asset-gallery">
+            <!-- Icon -->
+            {% if assets.icon %}
+            <div class="asset-card featured">
+                <div class="asset-preview">
+                    <img src="{{ assets.icon[0].url }}" alt="App Icon" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%22 height=%22100%22><rect width=%22100%22 height=%22100%22 fill=%22%23111113%22/><text x=%2250%22 y=%2255%22 text-anchor=%22middle%22 fill=%22%2371717A%22 font-size=%2214%22>No Icon</text></svg>'">
+                </div>
+                <div class="asset-info">
+                    <span class="asset-type">App Icon</span>
+                    <span class="asset-score {{ 'high' if assets.icon[0].score >= 70 else 'medium' if assets.icon[0].score >= 50 else 'low' }}">
+                        {{ assets.icon[0].score }}%
+                    </span>
+                </div>
+            </div>
+            {% endif %}
+            
+            <!-- Screenshots -->
+            {% if assets.screenshot %}
+            <div class="asset-group">
+                <span class="asset-group-title">Screenshots</span>
+                <div class="asset-grid">
+                    {% for screenshot in assets.screenshot %}
+                    <div class="asset-card">
+                        <div class="asset-preview">
+                            <img src="{{ screenshot.url }}" alt="Screenshot {{ screenshot.order }}" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%22 height=%22178%22><rect width=%22100%22 height=%22178%22 fill=%22%23111113%22/><text x=%2250%22 y=%2289%22 text-anchor=%22middle%22 fill=%22%2371717A%22 font-size=%2212%22>Screenshot</text></svg>'">
+                        </div>
+                        <div class="asset-info">
+                            <span class="asset-type">#{{ screenshot.order }}</span>
+                            <span class="asset-score {{ 'high' if screenshot.score >= 70 else 'medium' if screenshot.score >= 50 else 'low' }}">
+                                {{ screenshot.score }}%
+                            </span>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+            {% endif %}
+            
+            <!-- Feature Graphic -->
+            {% if assets.feature_graphic %}
+            <div class="asset-card featured">
+                <div class="asset-preview">
+                    <img src="{{ assets.feature_graphic[0].url }}" alt="Feature Graphic" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%22 height=%2250%22><rect width=%22100%22 height=%2250%22 fill=%22%23111113%22/><text x=%2250%22 y=%2225%22 text-anchor=%22middle%22 fill=%22%2371717A%22 font-size=%2212%22>Feature Graphic</text></svg>'">
+                </div>
+                <div class="asset-info">
+                    <span class="asset-type">Feature Graphic</span>
+                    <span class="asset-score {{ 'high' if assets.feature_graphic[0].score >= 70 else 'medium' if assets.feature_graphic[0].score >= 50 else 'low' }}">
+                        {{ assets.feature_graphic[0].score }}%
+                    </span>
+                </div>
+            </div>
+            {% endif %}
+        </div>
+    </section>
+    
+    <!-- History -->
+    {% if history %}
+    <section class="creative-history">
+        <h2 class="creative-section-title">📋 Recent Changes</h2>
+        <div class="history-timeline">
+            {% for item in history[:5] %}
+            <div class="history-item">
+                <span class="history-date">{{ item.date }}</span>
+                <span class="history-type">{{ item.asset_type|title }}</span>
+                <span class="history-change {{ item.change_type }}">
+                    {{ item.change_type|title }}
+                </span>
+                <span class="history-summary">{{ item.summary }}</span>
+            </div>
+            {% endfor %}
+        </div>
+    </section>
+    {% endif %}
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="{{ url_for('static', path='js/creative.js') }}"></script>
+{% endblock %}
