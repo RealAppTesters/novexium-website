@@ -1,4 +1,3 @@
-cat > migrations/env.py << 'EOF'
 from logging.config import fileConfig
 from sqlalchemy import engine_from_config
 from sqlalchemy import pool
@@ -6,7 +5,6 @@ from alembic import context
 import sys
 import os
 
-# Add the app directory to Python path
 sys.path.append(os.path.dirname(os.path.dirname(__file__)))
 
 from app.models.base import Base
@@ -19,9 +17,6 @@ config = context.config
 
 if config.config_file_name is not None:
     fileConfig(config.config_file_name)
-
-# Override the database URL with settings
-config.set_main_option("sqlalchemy.url", settings.DATABASE_URL)
 
 target_metadata = Base.metadata
 
@@ -38,8 +33,11 @@ def run_migrations_offline():
         context.run_migrations()
 
 def run_migrations_online():
+    configuration = config.get_section(config.config_ini_section)
+    configuration["sqlalchemy.url"] = settings.DATABASE_URL
+    
     connectable = engine_from_config(
-        config.get_section(config.config_ini_section),
+        configuration,
         prefix="sqlalchemy.",
         poolclass=pool.NullPool,
     )
@@ -57,4 +55,3 @@ if context.is_offline_mode():
     run_migrations_offline()
 else:
     run_migrations_online()
-EOF

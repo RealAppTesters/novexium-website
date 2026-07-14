@@ -1,22 +1,29 @@
 from fastapi import FastAPI
-from fastapi.staticfiles import StaticFiles
-from fastapi.templating import Jinja2Templates
-from pathlib import Path
+from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI(title="Novexium", version="1.0.0")
 
-# Static files
-app.mount("/static", StaticFiles(directory="app/static"), name="static")
+# Enable CORS
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
-# Templates
-templates = Jinja2Templates(directory="app/templates")
-
-# THIS IS THE CRITICAL ROUTE YOU'RE MISSING:
 @app.get("/")
 async def root():
-    return {"message": "Novexium API is running!"}
+    return {
+        "message": "Novexium API is running!",
+        "version": "1.0.0",
+        "status": "healthy"
+    }
 
-# Also add a health check
 @app.get("/health")
-async def health():
-    return {"status": "healthy"}
+async def health_check():
+    return {"status": "healthy", "version": "1.0.0"}
+
+# Import and include your routes
+# from app.routes.web import auth
+# app.include_router(auth.router)
