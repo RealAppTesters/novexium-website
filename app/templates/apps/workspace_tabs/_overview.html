@@ -1,0 +1,136 @@
+<div class="workspace-overview">
+    <!-- Your Next Win -->
+    <section class="workspace-next-win">
+        <div class="workspace-next-win-badge">⚡ Your Next Win</div>
+        <div class="workspace-next-win-content">
+            <div class="workspace-next-win-info">
+                <h3 class="workspace-next-win-title">{{ next_win.title }}</h3>
+                <p class="workspace-next-win-description">{{ next_win.description }}</p>
+                <div class="workspace-next-win-metrics">
+                    <span class="workspace-next-win-impact">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#22C55E" stroke-width="2">
+                            <path d="M2 12L6 8L10 12L14 8L18 12L22 8"/>
+                            <path d="M2 16L6 12L10 16L14 12L18 16L22 12"/>
+                        </svg>
+                        {{ next_win.impact }}
+                    </span>
+                    <span class="workspace-next-win-time">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="10"/>
+                            <polyline points="12 6 12 12 16 14"/>
+                        </svg>
+                        {{ next_win.time }}
+                    </span>
+                    <span class="workspace-next-win-difficulty {{ next_win.difficulty_class }}">
+                        {{ next_win.difficulty }}
+                    </span>
+                </div>
+                <div class="workspace-next-win-reason">
+                    <span class="workspace-next-win-reason-label">Why this matters</span>
+                    <span>{{ next_win.reason }}</span>
+                </div>
+            </div>
+            <div class="workspace-next-win-actions">
+                <button class="btn-primary" onclick="startRecommendation('{{ app.id }}')">
+                    Start Now
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M5 12H19M19 12L13 6M19 12L13 18"/>
+                    </svg>
+                </button>
+                <button class="btn-secondary" onclick="viewBlueprint()">
+                    View Growth Blueprint
+                </button>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Score Overview -->
+    <section class="workspace-scores">
+        {% include 'components/workspace/_workspace_overview.html' %}
+    </section>
+    
+    <!-- Two Column Layout -->
+    <div class="workspace-grid">
+        <div class="workspace-grid-left">
+            <!-- Growth Blueprint -->
+            <section class="workspace-blueprint">
+                <div class="workspace-blueprint-header">
+                    <h3 class="workspace-blueprint-title">Growth Blueprint</h3>
+                    <a href="#" class="workspace-blueprint-view-all">View All</a>
+                </div>
+                <div class="workspace-blueprint-list">
+                    {% for item in blueprint_items[:5] %}
+                        <div class="workspace-blueprint-item {{ item.priority_class }}">
+                            <div class="workspace-blueprint-item-status">
+                                <span class="workspace-blueprint-item-priority">{{ item.priority }}</span>
+                                <span class="workspace-blueprint-item-impact">{{ item.impact }}</span>
+                            </div>
+                            <div class="workspace-blueprint-item-content">
+                                <h4 class="workspace-blueprint-item-title">{{ item.title }}</h4>
+                                <p class="workspace-blueprint-item-description">{{ item.description }}</p>
+                                <div class="workspace-blueprint-item-meta">
+                                    <span class="workspace-blueprint-item-difficulty {{ item.difficulty_class }}">{{ item.difficulty }}</span>
+                                    <span class="workspace-blueprint-item-time">{{ item.time }}</span>
+                                </div>
+                            </div>
+                            <button class="workspace-blueprint-item-action btn-primary btn-sm" onclick="startRecommendation('{{ app.id }}')">
+                                {{ 'Start' if not item.completed else 'Completed' }}
+                            </button>
+                        </div>
+                    {% endfor %}
+                </div>
+            </section>
+            
+            <!-- Opportunity Finder -->
+            <section class="workspace-opportunities">
+                <div class="workspace-opportunities-header">
+                    <h3 class="workspace-opportunities-title">Opportunity Finder</h3>
+                    <a href="#" class="workspace-opportunities-view-all">View All</a>
+                </div>
+                <div class="workspace-opportunities-grid">
+                    {% for opp in opportunities[:3] %}
+                        <div class="workspace-opportunity">
+                            <div class="workspace-opportunity-badge {{ opp.badge_class }}">{{ opp.badge }}</div>
+                            <h4 class="workspace-opportunity-title">{{ opp.title }}</h4>
+                            <p class="workspace-opportunity-description">{{ opp.description }}</p>
+                            <div class="workspace-opportunity-metrics">
+                                <span class="workspace-opportunity-score">{{ opp.score }}</span>
+                                <span class="workspace-opportunity-impact {{ opp.impact_class }}">{{ opp.impact }}</span>
+                            </div>
+                            <button class="workspace-opportunity-action btn-secondary btn-sm" onclick="viewOpportunity('{{ opp.id }}')">
+                                View Details
+                            </button>
+                        </div>
+                    {% endfor %}
+                </div>
+            </section>
+            
+            <!-- Before & After Simulator -->
+            <section class="workspace-simulator">
+                {% include 'components/workspace/_workspace_simulator.html' %}
+            </section>
+        </div>
+        
+        <div class="workspace-grid-right">
+            <!-- App Health -->
+            <section class="workspace-health">
+                {% include 'components/workspace/_workspace_health.html' %}
+            </section>
+            
+            <!-- Insights Panel -->
+            <section class="workspace-insights">
+                {% include 'components/workspace/_workspace_insights.html' %}
+            </section>
+            
+            <!-- Recent Activity -->
+            <section class="workspace-activity">
+                {% include 'components/workspace/_workspace_activity.html' %}
+            </section>
+        </div>
+    </div>
+    
+    <!-- Performance Charts -->
+    <section class="workspace-charts">
+        {% include 'components/workspace/_workspace_charts.html' %}
+    </section>
+</div>
