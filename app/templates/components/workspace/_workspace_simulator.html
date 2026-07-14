@@ -1,0 +1,77 @@
+<div class="workspace-simulator-container">
+    <div class="workspace-simulator-header">
+        <h3 class="workspace-simulator-title">Before & After Simulator</h3>
+        <p class="workspace-simulator-subtitle">See the potential before you make changes</p>
+    </div>
+    
+    <div class="workspace-simulator-grid">
+        <div class="workspace-simulator-current">
+            <h4 class="workspace-simulator-label">Current</h4>
+            <div class="workspace-simulator-metric">
+                <span class="workspace-simulator-metric-label">Growth Score</span>
+                <span class="workspace-simulator-metric-value">{{ app.growth_score }}</span>
+                <div class="workspace-simulator-metric-bar">
+                    <div class="workspace-simulator-metric-fill current" style="width: {{ app.growth_score }}%"></div>
+                </div>
+            </div>
+            <div class="workspace-simulator-metric">
+                <span class="workspace-simulator-metric-label">Visibility</span>
+                <span class="workspace-simulator-metric-value">{{ app.visibility_score }}</span>
+                <div class="workspace-simulator-metric-bar">
+                    <div class="workspace-simulator-metric-fill current" style="width: {{ app.visibility_score }}%"></div>
+                </div>
+            </div>
+            <div class="workspace-simulator-metric">
+                <span class="workspace-simulator-metric-label">Conversion Potential</span>
+                <span class="workspace-simulator-metric-value">{{ app.conversion_potential }}%</span>
+                <div class="workspace-simulator-metric-bar">
+                    <div class="workspace-simulator-metric-fill current" style="width: {{ app.conversion_potential }}%"></div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="workspace-simulator-arrow">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#4F46E5" stroke-width="2">
+                <path d="M5 12H19M19 12L13 6M19 12L13 18"/>
+            </svg>
+            <span class="workspace-simulator-arrow-label">Apply Recommendations</span>
+        </div>
+        
+        <div class="workspace-simulator-projected">
+            <h4 class="workspace-simulator-label">Projected</h4>
+            <div class="workspace-simulator-metric">
+                <span class="workspace-simulator-metric-label">Growth Score</span>
+                <span class="workspace-simulator-metric-value projected">{{ app.projected_growth }}</span>
+                <span class="workspace-simulator-metric-change">+{{ app.projected_growth - app.growth_score }}</span>
+                <div class="workspace-simulator-metric-bar">
+                    <div class="workspace-simulator-metric-fill projected" style="width: {{ app.projected_growth }}%"></div>
+                </div>
+            </div>
+            <div class="workspace-simulator-metric">
+                <span class="workspace-simulator-metric-label">Visibility</span>
+                <span class="workspace-simulator-metric-value projected">{{ app.projected_visibility }}</span>
+                <span class="workspace-simulator-metric-change">+{{ app.projected_visibility - app.visibility_score }}</span>
+                <div class="workspace-simulator-metric-bar">
+                    <div class="workspace-simulator-metric-fill projected" style="width: {{ app.projected_visibility }}%"></div>
+                </div>
+            </div>
+            <div class="workspace-simulator-metric">
+                <span class="workspace-simulator-metric-label">Conversion Potential</span>
+                <span class="workspace-simulator-metric-value projected">{{ app.projected_conversion }}%</span>
+                <span class="workspace-simulator-metric-change">+{{ app.projected_conversion - app.conversion_potential }}%</span>
+                <div class="workspace-simulator-metric-bar">
+                    <div class="workspace-simulator-metric-fill projected" style="width: {{ app.projected_conversion }}%"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="workspace-simulator-note">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10"/>
+            <line x1="12" y1="8" x2="12" y2="12"/>
+            <line x1="12" y1="16" x2="12.01" y2="16"/>
+        </svg>
+        <span>Projections based on historical data from similar apps. Results may vary.</span>
+    </div>
+</div>
