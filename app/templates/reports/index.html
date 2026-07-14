@@ -1,0 +1,148 @@
+{% extends "base/dashboard.html" %}
+
+{% block title %}Reports — Novexium{% endblock %}
+
+{% block dashboard_content %}
+<div class="reports-page">
+    <!-- Header -->
+    <header class="reports-header">
+        <div class="reports-header-left">
+            <h1 class="reports-title">Reports</h1>
+            <p class="reports-subtitle">Create, manage, and share professional reports</p>
+        </div>
+        <div class="reports-header-right">
+            <a href="/reports/builder" class="btn-primary">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M12 5v14M5 12h14"/>
+                </svg>
+                New Report
+            </a>
+        </div>
+    </header>
+    
+    <!-- Stats -->
+    <section class="reports-stats">
+        <div class="stats-cards">
+            <div class="stat-card">
+                <span class="stat-icon">📄</span>
+                <div class="stat-content">
+                    <span class="stat-value">{{ reports|length }}</span>
+                    <span class="stat-label">Total Reports</span>
+                </div>
+            </div>
+            <div class="stat-card">
+                <span class="stat-icon">📅</span>
+                <div class="stat-content">
+                    <span class="stat-value">{{ reports|selectattr('status', 'equalto', 'ready')|list|length }}</span>
+                    <span class="stat-label">Ready</span>
+                </div>
+            </div>
+            <div class="stat-card">
+                <span class="stat-icon">📂</span>
+                <div class="stat-content">
+                    <span class="stat-value">{{ templates|length }}</span>
+                    <span class="stat-label">Templates</span>
+                </div>
+            </div>
+            <div class="stat-card">
+                <span class="stat-icon">⏰</span>
+                <div class="stat-content">
+                    <span class="stat-value">0</span>
+                    <span class="stat-label">Scheduled</span>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Recent Reports -->
+    {% if reports %}
+    <section class="reports-list">
+        <h2 class="reports-section-title">📋 Recent Reports</h2>
+        <div class="reports-grid">
+            {% for report in reports[:6] %}
+            <div class="report-card">
+                <div class="report-card-header">
+                    <div class="report-card-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#4F46E5" stroke-width="2">
+                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                            <polyline points="14 2 14 8 20 8"/>
+                            <line x1="16" y1="13" x2="8" y2="13"/>
+                            <line x1="16" y1="17" x2="8" y2="17"/>
+                            <polyline points="10 9 9 9 8 9"/>
+                        </svg>
+                    </div>
+                    <div class="report-card-info">
+                        <h3 class="report-card-title">{{ report.title }}</h3>
+                        <span class="report-card-date">{{ report.generated_date or 'Draft' }}</span>
+                    </div>
+                    <button class="report-card-favorite" onclick="toggleFavorite('{{ report.id }}')">
+                        {{ '★' if report.is_favorite else '☆' }}
+                    </button>
+                </div>
+                <div class="report-card-status">
+                    <span class="status-badge {{ report.status }}">
+                        {{ report.status|title }}
+                    </span>
+                </div>
+                <div class="report-card-actions">
+                    {% if report.status == 'ready' %}
+                    <button class="btn-secondary btn-sm" onclick="downloadReport('{{ report.id }}')">
+                        📥 Download
+                    </button>
+                    <button class="btn-secondary btn-sm" onclick="shareReport('{{ report.id }}')">
+                        🔗 Share
+                    </button>
+                    {% else %}
+                    <button class="btn-primary btn-sm" onclick="generateReport('{{ report.id }}')">
+                        Generate
+                    </button>
+                    {% endif %}
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </section>
+    {% else %}
+    <div class="reports-empty">
+        <div class="empty-icon">📊</div>
+        <h3>Create Your First Report</h3>
+        <p>Reports help you track progress and communicate results.</p>
+        <a href="/reports/builder" class="btn-primary">
+            Create Report
+        </a>
+    </div>
+    {% endif %}
+    
+    <!-- Templates -->
+    {% if templates %}
+    <section class="templates-section">
+        <h2 class="reports-section-title">📚 Templates</h2>
+        <div class="templates-grid">
+            {% for template in templates[:4] %}
+            <div class="template-card">
+                <div class="template-card-header">
+                    <span class="template-icon">
+                        {% if template.category == 'executive' %}📋
+                        {% elif template.category == 'weekly' %}📅
+                        {% elif template.category == 'monthly' %}📆
+                        {% elif template.category == 'quarterly' %}📊
+                        {% elif template.category == 'agency' %}🤝
+                        {% else %}📄{% endif %}
+                    </span>
+                    <span class="template-name">{{ template.name }}</span>
+                </div>
+                <p class="template-description">{{ template.description or 'No description' }}</p>
+                <a href="/reports/builder?template_id={{ template.id }}" class="template-use-btn">
+                    Use Template →
+                </a>
+            </div>
+            {% endfor %}
+        </div>
+    </section>
+    {% endif %}
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="{{ url_for('static', path='js/reports.js') }}"></script>
+{% endblock %}
