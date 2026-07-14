@@ -1,0 +1,141 @@
+{% extends "base/dashboard.html" %}
+
+{% block title %}Review Intelligence — Novexium{% endblock %}
+
+{% block dashboard_content %}
+<div class="reviews-page">
+    <!-- Header -->
+    <header class="reviews-header">
+        <div class="reviews-header-left">
+            <h1 class="reviews-title">Review Intelligence</h1>
+            <p class="reviews-subtitle">Understand what your users are saying</p>
+        </div>
+        <div class="reviews-header-right">
+            <button class="btn-secondary" onclick="refreshReviews()">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M23 4v6h-6"/>
+                    <path d="M1 20v-6h6"/>
+                    <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/>
+                </svg>
+                Refresh
+            </button>
+        </div>
+    </header>
+    
+    <!-- Dashboard Cards -->
+    <section class="reviews-dashboard">
+        <div class="reviews-cards">
+            <div class="review-card">
+                <div class="review-card-icon">⭐</div>
+                <div class="review-card-content">
+                    <span class="review-card-label">Average Rating</span>
+                    <span class="review-card-value">{{ dashboard.average_rating or '—' }}</span>
+                </div>
+            </div>
+            
+            <div class="review-card">
+                <div class="review-card-icon">📝</div>
+                <div class="review-card-content">
+                    <span class="review-card-label">Total Reviews</span>
+                    <span class="review-card-value">{{ dashboard.total_reviews or 0 }}</span>
+                </div>
+            </div>
+            
+            <div class="review-card">
+                <div class="review-card-icon">😊</div>
+                <div class="review-card-content">
+                    <span class="review-card-label">Positive</span>
+                    <span class="review-card-value">{{ dashboard.positive_count or 0 }}</span>
+                </div>
+            </div>
+            
+            <div class="review-card">
+                <div class="review-card-icon">😞</div>
+                <div class="review-card-content">
+                    <span class="review-card-label">Negative</span>
+                    <span class="review-card-value">{{ dashboard.negative_count or 0 }}</span>
+                </div>
+            </div>
+            
+            <div class="review-card">
+                <div class="review-card-icon">💬</div>
+                <div class="review-card-content">
+                    <span class="review-card-label">Unresponded</span>
+                    <span class="review-card-value">{{ dashboard.unresponded_count or 0 }}</span>
+                </div>
+            </div>
+            
+            <div class="review-card">
+                <div class="review-card-icon">📊</div>
+                <div class="review-card-content">
+                    <span class="review-card-label">Sentiment</span>
+                    <span class="review-card-value">
+                        <span class="sentiment-positive">👍 {{ dashboard.positive_count or 0 }}</span>
+                        <span class="sentiment-negative">👎 {{ dashboard.negative_count or 0 }}</span>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Themes -->
+    {% if dashboard.themes %}
+    <section class="reviews-themes">
+        <h2 class="reviews-section-title">🏷️ Common Themes</h2>
+        <div class="themes-grid">
+            {% for theme in dashboard.themes %}
+            <div class="theme-card">
+                <div class="theme-header">
+                    <span class="theme-name">{{ theme.theme }}</span>
+                    <span class="theme-count">{{ theme.review_count }} reviews</span>
+                </div>
+                <div class="theme-sentiment">
+                    <span class="theme-positive">👍 {{ theme.positive_count }}</span>
+                    <span class="theme-neutral">😐 {{ theme.neutral_count }}</span>
+                    <span class="theme-negative">👎 {{ theme.negative_count }}</span>
+                </div>
+                <div class="theme-rating">⭐ {{ "%.1f"|format(theme.average_rating) }}</div>
+            </div>
+            {% endfor %}
+        </div>
+    </section>
+    {% endif %}
+    
+    <!-- Recent Reviews -->
+    {% if dashboard.recent_activity %}
+    <section class="reviews-recent">
+        <h2 class="reviews-section-title">📋 Recent Reviews</h2>
+        <div class="recent-reviews">
+            {% for review in dashboard.recent_activity[:5] %}
+            <div class="review-item {{ review.sentiment }}">
+                <div class="review-item-header">
+                    <span class="review-rating">
+                        {% for i in range(review.rating) %}⭐{% endfor %}
+                    </span>
+                    <span class="review-date">{{ review.review_date }}</span>
+                </div>
+                <p class="review-content">{{ review.content|truncate(150) }}</p>
+                <div class="review-item-footer">
+                    <span class="review-sentiment {{ review.sentiment }}">
+                        {{ review.sentiment|title }}
+                    </span>
+                    <span class="review-theme">{{ review.theme or 'Uncategorized' }}</span>
+                    {% if review.is_responded %}
+                    <span class="review-responded">✓ Responded</span>
+                    {% else %}
+                    <button class="review-respond-btn" onclick="openResponse('{{ review.id }}')">
+                        Respond
+                    </button>
+                    {% endif %}
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </section>
+    {% endif %}
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="{{ url_for('static', path='js/reviews.js') }}"></script>
+{% endblock %}
