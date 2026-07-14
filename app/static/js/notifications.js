@@ -118,3 +118,133 @@ window.showNotification = (message, type, duration) => {
 window.showToast = (message, type, duration) => {
     notifications.showToast(message, type, duration);
 };
+
+document.addEventListener('DOMContentLoaded', function() {
+    // ============================================
+    // Filters
+    // ============================================
+    
+    document.querySelectorAll('.filter-btn').forEach(function(btn) {
+        btn.addEventListener('click', function() {
+            document.querySelectorAll('.filter-btn').forEach(function(b) {
+                b.classList.remove('active');
+            });
+            this.classList.add('active');
+            
+            const filter = this.dataset.filter;
+            filterNotifications(filter);
+        });
+    });
+    
+    function filterNotifications(filter) {
+        const items = document.querySelectorAll('.notification-item');
+        
+        items.forEach(function(item) {
+            let show = true;
+            
+            if (filter === 'unread') {
+                show = item.classList.contains('unread');
+            } else if (filter === 'high') {
+                show = item.classList.contains('high') || item.classList.contains('critical');
+            } else if (filter === 'bookmarked') {
+                const bookmark = item.querySelector('.notification-bookmark');
+                show = bookmark && bookmark.textContent === '★';
+            }
+            
+            item.style.display = show ? '' : 'none';
+        });
+    }
+    
+    // ============================================
+    // Mark All Read
+    // ============================================
+    
+    window.markAllRead = function() {
+        fetch('/api/v1/notifications/mark-all-read', {
+            method: 'POST'
+        })
+        .then(response => response.json())
+        .then(() => {
+            document.querySelectorAll('.notification-item.unread').forEach(function(item) {
+                item.classList.remove('unread');
+            });
+            showToast('All notifications marked as read', 'success');
+        })
+        .catch(() => {
+            showToast('Failed to mark all as read', 'error');
+        });
+    };
+    
+    // ============================================
+    // Bookmark
+    // ============================================
+    
+    window.bookmarkNotification = function(notificationId) {
+        const btn = event.currentTarget;
+        const isBookmarked = btn.textContent === '★';
+        
+        fetch(`/api/v1/notifications/${notificationId}/bookmark`, {
+            method: 'POST'
+        })
+        .then(response => response.json())
+        .then(() => {
+            btn.textContent = isBookmarked ? '☆' : '★';
+            showToast(isBookmarked ? 'Bookmark removed' : 'Bookmarked!', 'info');
+        })
+        .catch(() => {
+            showToast('Failed to bookmark', 'error');
+        });
+    };
+    
+    // ============================================
+    // Dismiss
+    // ============================================
+    
+    window.dismissNotification = function(notificationId) {
+        const item = event.currentTarget.closest('.notification-item');
+        
+        fetch(`/api/v1/notifications/${notificationId}/dismiss`, {
+            method: 'POST'
+        })
+        .then(response => response.json())
+        .then(() => {
+            item.style.display = 'none';
+            showToast('Notification dismissed', 'info');
+        })
+        .catch(() => {
+            showToast('Failed to dismiss', 'error');
+        });
+    };
+    
+    // ============================================
+    // Sort
+    // ============================================
+    
+    document.querySelector('.filter-select').addEventListener('change', function() {
+        const sortBy = this.value;
+        const list = document.querySelector('.notifications-list');
+        const items = Array.from(list.querySelectorAll('.notification-item'));
+        
+        items.sort(function(a, b) {
+            if (sortBy === 'newest') {
+                return b.dataset.date - a.dataset.date;
+            } else if (sortBy === 'oldest') {
+                return a.dataset.date - b.dataset.date;
+            } else if (sortBy === 'priority') {
+                const priorities = { critical: 0, high: 1, medium: 2, low: 3 };
+                const aPriority = a.classList.contains('critical') ? 'critical' : 
+                                  a.classList.contains('high') ? 'high' : 
+                                  a.classList.contains('medium') ? 'medium' : 'low';
+                const bPriority = b.classList.contains('critical') ? 'critical' : 
+                                  b.classList.contains('high') ? 'high' : 
+                                  b.classList.contains('medium') ? 'medium' : 'low';
+                return priorities[aPriority] - priorities[bPriority];
+            }
+            return 0;
+        });
+        
+        items.forEach(function(item) {
+            list.appendChild(item);
+        });
+    });
+});
