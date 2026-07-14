@@ -1,0 +1,195 @@
+{% extends "admin/base.html" %}
+
+{% block title %}Admin Dashboard — Novexium{% endblock %}
+
+{% block admin_content %}
+<div class="admin-dashboard">
+    <!-- Header -->
+    <header class="admin-header">
+        <div class="admin-header-left">
+            <h1 class="admin-title">Operations Center</h1>
+            <p class="admin-subtitle">Complete visibility and control over the Novexium platform</p>
+        </div>
+        <div class="admin-header-right">
+            <span class="admin-status healthy">● All Systems Operational</span>
+            <button class="admin-refresh-btn" onclick="refreshDashboard()">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M23 4v6h-6"/>
+                    <path d="M1 20v-6h6"/>
+                    <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/>
+                </svg>
+                Refresh
+            </button>
+        </div>
+    </header>
+    
+    <!-- KPI Cards -->
+    <section class="admin-kpis">
+        <div class="kpi-card">
+            <div class="kpi-icon">👥</div>
+            <div class="kpi-content">
+                <span class="kpi-value">{{ stats.total_users }}</span>
+                <span class="kpi-label">Total Users</span>
+                <span class="kpi-change positive">↑ {{ stats.new_users_today }} today</span>
+            </div>
+        </div>
+        <div class="kpi-card">
+            <div class="kpi-icon">💳</div>
+            <div class="kpi-content">
+                <span class="kpi-value">${{ stats.monthly_revenue }}</span>
+                <span class="kpi-label">Monthly Revenue</span>
+                <span class="kpi-change positive">↑ {{ stats.revenue_change }}%</span>
+            </div>
+        </div>
+        <div class="kpi-card">
+            <div class="kpi-icon">📱</div>
+            <div class="kpi-content">
+                <span class="kpi-value">{{ stats.active_apps }}</span>
+                <span class="kpi-label">Active Apps</span>
+                <span class="kpi-change neutral">— {{ stats.apps_today }} today</span>
+            </div>
+        </div>
+        <div class="kpi-card">
+            <div class="kpi-icon">📊</div>
+            <div class="kpi-content">
+                <span class="kpi-value">{{ stats.audits_today }}</span>
+                <span class="kpi-label">Audits Today</span>
+                <span class="kpi-change positive">↑ {{ stats.audits_change }}%</span>
+            </div>
+        </div>
+        <div class="kpi-card">
+            <div class="kpi-icon">🔔</div>
+            <div class="kpi-content">
+                <span class="kpi-value">{{ stats.jobs_queued }}</span>
+                <span class="kpi-label">Jobs Queued</span>
+                <span class="kpi-change warning">⚠ {{ stats.jobs_failed }} failed</span>
+            </div>
+        </div>
+        <div class="kpi-card">
+            <div class="kpi-icon">❤️</div>
+            <div class="kpi-content">
+                <span class="kpi-value">{{ stats.system_health }}%</span>
+                <span class="kpi-label">System Health</span>
+                <span class="kpi-change healthy">● Operational</span>
+            </div>
+        </div>
+    </section>
+    
+    <!-- System Health -->
+    <section class="admin-health">
+        <h2 class="admin-section-title">🖥️ System Health</h2>
+        <div class="health-grid">
+            <div class="health-item">
+                <span class="health-label">CPU</span>
+                <div class="health-bar">
+                    <div class="health-fill" style="width: {{ stats.cpu }}%"></div>
+                </div>
+                <span class="health-value">{{ stats.cpu }}%</span>
+            </div>
+            <div class="health-item">
+                <span class="health-label">Memory</span>
+                <div class="health-bar">
+                    <div class="health-fill" style="width: {{ stats.memory }}%"></div>
+                </div>
+                <span class="health-value">{{ stats.memory }}%</span>
+            </div>
+            <div class="health-item">
+                <span class="health-label">Disk</span>
+                <div class="health-bar">
+                    <div class="health-fill" style="width: {{ stats.disk }}%"></div>
+                </div>
+                <span class="health-value">{{ stats.disk }}%</span>
+            </div>
+            <div class="health-item">
+                <span class="health-label">Database</span>
+                <div class="health-status {{ 'healthy' if stats.db_status == 'healthy' else 'warning' if stats.db_status == 'degraded' else 'critical' }}">
+                    {{ stats.db_status|title }}
+                </div>
+            </div>
+            <div class="health-item">
+                <span class="health-label">Redis</span>
+                <div class="health-status {{ 'healthy' if stats.redis_status == 'healthy' else 'warning' if stats.redis_status == 'degraded' else 'critical' }}">
+                    {{ stats.redis_status|title }}
+                </div>
+            </div>
+            <div class="health-item">
+                <span class="health-label">Queue</span>
+                <div class="health-status {{ 'healthy' if stats.queue_status == 'healthy' else 'warning' if stats.queue_status == 'degraded' else 'critical' }}">
+                    {{ stats.queue_status|title }}
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Recent Errors -->
+    {% if stats.recent_errors %}
+    <section class="admin-errors">
+        <h2 class="admin-section-title">🚨 Recent Errors</h2>
+        <div class="errors-list">
+            {% for error in stats.recent_errors %}
+            <div class="error-item">
+                <span class="error-time">{{ error.time }}</span>
+                <span class="error-level {{ error.level }}">{{ error.level|upper }}</span>
+                <span class="error-message">{{ error.message }}</span>
+                <span class="error-source">{{ error.source }}</span>
+            </div>
+            {% endfor %}
+        </div>
+    </section>
+    {% endif %}
+    
+    <!-- Quick Actions -->
+    <section class="admin-quick-actions">
+        <h2 class="admin-section-title">⚡ Quick Actions</h2>
+        <div class="quick-actions-grid">
+            <a href="/admin/users" class="quick-action">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+                    <circle cx="12" cy="7" r="4"/>
+                </svg>
+                User Management
+            </a>
+            <a href="/admin/apps" class="quick-action">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="2" y="2" width="20" height="20" rx="4"/>
+                    <line x1="8" y1="2" x2="8" y2="22"/>
+                    <line x1="16" y1="2" x2="16" y2="22"/>
+                    <line x1="2" y1="8" x2="22" y2="8"/>
+                    <line x1="2" y1="16" x2="22" y2="16"/>
+                </svg>
+                App Management
+            </a>
+            <a href="/admin/jobs" class="quick-action">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polyline points="23 4 23 10 17 10"/>
+                    <polyline points="1 20 1 14 7 14"/>
+                    <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/>
+                </svg>
+                Job Monitor
+            </a>
+            <a href="/admin/support" class="quick-action">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+                </svg>
+                Support Center
+            </a>
+            <a href="/admin/analytics" class="quick-action">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M21 21H3V3"/>
+                    <path d="M7 14L10 11L13 14L18 9"/>
+                </svg>
+                Analytics
+            </a>
+            <a href="/admin/feature-flags" class="quick-action">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M4 21V14M4 10V3M12 21V12M12 8V3M20 21V16M20 12V3"/>
+                    <circle cx="4" cy="12" r="2"/>
+                    <circle cx="12" cy="10" r="2"/>
+                    <circle cx="20" cy="14" r="2"/>
+                </svg>
+                Feature Flags
+            </a>
+        </div>
+    </section>
+</div>
+{% endblock %}
