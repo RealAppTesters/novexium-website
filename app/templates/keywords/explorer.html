@@ -1,0 +1,124 @@
+{% extends "base/dashboard.html" %}
+
+{% block title %}Keyword Explorer — Novexium{% endblock %}
+
+{% block dashboard_content %}
+<div class="keywords-explorer">
+    <!-- Header -->
+    <header class="explorer-header">
+        <div class="explorer-header-left">
+            <a href="{{ url_for('keyword_dashboard', app_id=app_id) }}" class="explorer-back">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M19 12H5M12 19L5 12L12 5"/>
+                </svg>
+                Back to Dashboard
+            </a>
+            <h1 class="explorer-title">Keyword Explorer</h1>
+        </div>
+        <div class="explorer-header-right">
+            <span class="explorer-result-count">{{ keywords|length }} results</span>
+        </div>
+    </header>
+    
+    <!-- Search -->
+    <div class="explorer-search">
+        <form class="explorer-search-form" method="GET">
+            <div class="explorer-search-wrapper">
+                <svg class="explorer-search-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="11" cy="11" r="8"/>
+                    <path d="M21 21L17 17"/>
+                </svg>
+                <input 
+                    type="text" 
+                    name="q" 
+                    class="explorer-search-input" 
+                    placeholder="Search keywords..."
+                    value="{{ query }}"
+                    autofocus
+                >
+                <button type="submit" class="explorer-search-btn">Search</button>
+            </div>
+        </form>
+        
+        <div class="explorer-filters">
+            <select class="explorer-filter">
+                <option value="opportunity">Sort by Opportunity</option>
+                <option value="volume">Sort by Volume</option>
+                <option value="difficulty">Sort by Difficulty</option>
+                <option value="traffic">Sort by Traffic</option>
+                <option value="alphabetical">Sort by Keyword</option>
+            </select>
+            <select class="explorer-filter">
+                <option value="">All Countries</option>
+                <option value="US">United States</option>
+                <option value="GB">United Kingdom</option>
+                <option value="CA">Canada</option>
+            </select>
+        </div>
+    </div>
+    
+    <!-- Results -->
+    <div class="explorer-results">
+        {% if keywords %}
+            <table class="explorer-table">
+                <thead>
+                    <tr>
+                        <th>Keyword</th>
+                        <th>Volume</th>
+                        <th>Difficulty</th>
+                        <th>Opportunity</th>
+                        <th>Traffic</th>
+                        <th>Ranking</th>
+                        <th>Change</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for kw in keywords %}
+                    <tr>
+                        <td class="explorer-keyword">{{ kw.keyword }}</td>
+                        <td>{{ kw.search_volume or '—' }}</td>
+                        <td>
+                            <span class="difficulty-badge {{ 'low' if kw.difficulty and kw.difficulty < 30 else 'medium' if kw.difficulty and kw.difficulty < 60 else 'high' }}">
+                                {{ kw.difficulty or '—' }}
+                            </span>
+                        </td>
+                        <td>
+                            <span class="opportunity-score {{ 'high' if kw.opportunity_score and kw.opportunity_score >= 70 else 'medium' if kw.opportunity_score and kw.opportunity_score >= 40 else 'low' }}">
+                                {{ kw.opportunity_score or '—' }}
+                            </span>
+                        </td>
+                        <td>{{ kw.estimated_traffic or '—' }}</td>
+                        <td>#{{ kw.current_ranking or '—' }}</td>
+                        <td>
+                            {% if kw.ranking_change %}
+                                <span class="change {{ 'positive' if kw.ranking_change > 0 else 'negative' }}">
+                                    {{ '+' if kw.ranking_change > 0 }}{{ kw.ranking_change }}
+                                </span>
+                            {% else %}
+                                —
+                            {% endif %}
+                        </td>
+                        <td>
+                            <button class="track-btn" onclick="trackKeyword('{{ app_id }}', '{{ kw.id }}')">
+                                {{ 'Track' }}
+                            </button>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <div class="explorer-empty">
+                <div class="explorer-empty-icon">🔍</div>
+                <h3>No keywords found</h3>
+                <p>Try adjusting your search terms or filters</p>
+            </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="{{ url_for('static', path='js/keywords.js') }}"></script>
+{% endblock %}
