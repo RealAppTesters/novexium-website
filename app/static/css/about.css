@@ -1,0 +1,1021 @@
+/* ============================================
+   About Page Styles
+   ============================================ */
+
+/* Hero */
+.about-hero {
+    position: relative;
+    min-height: 80vh;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    padding: var(--space-8) 0;
+}
+
+.about-hero-background {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+}
+
+.about-hero-glow-1 {
+    position: absolute;
+    top: -30%;
+    left: -10%;
+    width: 60%;
+    height: 70%;
+    background: radial-gradient(circle, rgba(79, 70, 229, 0.12) 0%, transparent 70%);
+    border-radius: 50%;
+}
+
+.about-hero-glow-2 {
+    position: absolute;
+    bottom: -20%;
+    right: -10%;
+    width: 50%;
+    height: 60%;
+    background: radial-gradient(circle, rgba(34, 197, 94, 0.06) 0%, transparent 70%);
+    border-radius: 50%;
+}
+
+.about-hero-container {
+    position: relative;
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 var(--space-5);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-8);
+    align-items: center;
+    z-index: 1;
+}
+
+.about-hero-content {
+    max-width: 600px;
+}
+
+.about-hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    padding: 4px 14px;
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-full);
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: var(--text-secondary);
+    margin-bottom: var(--space-4);
+}
+
+.about-hero-badge-dot {
+    width: 6px;
+    height: 6px;
+    background: var(--accent-success);
+    border-radius: 50%;
+    animation: pulse-dot 2s ease-in-out infinite;
+}
+
+.about-hero-title {
+    font-size: 3.5rem;
+    font-weight: 800;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    margin-bottom: var(--space-4);
+}
+
+.about-hero-gradient {
+    background: linear-gradient(135deg, #4F46E5, #818CF8);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.about-hero-subtitle {
+    font-size: 1.25rem;
+    line-height: 1.6;
+    color: var(--text-secondary);
+    margin-bottom: var(--space-6);
+}
+
+.about-hero-actions {
+    display: flex;
+    gap: var(--space-3);
+    flex-wrap: wrap;
+    margin-bottom: var(--space-6);
+}
+
+.about-hero-stats {
+    display: flex;
+    gap: var(--space-6);
+    padding-top: var(--space-5);
+    border-top: 1px solid var(--border-subtle);
+}
+
+.about-hero-stat {
+    text-align: center;
+}
+
+.about-hero-stat-value {
+    display: block;
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: var(--brand-primary);
+}
+
+.about-hero-stat-label {
+    font-size: 0.8125rem;
+    color: var(--text-secondary);
+}
+
+.about-hero-visual {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.about-hero-illustration {
+    width: 100%;
+    max-width: 400px;
+}
+
+.about-hero-illustration svg {
+    width: 100%;
+    height: auto;
+}
+
+/* Mission */
+.about-mission {
+    padding: var(--space-8) 0;
+    background: var(--bg-secondary);
+}
+
+.about-mission-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--space-5);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-8);
+    align-items: center;
+}
+
+.about-mission-badge {
+    display: inline-block;
+    padding: 4px 14px;
+    background: var(--bg-info);
+    color: var(--accent-info);
+    border-radius: var(--radius-full);
+    font-size: 0.75rem;
+    font-weight: 500;
+    margin-bottom: var(--space-3);
+}
+
+.about-mission-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: var(--space-3);
+}
+
+.about-mission-gradient {
+    background: linear-gradient(135deg, #4F46E5, #818CF8);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.about-mission-text {
+    font-size: 1.0625rem;
+    color: var(--text-secondary);
+    line-height: 1.7;
+    margin-bottom: var(--space-4);
+}
+
+.about-mission-values {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+}
+
+.about-mission-value {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    font-size: 0.9375rem;
+}
+
+.about-mission-value-icon {
+    color: var(--accent-success);
+    font-weight: 700;
+}
+
+.about-mission-quote {
+    background: var(--bg-surface);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-lg);
+    padding: var(--space-6);
+    text-align: center;
+}
+
+.about-mission-quote blockquote {
+    font-size: 1.25rem;
+    line-height: 1.6;
+    color: var(--text-primary);
+    font-style: italic;
+    margin-bottom: var(--space-3);
+}
+
+.about-mission-quote cite {
+    font-style: normal;
+    font-size: 0.875rem;
+    color: var(--text-muted);
+}
+
+/* Philosophy */
+.about-philosophy {
+    padding: var(--space-8) 0;
+}
+
+.about-philosophy-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--space-5);
+}
+
+.about-philosophy-header {
+    text-align: center;
+    margin-bottom: var(--space-6);
+}
+
+.about-philosophy-badge {
+    display: inline-block;
+    padding: 4px 14px;
+    background: var(--bg-secondary);
+    border-radius: var(--radius-full);
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: var(--text-secondary);
+    margin-bottom: var(--space-3);
+}
+
+.about-philosophy-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: var(--space-2);
+}
+
+.about-philosophy-gradient {
+    background: linear-gradient(135deg, #4F46E5, #818CF8);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.about-philosophy-subtitle {
+    font-size: 1.125rem;
+    color: var(--text-secondary);
+    max-width: 640px;
+    margin: 0 auto;
+}
+
+.about-philosophy-principle {
+    background: var(--bg-surface);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-lg);
+    padding: var(--space-6);
+    margin-bottom: var(--space-6);
+    display: flex;
+    gap: var(--space-5);
+    align-items: flex-start;
+}
+
+.about-philosophy-principle-icon {
+    font-size: 3rem;
+    flex-shrink: 0;
+}
+
+.about-philosophy-principle-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: var(--space-2);
+}
+
+.about-philosophy-principle-text {
+    font-size: 1rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+    margin-bottom: var(--space-3);
+}
+
+.about-philosophy-principle-steps {
+    display: flex;
+    gap: var(--space-3);
+    flex-wrap: wrap;
+}
+
+.about-philosophy-principle-step {
+    padding: 4px 14px;
+    background: var(--bg-secondary);
+    border-radius: var(--radius-full);
+    font-size: 0.8125rem;
+    color: var(--text-secondary);
+}
+
+.about-philosophy-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-4);
+}
+
+.about-philosophy-item {
+    background: var(--bg-surface);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-lg);
+    padding: var(--space-4);
+}
+
+.about-philosophy-item-title {
+    font-size: 1.0625rem;
+    font-weight: 600;
+    margin-bottom: var(--space-2);
+}
+
+.about-philosophy-item-text {
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+}
+
+/* Beliefs */
+.about-beliefs {
+    padding: var(--space-8) 0;
+    background: var(--bg-secondary);
+}
+
+.about-beliefs-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--space-5);
+}
+
+.about-beliefs-header {
+    text-align: center;
+    margin-bottom: var(--space-6);
+}
+
+.about-beliefs-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: var(--space-2);
+}
+
+.about-beliefs-gradient {
+    background: linear-gradient(135deg, #4F46E5, #818CF8);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.about-beliefs-subtitle {
+    font-size: 1.125rem;
+    color: var(--text-secondary);
+}
+
+.about-beliefs-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-4);
+}
+
+.about-belief-card {
+    background: var(--bg-surface);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-lg);
+    padding: var(--space-5);
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+.about-belief-card:hover {
+    border-color: var(--border-strong);
+    transform: translateY(-4px);
+}
+
+.about-belief-icon {
+    font-size: 2.5rem;
+    margin-bottom: var(--space-2);
+}
+
+.about-belief-title {
+    font-size: 1.0625rem;
+    font-weight: 600;
+    margin-bottom: var(--space-2);
+}
+
+.about-belief-text {
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+}
+
+/* Audiences */
+.about-audiences {
+    padding: var(--space-8) 0;
+}
+
+.about-audiences-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--space-5);
+}
+
+.about-audiences-header {
+    text-align: center;
+    margin-bottom: var(--space-6);
+}
+
+.about-audiences-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: var(--space-2);
+}
+
+.about-audiences-gradient {
+    background: linear-gradient(135deg, #4F46E5, #818CF8);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.about-audiences-subtitle {
+    font-size: 1.125rem;
+    color: var(--text-secondary);
+}
+
+.about-audiences-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--space-4);
+}
+
+.about-audience-card {
+    background: var(--bg-surface);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-lg);
+    padding: var(--space-5);
+    transition: all 0.3s ease;
+}
+
+.about-audience-card:hover {
+    border-color: var(--border-strong);
+    transform: translateY(-4px);
+}
+
+.about-audience-icon {
+    font-size: 2rem;
+    margin-bottom: var(--space-2);
+}
+
+.about-audience-title {
+    font-size: 1.125rem;
+    font-weight: 600;
+    margin-bottom: var(--space-2);
+}
+
+.about-audience-text {
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+    margin-bottom: var(--space-3);
+}
+
+.about-audience-challenge,
+.about-audience-solution {
+    padding: var(--space-2) var(--space-3);
+    border-radius: var(--radius-sm);
+    margin-bottom: var(--space-2);
+}
+
+.about-audience-challenge {
+    background: var(--bg-secondary);
+}
+
+.about-audience-solution {
+    background: var(--bg-success);
+}
+
+.about-audience-challenge-label,
+.about-audience-solution-label {
+    display: block;
+    font-size: 0.625rem;
+    font-weight: 600;
+    color: var(--text-muted);
+    text-transform: uppercase;
+}
+
+.about-audience-challenge-text {
+    font-size: 0.8125rem;
+}
+
+.about-audience-solution-text {
+    font-size: 0.8125rem;
+    color: var(--accent-success);
+}
+
+/* Platform */
+.about-platform {
+    padding: var(--space-8) 0;
+    background: var(--bg-secondary);
+}
+
+.about-platform-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--space-5);
+}
+
+.about-platform-header {
+    text-align: center;
+    margin-bottom: var(--space-6);
+}
+
+.about-platform-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: var(--space-2);
+}
+
+.about-platform-gradient {
+    background: linear-gradient(135deg, #4F46E5, #818CF8);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.about-platform-subtitle {
+    font-size: 1.125rem;
+    color: var(--text-secondary);
+}
+
+.about-platform-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--space-3);
+    margin-bottom: var(--space-5);
+}
+
+.about-platform-link {
+    background: var(--bg-surface);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-md);
+    padding: var(--space-4);
+    text-align: center;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.about-platform-link:hover {
+    border-color: var(--border-strong);
+    transform: translateY(-4px);
+}
+
+.about-platform-icon {
+    display: block;
+    font-size: 1.75rem;
+    margin-bottom: var(--space-2);
+}
+
+.about-platform-name {
+    display: block;
+    font-weight: 600;
+    font-size: 0.875rem;
+    color: var(--text-primary);
+}
+
+.about-platform-desc {
+    display: block;
+    font-size: 0.75rem;
+    color: var(--text-muted);
+}
+
+.about-platform-footer {
+    text-align: center;
+}
+
+/* Commitment */
+.about-commitment {
+    padding: var(--space-8) 0;
+}
+
+.about-commitment-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--space-5);
+}
+
+.about-commitment-header {
+    text-align: center;
+    margin-bottom: var(--space-6);
+}
+
+.about-commitment-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: var(--space-2);
+}
+
+.about-commitment-gradient {
+    background: linear-gradient(135deg, #4F46E5, #818CF8);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.about-commitment-subtitle {
+    font-size: 1.125rem;
+    color: var(--text-secondary);
+}
+
+.about-commitment-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-4);
+}
+
+.about-commitment-item {
+    display: flex;
+    gap: var(--space-3);
+    align-items: flex-start;
+    padding: var(--space-4);
+    background: var(--bg-surface);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-lg);
+}
+
+.about-commitment-icon {
+    flex-shrink: 0;
+    color: var(--brand-primary);
+}
+
+.about-commitment-title-small {
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 2px;
+}
+
+.about-commitment-text {
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+}
+
+/* Trust */
+.about-trust {
+    padding: var(--space-8) 0;
+    background: var(--bg-secondary);
+}
+
+.about-trust-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--space-5);
+}
+
+.about-trust-header {
+    text-align: center;
+    margin-bottom: var(--space-6);
+}
+
+.about-trust-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: var(--space-2);
+}
+
+.about-trust-gradient {
+    background: linear-gradient(135deg, #4F46E5, #818CF8);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.about-trust-subtitle {
+    font-size: 1.125rem;
+    color: var(--text-secondary);
+}
+
+.about-trust-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-4);
+}
+
+.about-trust-card {
+    background: var(--bg-surface);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-lg);
+    padding: var(--space-4);
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+.about-trust-card:hover {
+    border-color: var(--border-strong);
+    transform: translateY(-4px);
+}
+
+.about-trust-icon {
+    font-size: 2rem;
+    margin-bottom: var(--space-2);
+}
+
+.about-trust-title-small {
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: var(--space-2);
+}
+
+.about-trust-text {
+    font-size: 0.8125rem;
+    color: var(--text-secondary);
+    line-height: 1.5;
+}
+
+/* FAQ */
+.about-faq {
+    padding: var(--space-8) 0;
+}
+
+.about-faq-container {
+    max-width: 768px;
+    margin: 0 auto;
+    padding: 0 var(--space-5);
+}
+
+.about-faq-header {
+    text-align: center;
+    margin-bottom: var(--space-6);
+}
+
+.about-faq-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+}
+
+.about-faq-gradient {
+    background: linear-gradient(135deg, #4F46E5, #818CF8);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.about-faq-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+}
+
+.about-faq-item {
+    border-bottom: 1px solid var(--border-subtle);
+}
+
+.about-faq-item:last-child {
+    border-bottom: none;
+}
+
+.about-faq-question {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--space-4) 0;
+    background: none;
+    border: none;
+    color: var(--text-primary);
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    text-align: left;
+    transition: color 0.2s ease;
+}
+
+.about-faq-question:hover {
+    color: var(--brand-primary);
+}
+
+.about-faq-arrow {
+    transition: transform 0.3s ease;
+}
+
+.about-faq-item.active .about-faq-arrow {
+    transform: rotate(180deg);
+}
+
+.about-faq-answer {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+}
+
+.about-faq-item.active .about-faq-answer {
+    max-height: 200px;
+    padding-bottom: var(--space-4);
+}
+
+.about-faq-answer p {
+    color: var(--text-secondary);
+    line-height: 1.6;
+    font-size: 0.9375rem;
+}
+
+/* CTA */
+.about-cta {
+    padding: var(--space-8) 0;
+    position: relative;
+    overflow: hidden;
+    background: var(--bg-secondary);
+}
+
+.about-cta::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at 50% 50%, rgba(79, 70, 229, 0.08) 0%, transparent 70%);
+}
+
+.about-cta-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 var(--space-5);
+    position: relative;
+    z-index: 1;
+}
+
+.about-cta-content {
+    text-align: center;
+}
+
+.about-cta-title {
+    font-size: 3rem;
+    font-weight: 800;
+    line-height: 1.1;
+    margin-bottom: var(--space-3);
+}
+
+.about-cta-gradient {
+    background: linear-gradient(135deg, #4F46E5, #22C55E);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.about-cta-subtitle {
+    font-size: 1.125rem;
+    color: var(--text-secondary);
+    margin-bottom: var(--space-6);
+}
+
+.about-cta-actions {
+    display: flex;
+    gap: var(--space-3);
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: var(--space-5);
+}
+
+.about-cta-trust {
+    display: flex;
+    gap: var(--space-5);
+    justify-content: center;
+    font-size: 0.875rem;
+    color: var(--text-muted);
+}
+
+.about-cta-trust span {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.about-cta-trust span::before {
+    content: '•';
+}
+
+.about-cta-trust span:first-child::before {
+    content: '';
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+    .about-hero-container {
+        grid-template-columns: 1fr;
+        gap: var(--space-6);
+        text-align: center;
+    }
+    
+    .about-hero-content {
+        max-width: 100%;
+        margin: 0 auto;
+    }
+    
+    .about-hero-actions {
+        justify-content: center;
+    }
+    
+    .about-hero-stats {
+        justify-content: center;
+    }
+    
+    .about-mission-container {
+        grid-template-columns: 1fr;
+        gap: var(--space-5);
+        text-align: center;
+    }
+    
+    .about-mission-values {
+        align-items: center;
+    }
+    
+    .about-audiences-grid,
+    .about-beliefs-grid,
+    .about-commitment-grid,
+    .about-trust-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .about-hero-title {
+        font-size: 2.25rem;
+    }
+    
+    .about-hero-actions {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .about-hero-stats {
+        flex-direction: column;
+        gap: var(--space-3);
+    }
+    
+    .about-philosophy-principle {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+    
+    .about-philosophy-principle-steps {
+        justify-content: center;
+    }
+    
+    .about-philosophy-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .about-audiences-grid,
+    .about-beliefs-grid,
+    .about-commitment-grid,
+    .about-trust-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .about-platform-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .about-cta-title {
+        font-size: 2rem;
+    }
+    
+    .about-cta-actions {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .about-cta-trust {
+        flex-wrap: wrap;
+        gap: var(--space-2);
+    }
+    
+    .about-faq-question {
+        font-size: 0.9375rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .about-hero-title {
+        font-size: 1.75rem;
+    }
+    
+    .about-mission-title,
+    .about-philosophy-title,
+    .about-beliefs-title,
+    .about-audiences-title,
+    .about-platform-title,
+    .about-commitment-title,
+    .about-trust-title,
+    .about-faq-title {
+        font-size: 1.75rem;
+    }
+    
+    .about-platform-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Animations */
+@keyframes pulse-dot {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+}
