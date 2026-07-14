@@ -1,0 +1,50 @@
+<div class="workspace-activity-timeline">
+    <div class="workspace-activity-header">
+        <h3 class="workspace-activity-title">Recent Activity</h3>
+        <a href="#" class="workspace-activity-view-all">View All</a>
+    </div>
+    
+    <div class="workspace-activity-list">
+        {% for activity in activities %}
+            <div class="workspace-activity-item">
+                <div class="workspace-activity-item-icon {{ activity.type }}">
+                    {% if activity.type == 'audit' %}
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                        </svg>
+                    {% elif activity.type == 'keyword' %}
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M21 21L15 15M17 9C17 13.4183 13.4183 17 9 17C4.58172 17 1 13.4183 1 9C1 4.58172 4.58172 1 9 1C13.4183 1 17 4.58172 17 9Z"/>
+                        </svg>
+                    {% elif activity.type == 'competitor' %}
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M9 19V10M15 19V14M21 19V4M3 19V16"/>
+                        </svg>
+                    {% elif activity.type == 'review' %}
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M12 4.5C7.5 4.5 3.5 6.5 1 9.5C3.5 12.5 7.5 14.5 12 14.5C16.5 14.5 20.5 12.5 23 9.5C20.5 6.5 16.5 4.5 12 4.5Z"/>
+                            <circle cx="12" cy="9.5" r="3"/>
+                        </svg>
+                    {% elif activity.type == 'report' %}
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                            <polyline points="14 2 14 8 20 8"/>
+                            <line x1="16" y1="13" x2="8" y2="13"/>
+                            <line x1="16" y1="17" x2="8" y2="17"/>
+                            <polyline points="10 9 9 9 8 9"/>
+                        </svg>
+                    {% else %}
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="10"/>
+                            <polyline points="12 6 12 12 16 14"/>
+                        </svg>
+                    {% endif %}
+                </div>
+                <div class="workspace-activity-item-content">
+                    <p class="workspace-activity-item-text">{{ activity.text }}</p>
+                    <span class="workspace-activity-item-time">{{ activity.time }}</span>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
