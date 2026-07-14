@@ -1,0 +1,153 @@
+{% extends "base/dashboard.html" %}
+
+{% block title %}Competitor Intelligence — Novexium{% endblock %}
+
+{% block dashboard_content %}
+<div class="competitor-page">
+    <!-- Header -->
+    <header class="competitor-header">
+        <div class="competitor-header-left">
+            <h1 class="competitor-title">Competitor Intelligence</h1>
+            <p class="competitor-subtitle">Monitor your competitive landscape</p>
+        </div>
+        <div class="competitor-header-right">
+            <button class="btn-secondary" onclick="refreshCompetitors()">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M23 4v6h-6"/>
+                    <path d="M1 20v-6h6"/>
+                    <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/>
+                </svg>
+                Refresh
+            </button>
+            <button class="btn-primary" onclick="compareCompetitors()">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
+                    <polyline points="15 3 21 3 21 9"/>
+                    <line x1="10" y1="14" x2="21" y2="3"/>
+                </svg>
+                Compare
+            </button>
+        </div>
+    </header>
+    
+    <!-- Insights -->
+    {% if insights %}
+    <section class="competitor-insights">
+        <h2 class="competitor-section-title">💡 Market Insights</h2>
+        <div class="insights-grid">
+            {% for insight in insights[:3] %}
+            <div class="insight-card {{ insight.priority }}">
+                <div class="insight-content">
+                    <span class="insight-type">{{ insight.type|title }}</span>
+                    <p class="insight-text">{{ insight.text }}</p>
+                    <span class="insight-recommendation">💡 {{ insight.recommendation }}</span>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </section>
+    {% endif %}
+    
+    <!-- Competitor List -->
+    <section class="competitor-list">
+        <h2 class="competitor-section-title">📊 Tracked Competitors</h2>
+        {% if competitors %}
+        <div class="competitor-grid">
+            {% for competitor in competitors %}
+            <div class="competitor-card {{ 'pinned' if competitor.is_pinned }}">
+                <div class="competitor-card-header">
+                    <div class="competitor-icon">
+                        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#4F46E5" stroke-width="2">
+                            <rect x="2" y="2" width="20" height="20" rx="4"/>
+                            <line x1="8" y1="2" x2="8" y2="22"/>
+                            <line x1="16" y1="2" x2="16" y2="22"/>
+                            <line x1="2" y1="8" x2="22" y2="8"/>
+                            <line x1="2" y1="16" x2="22" y2="16"/>
+                        </svg>
+                    </div>
+                    <div class="competitor-info">
+                        <h3 class="competitor-name">{{ competitor.name }}</h3>
+                        <span class="competitor-developer">{{ competitor.developer }}</span>
+                        <div class="competitor-meta">
+                            <span class="competitor-platform">{{ competitor.platform|title }}</span>
+                            <span class="competitor-category">{{ competitor.category or 'App' }}</span>
+                        </div>
+                    </div>
+                    <div class="competitor-actions">
+                        <button class="competitor-pin {{ 'pinned' if competitor.is_pinned }}" 
+                                onclick="togglePin('{{ competitor.id }}')">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="{{ '#F59E0B' if competitor.is_pinned else 'none' }}" stroke="currentColor" stroke-width="2">
+                                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+                            </svg>
+                        </button>
+                        <button class="competitor-remove" onclick="removeCompetitor('{{ competitor.id }}')">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <line x1="18" y1="6" x2="6" y2="18"/>
+                                <line x1="6" y1="6" x2="18" y2="18"/>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+                <div class="competitor-card-stats">
+                    <div class="competitor-stat">
+                        <span class="competitor-stat-label">Rating</span>
+                        <span class="competitor-stat-value">⭐ {{ competitor.rating or '—' }}</span>
+                    </div>
+                    <div class="competitor-stat">
+                        <span class="competitor-stat-label">Reviews</span>
+                        <span class="competitor-stat-value">{{ competitor.review_count or 0 }}</span>
+                    </div>
+                    <div class="competitor-stat">
+                        <span class="competitor-stat-label">Score</span>
+                        <span class="competitor-stat-value">{{ competitor.overall_score or 0 }}</span>
+                    </div>
+                    <div class="competitor-stat">
+                        <span class="competitor-stat-label">Visibility</span>
+                        <span class="competitor-stat-value">{{ competitor.visibility_score or 0 }}</span>
+                    </div>
+                </div>
+                <div class="competitor-card-actions">
+                    <button class="btn-secondary btn-sm" onclick="viewCompetitor('{{ competitor.id }}')">
+                        View Profile
+                    </button>
+                    <button class="btn-secondary btn-sm" onclick="compareWith('{{ competitor.id }}')">
+                        Compare
+                    </button>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        {% else %}
+        <div class="competitor-empty">
+            <div class="competitor-empty-icon">🔍</div>
+            <h3>No Competitors Found Yet</h3>
+            <p>Novexium is analyzing your category to discover relevant competitors.</p>
+            <button class="btn-primary" onclick="discoverCompetitors()">
+                Discover Competitors
+            </button>
+        </div>
+        {% endif %}
+    </section>
+    
+    <!-- Recent Changes -->
+    {% if changes %}
+    <section class="competitor-changes">
+        <h2 class="competitor-section-title">📋 Recent Changes</h2>
+        <div class="changes-timeline">
+            {% for change in changes[:10] %}
+            <div class="change-item">
+                <span class="change-date">{{ change.detected_date }}</span>
+                <span class="change-type {{ change.type }}">{{ change.type|title }}</span>
+                <span class="change-description">{{ change.description }}</span>
+                <span class="change-impact {{ change.impact }}">{{ change.impact|title }}</span>
+            </div>
+            {% endfor %}
+        </div>
+    </section>
+    {% endif %}
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="{{ url_for('static', path='js/competitor.js') }}"></script>
+{% endblock %}
