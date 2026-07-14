@@ -1,0 +1,82 @@
+{% extends "base/dashboard.html" %}
+
+{% block title %}API Keys — Novexium{% endblock %}
+
+{% block dashboard_content %}
+<div class="api-keys-page">
+    <div class="api-section-header">
+        <div>
+            <h2 class="api-section-title">🔑 API Keys</h2>
+            <p class="api-section-subtitle">Manage your API keys for programmatic access</p>
+        </div>
+        <button class="btn-primary" onclick="generateAPIKey()">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M12 5v14M5 12h14"/>
+            </svg>
+            Generate New Key
+        </button>
+    </div>
+    
+    <div class="api-keys-list">
+        {% if keys %}
+        {% for key in keys %}
+        <div class="api-key-card">
+            <div class="api-key-header">
+                <div class="api-key-info">
+                    <span class="api-key-name">{{ key.name }}</span>
+                    <span class="api-key-scopes">{{ key.scopes|join(', ') }}</span>
+                </div>
+                <div class="api-key-status {{ 'active' if key.is_active else 'inactive' }}">
+                    {{ 'Active' if key.is_active else 'Inactive' }}
+                </div>
+            </div>
+            <div class="api-key-details">
+                <div class="api-key-detail">
+                    <span class="api-key-detail-label">Created</span>
+                    <span class="api-key-detail-value">{{ key.created_at }}</span>
+                </div>
+                <div class="api-key-detail">
+                    <span class="api-key-detail-label">Last Used</span>
+                    <span class="api-key-detail-value">{{ key.last_used or 'Never' }}</span>
+                </div>
+                <div class="api-key-detail">
+                    <span class="api-key-detail-label">Requests</span>
+                    <span class="api-key-detail-value">{{ key.request_count }}</span>
+                </div>
+            </div>
+            <div class="api-key-actions">
+                <button class="api-key-action" onclick="copyKey('{{ key.id }}')">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="9" y="9" width="13" height="13" rx="2" ry="2"/>
+                        <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
+                    </svg>
+                    Copy
+                </button>
+                <button class="api-key-action" onclick="regenerateKey('{{ key.id }}')">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M23 4v6h-6"/>
+                        <path d="M1 20v-6h6"/>
+                        <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/>
+                    </svg>
+                    Regenerate
+                </button>
+                <button class="api-key-action danger" onclick="revokeKey('{{ key.id }}')">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M18 6L6 18M6 6L18 18"/>
+                    </svg>
+                    Revoke
+                </button>
+            </div>
+        </div>
+        {% endfor %}
+        {% else %}
+        <div class="api-keys-empty">
+            <div class="empty-icon">🔑</div>
+            <h3>No API Keys</h3>
+            <p>Create your first API key to start building with Novexium</p>
+            <button class="btn-primary" onclick="generateAPIKey()">Generate API Key</button>
+        </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
