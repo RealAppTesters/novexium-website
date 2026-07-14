@@ -1,0 +1,184 @@
+{% extends "base/dashboard.html" %}
+
+{% block title %}Billing — Novexium{% endblock %}
+
+{% block dashboard_content %}
+<div class="billing-page">
+    <!-- Header -->
+    <header class="billing-header">
+        <div class="billing-header-left">
+            <h1 class="billing-title">Billing</h1>
+            <p class="billing-subtitle">Manage your subscription and payments</p>
+        </div>
+    </header>
+    
+    <!-- Current Plan -->
+    <section class="billing-plan">
+        <div class="plan-card">
+            <div class="plan-card-header">
+                <div class="plan-card-info">
+                    <span class="plan-name">{{ subscription.plan_name }}</span>
+                    <span class="plan-status {{ subscription.status }}">
+                        {{ subscription.status|title }}
+                    </span>
+                    <span class="plan-price">${{ subscription.amount }}/month</span>
+                </div>
+                <div class="plan-card-actions">
+                    <a href="/billing/plans" class="btn-secondary">Change Plan</a>
+                    <a href="/billing/cancel" class="btn-danger">Cancel</a>
+                </div>
+            </div>
+            <div class="plan-card-details">
+                {% if subscription.trial_end %}
+                <div class="plan-detail">
+                    <span class="plan-detail-label">Trial Ends</span>
+                    <span class="plan-detail-value">{{ subscription.trial_end }}</span>
+                </div>
+                {% endif %}
+                <div class="plan-detail">
+                    <span class="plan-detail-label">Renewal Date</span>
+                    <span class="plan-detail-value">{{ subscription.current_period_end or 'N/A' }}</span>
+                </div>
+                <div class="plan-detail">
+                    <span class="plan-detail-label">Status</span>
+                    <span class="plan-detail-value plan-status-text {{ subscription.status }}">
+                        {{ subscription.status|title }}
+                    </span>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Usage -->
+    <section class="billing-usage">
+        <h2 class="billing-section-title">📊 Usage</h2>
+        <div class="usage-grid">
+            <div class="usage-card">
+                <span class="usage-label">Apps</span>
+                <div class="usage-value">
+                    <span class="usage-count">{{ usage.app_count }}</span>
+                    <span class="usage-limit">/ {{ usage.app_limit }}</span>
+                </div>
+                <div class="usage-bar">
+                    <div class="usage-fill" style="width: {{ usage.app_percentage }}%"></div>
+                </div>
+            </div>
+            <div class="usage-card">
+                <span class="usage-label">Audits</span>
+                <div class="usage-value">
+                    <span class="usage-count">{{ usage.audit_count }}</span>
+                    <span class="usage-limit">/ {{ usage.audit_limit or '∞' }}</span>
+                </div>
+                <div class="usage-bar">
+                    <div class="usage-fill" style="width: {{ (usage.audit_count / usage.audit_limit * 100) if usage.audit_limit else 0 }}%"></div>
+                </div>
+            </div>
+            <div class="usage-card">
+                <span class="usage-label">Reports</span>
+                <div class="usage-value">
+                    <span class="usage-count">{{ usage.report_count }}</span>
+                    <span class="usage-limit">/ {{ usage.report_limit or '∞' }}</span>
+                </div>
+                <div class="usage-bar">
+                    <div class="usage-fill" style="width: {{ (usage.report_count / usage.report_limit * 100) if usage.report_limit else 0 }}%"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Payment Methods -->
+    <section class="billing-payment-methods">
+        <div class="payment-methods-header">
+            <h2 class="billing-section-title">💳 Payment Methods</h2>
+            <button class="btn-secondary" onclick="addPaymentMethod()">Add Payment Method</button>
+        </div>
+        <div class="payment-methods-list">
+            {% if payment_methods %}
+            {% for method in payment_methods %}
+            <div class="payment-method-card {{ 'default' if method.is_default }}">
+                <div class="payment-method-icon">
+                    {% if method.brand == 'visa' %}💳
+                    {% elif method.brand == 'mastercard' %}💳
+                    {% elif method.brand == 'amex' %}💳
+                    {% else %}💳{% endif %}
+                </div>
+                <div class="payment-method-info">
+                    <span class="payment-method-brand">{{ method.brand|title }}</span>
+                    <span class="payment-method-number">•••• {{ method.last_four }}</span>
+                    <span class="payment-method-expiry">Expires {{ method.exp_month }}/{{ method.exp_year }}</span>
+                    <span class="payment-method-name">{{ method.billing_name }}</span>
+                </div>
+                <div class="payment-method-actions">
+                    {% if method.is_default %}
+                    <span class="payment-method-default">✓ Default</span>
+                    {% else %}
+                    <button class="payment-method-set-default" onclick="setDefault('{{ method.stripe_id }}')">
+                        Set Default
+                    </button>
+                    {% endif %}
+                    <button class="payment-method-remove" onclick="removePaymentMethod('{{ method.stripe_id }}')">
+                        Remove
+                    </button>
+                </div>
+            </div>
+            {% endfor %}
+            {% else %}
+            <div class="payment-methods-empty">
+                <p>No payment methods added yet.</p>
+                <button class="btn-primary" onclick="addPaymentMethod()">Add Payment Method</button>
+            </div>
+            {% endif %}
+        </div>
+    </section>
+    
+    <!-- Invoices -->
+    <section class="billing-invoices">
+        <div class="invoices-header">
+            <h2 class="billing-section-title">📄 Invoices</h2>
+            <a href="/billing/invoices" class="btn-secondary">View All</a>
+        </div>
+        {% if invoices %}
+        <div class="invoices-list">
+            <table class="invoices-table">
+                <thead>
+                    <tr>
+                        <th>Invoice</th>
+                        <th>Date</th>
+                        <th>Amount</th>
+                        <th>Status</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for invoice in invoices[:5] %}
+                    <tr>
+                        <td>{{ invoice.invoice_number }}</td>
+                        <td>{{ invoice.invoice_date }}</td>
+                        <td>${{ invoice.amount }}</td>
+                        <td>
+                            <span class="invoice-status {{ invoice.status }}">
+                                {{ invoice.status|title }}
+                            </span>
+                        </td>
+                        <td>
+                            {% if invoice.pdf_url %}
+                            <a href="{{ invoice.pdf_url }}" target="_blank" class="invoice-download">Download</a>
+                            {% endif %}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        {% else %}
+        <div class="invoices-empty">
+            <p>No invoices yet.</p>
+        </div>
+        {% endif %}
+    </section>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="{{ url_for('static', path='js/billing.js') }}"></script>
+{% endblock %}
