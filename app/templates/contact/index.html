@@ -1,0 +1,40 @@
+{% extends "base/public.html" %}
+
+{% block title %}Contact Novexium — We're Here to Help{% endblock %}
+
+{% block description %}
+Have a question, need support, or want to explore Novexium for your team? We'd love to hear from you.
+{% endblock %}
+
+{% block og_title %}Contact Novexium — We're Here to Help{% endblock %}
+{% block og_description %}Have a question, need support, or want to explore Novexium for your team?{% endblock %}
+
+{% block page_content %}
+    <!-- Hero -->
+    {% include 'components/contact/_contact_hero.html' %}
+    
+    <!-- Contact Options -->
+    {% include 'components/contact/_contact_options.html' %}
+    
+    <!-- Contact Form -->
+    {% include 'components/contact/_contact_form.html' %}
+    
+    <!-- Quick Answers -->
+    {% include 'components/contact/_contact_quick.html' %}
+    
+    <!-- FAQ -->
+    {% include 'components/contact/_contact_faq.html' %}
+    
+    <!-- Response Expectations -->
+    {% include 'components/contact/_contact_response.html' %}
+    
+    <!-- Trust Section -->
+    {% include 'components/contact/_contact_trust.html' %}
+    
+    <!-- Final CTA -->
+    {% include 'components/contact/_contact_cta.html' %}
+{% endblock %}
+
+{% block extra_js %}
+<script src="{{ url_for('static', path='js/contact.js') }}"></script>
+{% endblock %}
