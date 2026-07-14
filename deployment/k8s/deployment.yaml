@@ -1,0 +1,134 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: novexium-app
+  namespace: novexium
+  labels:
+    app: novexium
+    tier: web
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: novexium
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+  template:
+    metadata:
+      labels:
+        app: novexium
+        tier: web
+    spec:
+      containers:
+      - name: app
+        image: novexium/app:latest
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8000
+          name: http
+        envFrom:
+        - secretRef:
+            name: novexium-secrets
+        - configMapRef:
+            name: novexium-config
+        resources:
+          requests:
+            memory: "512Mi"
+            cpu: "250m"
+          limits:
+            memory: "1Gi"
+            cpu: "500m"
+        livenessProbe:
+          httpGet:
+            path: /health/live
+            port: 8000
+          initialDelaySeconds: 30
+          periodSeconds: 10
+          timeoutSeconds: 5
+        readinessProbe:
+          httpGet:
+            path: /health/ready
+            port: 8000
+          initialDelaySeconds: 10
+          periodSeconds: 5
+          timeoutSeconds: 3
+        volumeMounts:
+        - name: static
+          mountPath: /app/static
+        - name: logs
+          mountPath: /app/logs
+      - name: celery-worker
+        image: novexium/app:latest
+        command: ["celery", "-A", "app.background.celery_app", "worker", "--loglevel=info"]
+        envFrom:
+        - secretRef:
+            name: novexium-secrets
+        - configMapRef:
+            name: novexium-config
+        resources:
+          requests:
+            memory: "512Mi"
+            cpu: "250m"
+          limits:
+            memory: "1Gi"
+            cpu: "500m"
+      volumes:
+      - name: static
+        persistentVolumeClaim:
+          claimName: static-pvc
+      - name: logs
+        emptyDir: {}
+      terminationGracePeriodSeconds: 30
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: novexium-service
+  namespace: novexium
+spec:
+  selector:
+    app: novexium
+  ports:
+  - port: 80
+    targetPort: 8000
+    name: http
+  type: ClusterIP
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: novexium-ingress
+  namespace: novexium
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+    nginx.ingress.kubernetes.io/ssl-redirect: "true"
+spec:
+  tls:
+  - hosts:
+    - app.novexium.com
+    - api.novexium.com
+    secretName: novexium-tls
+  rules:
+  - host: app.novexium.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: novexium-service
+            port:
+              number: 80
+  - host: api.novexium.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: novexium-service
+            port:
+              number: 80
