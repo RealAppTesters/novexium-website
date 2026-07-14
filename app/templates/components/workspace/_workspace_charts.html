@@ -1,0 +1,53 @@
+<div class="workspace-charts-container">
+    <div class="workspace-charts-header">
+        <h3 class="workspace-charts-title">Performance Trends</h3>
+        <div class="workspace-charts-filters">
+            <button class="workspace-charts-filter active" data-period="30">30 Days</button>
+            <button class="workspace-charts-filter" data-period="90">90 Days</button>
+            <button class="workspace-charts-filter" data-period="180">6 Months</button>
+            <button class="workspace-charts-filter" data-period="365">1 Year</button>
+        </div>
+    </div>
+    
+    <div class="workspace-charts-grid">
+        <div class="workspace-chart">
+            <div class="workspace-chart-header">
+                <span class="workspace-chart-label">Growth Score History</span>
+                <span class="workspace-chart-trend positive">↑ 12.5%</span>
+            </div>
+            <div class="workspace-chart-container">
+                <canvas id="growthChart" height="200"></canvas>
+            </div>
+        </div>
+        
+        <div class="workspace-chart">
+            <div class="workspace-chart-header">
+                <span class="workspace-chart-label">Visibility Trend</span>
+                <span class="workspace-chart-trend positive">↑ 8.3%</span>
+            </div>
+            <div class="workspace-chart-container">
+                <canvas id="visibilityChart" height="200"></canvas>
+            </div>
+        </div>
+        
+        <div class="workspace-chart">
+            <div class="workspace-chart-header">
+                <span class="workspace-chart-label">Keyword Trend</span>
+                <span class="workspace-chart-trend positive">↑ 156</span>
+            </div>
+            <div class="workspace-chart-container">
+                <canvas id="keywordChart" height="200"></canvas>
+            </div>
+        </div>
+        
+        <div class="workspace-chart">
+            <div class="workspace-chart-header">
+                <span class="workspace-chart-label">Review Trend</span>
+                <span class="workspace-chart-trend positive">↑ 0.2</span>
+            </div>
+            <div class="workspace-chart-container">
+                <canvas id="reviewChart" height="200"></canvas>
+            </div>
+        </div>
+    </div>
+</div>
