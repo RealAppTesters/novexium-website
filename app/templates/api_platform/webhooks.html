@@ -1,0 +1,72 @@
+{% extends "base/dashboard.html" %}
+
+{% block title %}Webhooks — Novexium{% endblock %}
+
+{% block dashboard_content %}
+<div class="webhooks-page">
+    <div class="api-section-header">
+        <div>
+            <h2 class="api-section-title">🔔 Webhooks</h2>
+            <p class="api-section-subtitle">Configure webhook endpoints for real-time events</p>
+        </div>
+        <button class="btn-primary" onclick="createWebhook()">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M12 5v14M5 12h14"/>
+            </svg>
+            Create Webhook
+        </button>
+    </div>
+    
+    <div class="webhooks-list">
+        {% if webhooks %}
+        {% for webhook in webhooks %}
+        <div class="webhook-card {{ 'paused' if webhook.is_paused else 'active' }}">
+            <div class="webhook-header">
+                <div class="webhook-info">
+                    <span class="webhook-name">{{ webhook.name }}</span>
+                    <span class="webhook-url">{{ webhook.url }}</span>
+                </div>
+                <div class="webhook-status {{ 'active' if not webhook.is_paused else 'paused' }}">
+                    {{ 'Active' if not webhook.is_paused else 'Paused' }}
+                </div>
+            </div>
+            <div class="webhook-events">
+                {% for event in webhook.events %}
+                <span class="webhook-event">{{ event }}</span>
+                {% endfor %}
+            </div>
+            <div class="webhook-stats">
+                <div class="webhook-stat">
+                    <span class="webhook-stat-label">Deliveries</span>
+                    <span class="webhook-stat-value">{{ webhook.deliveries }}</span>
+                </div>
+                <div class="webhook-stat">
+                    <span class="webhook-stat-label">Success Rate</span>
+                    <span class="webhook-stat-value">{{ webhook.success_rate }}%</span>
+                </div>
+                <div class="webhook-stat">
+                    <span class="webhook-stat-label">Last Delivered</span>
+                    <span class="webhook-stat-value">{{ webhook.last_delivery or 'Never' }}</span>
+                </div>
+            </div>
+            <div class="webhook-actions">
+                <button class="webhook-action" onclick="testWebhook('{{ webhook.id }}')">Test</button>
+                <button class="webhook-action" onclick="editWebhook('{{ webhook.id }}')">Edit</button>
+                <button class="webhook-action" onclick="toggleWebhook('{{ webhook.id }}')">
+                    {{ 'Resume' if webhook.is_paused else 'Pause' }}
+                </button>
+                <button class="webhook-action danger" onclick="deleteWebhook('{{ webhook.id }}')">Delete</button>
+            </div>
+        </div>
+        {% endfor %}
+        {% else %}
+        <div class="webhooks-empty">
+            <div class="empty-icon">🔔</div>
+            <h3>No Webhooks</h3>
+            <p>Create a webhook to receive real-time events from Novexium</p>
+            <button class="btn-primary" onclick="createWebhook()">Create Webhook</button>
+        </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
