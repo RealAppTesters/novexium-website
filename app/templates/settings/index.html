@@ -1,0 +1,30 @@
+{% extends "base/dashboard.html" %}
+
+{% block title %}Settings — Novexium{% endblock %}
+
+{% block dashboard_content %}
+<div class="settings-page">
+    <div class="settings-container">
+        <!-- Sidebar -->
+        {% include 'components/settings/_sidebar.html' %}
+        
+        <!-- Main Content -->
+        <div class="settings-content">
+            <div class="settings-header">
+                <h1 class="settings-title">{{ section_title }}</h1>
+                <p class="settings-subtitle">{{ section_subtitle }}</p>
+            </div>
+            
+            <div class="settings-body">
+                {% block settings_content %}
+                    <!-- Content rendered by child templates -->
+                {% endblock %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="{{ url_for('static', path='js/settings.js') }}"></script>
+{% endblock %}
