@@ -55,9 +55,18 @@
         <div class="loading-spinner"></div>
     </div>
     
-    <!-- Flash Messages - Fixed for FastAPI -->
+    <!-- Flash Messages -->
     <div id="flash-container">
-        <!-- Flash messages will be handled by JavaScript -->
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="flash flash-{{ category }}" role="alert">
+                        <span>{{ message }}</span>
+                        <button class="flash-dismiss" aria-label="Dismiss">&times;</button>
+                    </div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
     </div>
     
     <!-- Toast Container -->
@@ -73,8 +82,8 @@
         {% endblock %}
     </div>
     
-    <!-- Search Overlay (only if file exists) -->
-    <div id="search-overlay-container"></div>
+    <!-- Search Overlay -->
+    {% include 'components/_search.html' %}
     
     <!-- Modals Container -->
     <div id="modals-container"></div>
