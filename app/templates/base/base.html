@@ -57,16 +57,7 @@
     
     <!-- Flash Messages -->
     <div id="flash-container">
-        {% with messages = get_flashed_messages(with_categories=true) %}
-            {% if messages %}
-                {% for category, message in messages %}
-                    <div class="flash flash-{{ category }}" role="alert">
-                        <span>{{ message }}</span>
-                        <button class="flash-dismiss" aria-label="Dismiss">&times;</button>
-                    </div>
-                {% endfor %}
-            {% endif %}
-        {% endwith %}
+        <!-- FastAPI flash messages handled by main.py -->
     </div>
     
     <!-- Toast Container -->
@@ -81,9 +72,6 @@
             <!-- Page content goes here -->
         {% endblock %}
     </div>
-    
-    <!-- Search Overlay -->
-    {% include 'components/_search.html' %}
     
     <!-- Modals Container -->
     <div id="modals-container"></div>
