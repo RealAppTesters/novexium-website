@@ -22,6 +22,3 @@ except Exception as e:
     @app.get("/health")
     async def health():
         return {"status": "healthy"}
-
-# Vercel expects a 'handler'
-handler = app
