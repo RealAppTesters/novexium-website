@@ -4,7 +4,7 @@ from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 from fastapi.responses import HTMLResponse, JSONResponse
 from pathlib import Path
-from datetime import datetime
+import os
 
 # Create FastAPI app
 app = FastAPI(title="Novexium", version="1.0.0")
@@ -21,11 +21,19 @@ app.add_middleware(
 # Set up templates
 templates = Jinja2Templates(directory="app/templates")
 
+# Add custom functions to template context
+def get_flashed_messages():
+    """Mock flash messages for templates - replace with real implementation later"""
+    return []
+
+# Add the function to template globals
+templates.env.globals['get_flashed_messages'] = get_flashed_messages
+
 # Mount static files
 app.mount("/static", StaticFiles(directory="app/static"), name="static")
 
 # ============================================
-# API ROUTES (JSON Responses)
+# API ROUTES
 # ============================================
 
 @app.get("/api")
@@ -33,151 +41,113 @@ async def api_root():
     return {
         "message": "Novexium API is running!",
         "version": "1.0.0",
-        "status": "healthy",
-        "endpoints": [
-            "/",
-            "/api",
-            "/api/health",
-            "/auth/login",
-            "/auth/register",
-            "/dashboard",
-            "/apps",
-            "/pricing",
-            "/platform",
-            "/solutions",
-            "/resources",
-            "/about",
-            "/contact"
-        ]
+        "status": "healthy"
     }
 
 @app.get("/api/health")
 async def health_check():
-    return {"status": "healthy", "version": "1.0.0", "timestamp": datetime.utcnow().isoformat()}
+    return {"status": "healthy", "version": "1.0.0"}
 
 # ============================================
-# PUBLIC WEB ROUTES (HTML Pages)
+# WEB ROUTES WITH ERROR HANDLING
 # ============================================
 
 @app.get("/", response_class=HTMLResponse)
 async def home_page(request: Request):
-    """Homepage - Conversion-focused landing page"""
-    return templates.TemplateResponse(
-        "public/index.html",
-        {"request": request}
-    )
-
-@app.get("/platform", response_class=HTMLResponse)
-async def platform_page(request: Request):
-    """Platform page - Product tour"""
-    return templates.TemplateResponse(
-        "platform/index.html",
-        {"request": request}
-    )
-
-@app.get("/solutions", response_class=HTMLResponse)
-async def solutions_page(request: Request):
-    """Solutions page - For different audiences"""
-    return templates.TemplateResponse(
-        "solutions/index.html",
-        {"request": request}
-    )
-
-@app.get("/pricing", response_class=HTMLResponse)
-async def pricing_page(request: Request):
-    """Pricing page - Plans and subscription"""
-    return templates.TemplateResponse(
-        "pricing/index.html",
-        {"request": request}
-    )
-
-@app.get("/resources", response_class=HTMLResponse)
-async def resources_page(request: Request):
-    """Resources Center - Guides and downloads"""
-    return templates.TemplateResponse(
-        "resources/index.html",
-        {"request": request}
-    )
-
-@app.get("/about", response_class=HTMLResponse)
-async def about_page(request: Request):
-    """About page - Company information"""
-    return templates.TemplateResponse(
-        "about/index.html",
-        {"request": request}
-    )
-
-@app.get("/contact", response_class=HTMLResponse)
-async def contact_page(request: Request):
-    """Contact page - Get in touch"""
-    return templates.TemplateResponse(
-        "contact/index.html",
-        {"request": request}
-    )
-
-# ============================================
-# AUTHENTICATION ROUTES
-# ============================================
+    try:
+        return templates.TemplateResponse("public/index.html", {"request": request})
+    except Exception as e:
+        return HTMLResponse(f"""
+        <!DOCTYPE html>
+        <html>
+        <head><title>Novexium</title></head>
+        <body>
+            <h1>Novexium</h1>
+            <p>Welcome to Novexium! (Template not found, using fallback)</p>
+            <p>Error: {str(e)}</p>
+        </body>
+        </html>
+        """)
 
 @app.get("/auth/login", response_class=HTMLResponse)
 async def login_page(request: Request):
-    """Login page"""
-    return templates.TemplateResponse(
-        "auth/login.html",
-        {"request": request}
-    )
+    try:
+        return templates.TemplateResponse("auth/login.html", {"request": request})
+    except Exception:
+        return HTMLResponse("""
+        <!DOCTYPE html>
+        <html>
+        <head><title>Login - Novexium</title></head>
+        <body>
+            <h1>Log In</h1>
+            <form>
+                <input type="email" placeholder="Email"><br>
+                <input type="password" placeholder="Password"><br>
+                <button>Log In</button>
+            </form>
+            <a href="/auth/register">Sign up</a>
+        </body>
+        </html>
+        """)
 
 @app.get("/auth/register", response_class=HTMLResponse)
 async def register_page(request: Request):
-    """Register page"""
-    return templates.TemplateResponse(
-        "auth/register.html",
-        {"request": request}
-    )
-
-@app.get("/auth/forgot-password", response_class=HTMLResponse)
-async def forgot_password_page(request: Request):
-    """Forgot password page"""
-    return templates.TemplateResponse(
-        "auth/forgot_password.html",
-        {"request": request}
-    )
-
-@app.get("/auth/verify/{token}", response_class=HTMLResponse)
-async def verify_email_page(request: Request, token: str):
-    """Email verification page"""
-    return templates.TemplateResponse(
-        "auth/verify_email.html",
-        {"request": request, "token": token}
-    )
-
-# ============================================
-# DASHBOARD ROUTES (Protected - Add auth later)
-# ============================================
+    try:
+        return templates.TemplateResponse("auth/register.html", {"request": request})
+    except Exception:
+        return HTMLResponse("""
+        <!DOCTYPE html>
+        <html>
+        <head><title>Register - Novexium</title></head>
+        <body>
+            <h1>Create Account</h1>
+            <form>
+                <input type="text" placeholder="Full Name"><br>
+                <input type="email" placeholder="Email"><br>
+                <input type="password" placeholder="Password"><br>
+                <button>Create Account</button>
+            </form>
+            <a href="/auth/login">Log in</a>
+        </body>
+        </html>
+        """)
 
 @app.get("/dashboard", response_class=HTMLResponse)
 async def dashboard_page(request: Request):
-    """User Dashboard"""
-    return templates.TemplateResponse(
-        "dashboard/index.html",
-        {"request": request}
-    )
+    try:
+        return templates.TemplateResponse("dashboard/index.html", {"request": request})
+    except Exception:
+        return HTMLResponse("""
+        <!DOCTYPE html>
+        <html>
+        <head><title>Dashboard - Novexium</title></head>
+        <body>
+            <h1>Dashboard</h1>
+            <p>Welcome to your Novexium dashboard!</p>
+            <a href="/">Home</a>
+        </body>
+        </html>
+        """)
 
-@app.get("/apps", response_class=HTMLResponse)
-async def apps_page(request: Request):
-    """My Apps page"""
-    return templates.TemplateResponse(
-        "apps/index.html",
-        {"request": request}
-    )
-
-@app.get("/apps/{app_id}/workspace", response_class=HTMLResponse)
-async def app_workspace(request: Request, app_id: str):
-    """App Workspace"""
-    return templates.TemplateResponse(
-        "apps/workspace.html",
-        {"request": request, "app_id": app_id}
-    )
+@app.get("/pricing", response_class=HTMLResponse)
+async def pricing_page(request: Request):
+    try:
+        return templates.TemplateResponse("pricing/index.html", {"request": request})
+    except Exception:
+        return HTMLResponse("""
+        <!DOCTYPE html>
+        <html>
+        <head><title>Pricing - Novexium</title></head>
+        <body>
+            <h1>Simple Pricing</h1>
+            <div>
+                <h3>Starter - $15/mo</h3>
+                <h3>Professional - $39/mo</h3>
+                <h3>Agency - $99/mo</h3>
+            </div>
+        </body>
+        </html>
+        """)
 
 # ============================================
 # ERROR HANDLING
@@ -185,26 +155,28 @@ async def app_workspace(request: Request, app_id: str):
 
 @app.exception_handler(404)
 async def not_found(request: Request, exc):
-    return templates.TemplateResponse(
-        "errors/404.html",
-        {"request": request},
-        status_code=404
-    )
+    return HTMLResponse("""
+    <!DOCTYPE html>
+    <html>
+    <head><title>404 - Page Not Found</title></head>
+    <body>
+        <h1>404 - Page Not Found</h1>
+        <p>The page you're looking for doesn't exist.</p>
+        <a href="/">Return Home</a>
+    </body>
+    </html>
+    """, status_code=404)
 
 @app.exception_handler(500)
 async def server_error(request: Request, exc):
-    return templates.TemplateResponse(
-        "errors/500.html",
-        {"request": request},
-        status_code=500
-    )
-
-# ============================================
-# If you have route modules, import them here:
-# ============================================
-
-# from app.routes.web import auth
-# app.include_router(auth.router)
-
-# from app.api.v1.routes import auth as api_auth
-# app.include_router(api_auth.router, prefix="/api/v1")
+    return HTMLResponse("""
+    <!DOCTYPE html>
+    <html>
+    <head><title>500 - Server Error</title></head>
+    <body>
+        <h1>500 - Server Error</h1>
+        <p>Something went wrong. We're working on it.</p>
+        <a href="/">Return Home</a>
+    </body>
+    </html>
+    """, status_code=500)
