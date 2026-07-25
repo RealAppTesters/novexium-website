@@ -55,16 +55,23 @@ async def health_check():
 @app.get("/", response_class=HTMLResponse)
 async def home_page(request: Request):
     try:
-        return templates.TemplateResponse("public/index.html", {"request": request})
+        # Try to render the template
+        response = templates.TemplateResponse("public/index.html", {"request": request})
+        return response
     except Exception as e:
+        # If it fails, show a simple page with the error
         return HTMLResponse(f"""
         <!DOCTYPE html>
         <html>
         <head><title>Novexium</title></head>
-        <body>
-            <h1>Novexium</h1>
-            <p>Welcome to Novexium! (Template not found, using fallback)</p>
-            <p>Error: {str(e)}</p>
+        <body style="font-family: system-ui; background: #0a0a0f; color: white; padding: 40px; text-align: center;">
+            <h1 style="color: #4f46e5;">Novexium</h1>
+            <p>Template found but error occurred:</p>
+            <p style="color: #f87171;">{str(e)}</p>
+            <p style="color: #6b7280; margin-top: 20px;">File exists at: app/templates/public/index.html</p>
+            <div style="margin-top: 20px;">
+                <a href="/api" style="color: #4f46e5;">API Status</a>
+            </div>
         </body>
         </html>
         """)
