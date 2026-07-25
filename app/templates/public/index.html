@@ -1,46 +1,19 @@
-{% extends "base/public.html" %}
-
-{% block title %}Grow Your App with Confidence — Novexium{% endblock %}
-
-{% block description %}ASO intelligence platform for app developers. Optimize App Store and Google Play listings, track competitors, and grow downloads from one platform.{% endblock %}
-
-{% block og_title %}Novexium — Everything You Need to Grow Your App{% endblock %}
-{% block og_description %}Stop guessing what to improve. Get complete ASO insights, competitor tracking, and actionable recommendations.{% endblock %}
-
-{% block page_content %}
-    <!-- Hero Section -->
-    {% include 'components/_home_hero.html' %}
-    
-    <!-- Trust Bar -->
-    {% include 'components/_home_trust_bar.html' %}
-    
-    <!-- Pain Points -->
-    {% include 'components/_home_pain_points.html' %}
-    
-    <!-- Features -->
-    {% include 'components/_home_features.html' %}
-    
-    <!-- How It Works -->
-    {% include 'components/_home_how_it_works.html' %}
-    
-    <!-- Benefits -->
-    {% include 'components/_home_benefits.html' %}
-    
-    <!-- Dashboard Preview -->
-    {% include 'components/_home_dashboard_preview.html' %}
-    
-    <!-- Why Choose -->
-    {% include 'components/_home_why_choose.html' %}
-    
-    <!-- Testimonials -->
-    {% include 'components/_home_testimonials.html' %}
-    
-    <!-- Pricing Preview -->
-    {% include 'components/_home_pricing.html' %}
-    
-    <!-- FAQ -->
-    {% include 'components/_home_faq.html' %}
-    
-    <!-- Final CTA -->
-    {% include 'components/_home_final_cta.html' %}
-{% endblock %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Novexium - Grow Your App</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
+    <div class="min-h-screen bg-gray-900 text-white flex items-center justify-center">
+        <div class="text-center">
+            <h1 class="text-6xl font-bold text-indigo-400">Novexium</h1>
+            <p class="text-xl text-gray-300 mt-4">Grow Your App with Confidence</p>
+            <div class="flex gap-4 justify-center mt-8">
+                <a href="/auth/register" class="bg-indigo-600 px-6 py-3 rounded-lg hover:bg-indigo-700">Get Started</a>
+                <a href="/api" class="bg-gray-700 px-6 py-3 rounded-lg hover:bg-gray-600">API Status</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
